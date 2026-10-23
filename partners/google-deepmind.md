@@ -1,5 +1,7 @@
 # Junction 2026 partner intelligence — Google DeepMind
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Featured; no tier assigned**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 **Checked: 10 October 2026.** For a four-person team with three full-stack developers and Markus owning research, architecture, evaluation and pitch. Recommendations are **INFERENCE**, not partner judging criteria. Narrative is condensed; tables provide implementation detail across the requested topics. No authenticated API calls or account-specific quota checks were performed.
 
 **Friday default: Gemini 3.8 Flash through the paid Gemini Developer API, using Interactions and a few validated application tools.** Add one specialized capability only when it changes the user outcome. Google’s strongest differentiation is the combination of live perception, grounded reasoning and bounded action—not a chatbot with a partner logo.

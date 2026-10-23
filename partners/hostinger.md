@@ -1,5 +1,7 @@
 # Hostinger — Junction 2026 partner intelligence
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Challenge**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 Research cutoff: **7 October 2026**. Audience: Markus (research, architecture, product and pitch) plus three experienced full-stack developers. **Recommendation: build in your normal stack and integrate one meaningful Hostinger action or expose your own domain tools to Hostinger Agent.** Treat AI Builder as an optional accelerator, rather than the default development environment.
 
 **Evidence labels:** CONFIRMED = official documentation; INFERENCE = interpretation of evidence; SPECULATION = potential challenge/project. Documentation was inspected; no paid account, API execution or deployment was tested. Integration times below are planning estimates, excluding account provisioning.

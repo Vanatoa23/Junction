@@ -1,5 +1,7 @@
 # Verda — Junction 2026 operational intelligence
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Main**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 Research date: **8 October 2026**. For Markus and three full-stack developers. **CONFIRMED** denotes a public source; **INFERENCE** denotes our interpretation; **SPECULATION** denotes an unannounced challenge hypothesis. Product listings do not establish live capacity or our account entitlement. This condenses the supplied 42-part brief into a weekend decision guide.
 
 ## Recommendation and event status

@@ -47,3 +47,9 @@ The actual Junction submission should be built during the event in accordance wi
 4. Create an accounts / API / tooling readiness checklist.
 5. Run mock Junction-style challenges.
 6. Finalize the challenge-selection and 48-hour execution runbook before the event.
+
+## Partner research coverage — 24 October 2026
+
+The [partner index](partners/README.md) now covers **all 32 currently listed main, challenge, tech and featured partners**, plus [all nine supporters](partners/supporters.md). Start with the [cross-partner decision guide](strategy/partner-decision-guide.md) to compare capabilities, access gates and team fit.
+
+See the [coverage audit](research/partner-coverage-2026-10-24.md) for sources and limitations. Challenge briefs remain TBA; proposed projects are hypotheses. The roster can grow, and older report dates are retained.

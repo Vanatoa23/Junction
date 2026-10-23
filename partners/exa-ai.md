@@ -1,5 +1,7 @@
 # Exa.ai — Junction 2026 operational intelligence
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Challenge**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 **Checked:** 7 October 2026. **Team:** three full-stack developers plus Markus on research, architecture, product and pitch. **Recommendation:** prepare a small, bounded research tool; choose its final use after challenges appear.
 
 **Evidence labels:** CONFIRMED = supported by inspected primary sources; INFERENCE = interpretation; SPECULATION = possible challenge/project. No authenticated API benchmark was run.

@@ -1,5 +1,7 @@
 # Junction 2026 Partner Intelligence — IronShard
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Tech**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 Research cutoff: **10 October 2026**. Recommendation: **Tier 2 — learn enough to activate quickly**. Allocate one developer an hour; prioritize storage integration over governance promises. This report assesses documentation, not a tested account.
 
 ## 1. Exact identity

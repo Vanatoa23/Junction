@@ -1,5 +1,7 @@
 # AfterQuery — Junction 2026 partner intelligence
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Challenge**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 **Research cutoff: 7 October 2026. Team: Markus + three full-stack developers.**
 
 **Recommendation:** prepare a reusable agent evaluation kit, then adapt it to the announced challenge. Your strongest starting point is a finance or operations workflow with a resettable environment, independently checked outcomes and visible failure recovery. Do not commit to training a model beforehand.
