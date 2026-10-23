@@ -1,5 +1,7 @@
 # NVIDIA — Junction 2026 partner intelligence
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Tech**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 Researched **10 October 2026** for your four-person team and 40 productive hours. Tier 1 = prepare; Tier 2 = conditional; Tier 3 = skip.
 
 ## Role and evidence

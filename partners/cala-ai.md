@@ -1,5 +1,7 @@
 # Cala AI — Junction 2026 partner intelligence
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Challenge**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 **Research cutoff: 7 October 2026.** For Markus and three full-stack developers. Documentation inspected; no authenticated queries were executed. Examples below are documented requests or proposed coverage tests, never claimed live results. **CONFIRMED** means published functionality or a statement; it does not certify data accuracy. **INFERENCE/SPECULATION** identify our recommendations and forecasts.
 
 **Recommendation:** spend two hours validating Cala, then consider an auditable company-research or relationship-based triage agent. Markus’s banking/risk background is useful for evaluation and pitching. Commit only after testing the actual entities, geography and source links. Avoid depending on native triggers.

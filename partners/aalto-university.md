@@ -1,5 +1,7 @@
 # Junction 2026 Partner Intelligence — Aalto University
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Challenge**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 **Research cutoff: 7 October 2026. Event: 13–15 November, Hype Areena, Espoo.**
 
 **Recommendation:** prepare accessible voice interaction and measurable AI evaluation first; keep physical AI as an alternative. Aalto’s strongest direct precedent is an older-adult challenge, but its 2026 internal sponsor remains unidentified.

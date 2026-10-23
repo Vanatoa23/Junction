@@ -1,5 +1,7 @@
 # Junction 2026 — Arduino partner intelligence
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Main**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 **Research cutoff: 7 October 2026. Audience:** Markus plus three full-stack developers. **Recommendation:** prepare a Python-to-hardware workflow and a repeatable camera-to-actuator demo. Choose robotics only after confirming access to an assembled, working kit.
 
 **Evidence labels:** CONFIRMED = supported by an official source; INFERENCE = our interpretation; SPECULATION = possible future challenge. Timing and feasibility estimates below are planning estimates, not benchmarks or guarantees.

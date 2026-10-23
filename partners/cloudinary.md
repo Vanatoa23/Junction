@@ -1,5 +1,7 @@
 # Cloudinary — Junction 2026 partner intelligence
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Tech**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 **Research date: 8 October 2026. Team: three full-stack developers plus research/AI/product/pitch lead.**
 
 **Verdict: Tier 2 overall; Tier 1 for a media-heavy challenge.** Learn signed uploads and optimized delivery now; activate advanced features only when the challenge needs them. Cloudinary should own media ingestion, transformations, asset storage and delivery; your backend should own users, permissions and business decisions.

@@ -1,5 +1,7 @@
 # Junction 2026 Partner Intelligence — City of Espoo
 
+> **Roster update — 24 October 2026:** independently confirmed in the official page's partner section as **Challenge**. This update supersedes earlier uncertainty about the listing/tier below. The original product research date remains as stated; API versions, prices and access in the older report have not all been re-tested or re-researched. Challenge briefs remain TBA. [Current coverage and source record](README.md).
+
 **Research cutoff: 7 October 2026.** For Markus Vanatoa’s four-person team: three full-stack developers; Markus leads research, data/AI architecture, challenge selection and pitch. **Recommendation: prepare a small public-data integration kit; keep business-advisory, service-access and urban-space concepts open until the brief arrives.**
 
 Evidence labels: **CONFIRMED** = supported by a cited source; **INFERENCE** = reasoned interpretation; **SPECULATION** = proposed challenge or product. Probability ratings are relative preparation priorities, not statistical forecasts. Integration times are engineering estimates after access is available. APIs were documentation-checked, **not live-tested**; no uptime guarantees were verified.
