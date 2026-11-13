@@ -11,7 +11,7 @@
     "seed": "tsx --env-file-if-exists=../../.env src/seed/seed.ts",
     "reset": "tsx --env-file-if-exists=../../.env src/db/reset.ts",
     "typecheck": "tsc -p tsconfig.json",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests --no-file-parallelism"
   },
   "dependencies": {
     "@fastify/cors": "^10.0.1",
