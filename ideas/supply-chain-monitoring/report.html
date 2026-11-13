@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SecondSource Recommendation</title>
+<style>
+:root{
+  --bg:#f7f6f2; --surface:#ffffff; --ink:#1d1f23; --muted:#5d636d; --line:#e3e1da;
+  --accent:#0f6b5c; --accent-soft:#e3f1ee; --warn:#9a5b00; --warn-soft:#fbf0dc;
+  --bad:#a3302a; --bad-soft:#f8e4e2; --good:#1f7a3a; --good-soft:#e2f2e6;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171a; --surface:#1d2024; --ink:#e9e7e2; --muted:#a3a8b0; --line:#30343a;
+    --accent:#4fc2ad; --accent-soft:#183531; --warn:#e3a74a; --warn-soft:#3a2d16;
+    --bad:#ec7b73; --bad-soft:#3b1f1d; --good:#6fcf8a; --good-soft:#1b3424;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15171a; --surface:#1d2024; --ink:#e9e7e2; --muted:#a3a8b0; --line:#30343a;
+  --accent:#4fc2ad; --accent-soft:#183531; --warn:#e3a74a; --warn-soft:#3a2d16;
+  --bad:#ec7b73; --bad-soft:#3b1f1d; --good:#6fcf8a; --good-soft:#1b3424;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px 80px}
+h1{font-size:2.1rem;line-height:1.2;margin:.2em 0 .3em;letter-spacing:-.01em}
+h2{font-size:1.35rem;margin:2.4em 0 .6em;padding-top:.4em;border-top:1px solid var(--line)}
+h3{font-size:1.05rem;margin:1.6em 0 .4em}
+p,li{color:var(--ink)}
+.muted{color:var(--muted)}
+.eyebrow{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);font-weight:600}
+.lede{font-size:1.15rem;color:var(--muted);max-width:68ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+.verdict{border-left:4px solid var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-size:1.05rem}
+.stat span{font-size:.88rem;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
+.scroll{overflow-x:auto}
+.pill{display:inline-block;font-size:.78rem;font-weight:600;padding:2px 8px;border-radius:999px}
+.pass{background:var(--good-soft);color:var(--good)}
+.fail{background:var(--bad-soft);color:var(--bad)}
+.unk{background:var(--warn-soft);color:var(--warn)}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.9rem}
+.flow span{background:var(--accent-soft);color:var(--accent);padding:4px 10px;border-radius:8px;font-weight:600}
+.flow i{color:var(--muted);font-style:normal}
+code{font-family:var(--mono);font-size:.88em;background:var(--accent-soft);padding:1px 5px;border-radius:4px}
+.bracket{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:10px;font-size:.86rem}
+.round h4{margin:0 0 6px;font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.m{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin-bottom:6px}
+.m .w{font-weight:700;color:var(--accent)}
+.m .l{color:var(--muted);text-decoration:line-through}
+ol.script li{margin-bottom:.5em}
+.t{font-family:var(--mono);color:var(--accent);font-weight:600;margin-right:6px}
+footer{margin-top:3em;color:var(--muted);font-size:.85rem}
+@media (max-width:640px){ .bracket{grid-template-columns:1fr 1fr} h1{font-size:1.7rem} }
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">Junction 2026 · Context.dev challenge · 16-entrant arena</div>
+<h1>Build SecondSource: live supply-chain monitoring that only suggests alternatives the same incident can't touch</h1>
+<p class="lede">16 independent design proposals competed in a knockout bracket, judged against the Context.dev criteria. The winner treats monitoring as the feeder and makes the <em>verified alternative</em> the memorable moment. From the runner-up it takes the on-stage "watch the clock stop" live detection.</p>
+
+<div class="card verdict">
+  <h3 style="margin-top:0">The recommendation in one paragraph</h3>
+  <p style="margin-bottom:0">The client pastes its supplier list. Cala, Exa and Context.dev turn it into a resolved, enriched and <strong>monitored</strong> graph in about a minute. Every supplier, and every port and region it depends on, is watched by Context.dev monitors with webhooks. When a change becomes an incident, the incident gets a typed <strong>footprint</strong>: the regions, ports, plants, sanction programmes and parent companies it touches. An agent then sources replacement suppliers and runs <strong>five explicit checks plus a live news check</strong> on each one. Only a candidate that passes every row, with a source URL behind each cell, is offered. Anything unknown is shown as "unverified", never as safe. A human approves.</p>
+</div>
+
+<div class="grid">
+  <div class="stat"><b>Primary prize</b><span>Context.dev (€2k plus the €750 core-flow bounty)</span></div>
+  <div class="stat"><b>Stack</b><span>TypeScript · Aiven Postgres · Aiven Runtime · Gemini</span></div>
+  <div class="stat"><b>Data sources</b><span>Context.dev (monitoring, core) · Exa (discovery) · Cala (identity and ownership)</span></div>
+  <div class="stat"><b>Not built</b><span>Graph DB, Kafka, downstream (stretch), Valio (optional last step)</span></div>
+</div>
+
+<h2>1. Why this design won</h2>
+<ul>
+  <li><strong>It matches your actual offer.</strong> "When something breaks, here is a supplier the same event cannot hit" is the part nobody else does. The finalist made that rule visible and checkable, cell by cell.</li>
+  <li><strong>It uses Context.dev in three places, not one:</strong>
+    <ul>
+      <li>monitors and webhooks detect the incident;</li>
+      <li>enrichment and structured extraction build every footprint;</li>
+      <li>a fresh news search vets every alternative before it is offered.</li>
+    </ul>
+    That last use is the "creative use of live web data" judges rarely see.</li>
+  <li><strong>It is honest by construction.</strong>
+    <ul>
+      <li>Code drops any claim without a source URL, so the LLM cannot invent evidence.</li>
+      <li>"Unknown" never turns into "pass".</li>
+      <li>Searches sent to Exa, Cala and Context.dev never include the client's name or supplier list, which keeps the privacy rule.</li>
+    </ul></li>
+  <li><strong>It is buildable.</strong> Every one of the 16 entrants independently chose Postgres over a graph database and no Kafka. That consensus is the safest call for about 40 hours of build time.</li>
+</ul>
+
+<h2>2. How it works</h2>
+<div class="card">
+  <div class="flow">
+    <span>Paste list</span><i>→</i><span>Resolve (Cala · Exa · Context.dev)</span><i>→</i><span>Footprint extraction</span><i>→</i><span>Monitors armed</span><i>→</i><span>Webhook</span><i>→</i><span>Gemini classify + quote check</span><i>→</i><span>Corroborate</span><i>→</i><span>Incident footprint</span><i>→</i><span>Alternatives agent</span><i>→</i><span>5 checks + live news</span><i>→</i><span>Human approves</span>
+  </div>
+</div>
+<ul>
+  <li><strong>One TypeScript service plus one worker on Aiven Runtime.</strong> Runtime gives a public URL, so Context.dev webhooks reach us without a tunnel.</li>
+  <li><strong>Aiven Postgres holds everything,</strong> including the job queue (<code>FOR UPDATE SKIP LOCKED</code>). The supply graph is an edge table; recursive queries cover the 2 hops we need.</li>
+  <li><strong>Gemini only classifies and extracts.</strong> It must return a verbatim quote, which code checks against the fetched page. The pass/fail checks are plain, unit-tested code, never the LLM.</li>
+  <li><strong>Privacy:</strong> public facts (companies, footprints, incidents) are shared and cached. Supply edges, alerts and alternatives carry a <code>client_id</code> and are locked down with Postgres row-level security. A second client login in the demo proves it.</li>
+</ul>
+
+<h2>3. Your data bootstrap, with Exa and Cala</h2>
+<p>You wanted Exa and Cala to put the first companies on the graph. The arena converged on a clear division of labour:</p>
+<div class="scroll"><table>
+<tr><th>Source</th><th>Role</th><th>What it gives us</th></tr>
+<tr><td><strong>Cala</strong></td><td>Identity and ownership spine</td><td>A canonical company ID, legal name, parent group and investors. This feeds the <em>parent</em> and <em>upstream</em> checks, so two "different" suppliers owned by the same group are caught.</td></tr>
+<tr><td><strong>Exa</strong></td><td>Discovery</td><td>Finds the domain for a bare name. Websets and company search build the pool of <em>alternative</em> candidates, by category and outside the incident region.</td></tr>
+<tr><td><strong>Context.dev</strong></td><td>The live reader (core)</td><td>Enrichment (domain, HQ), structured extraction of plants and ports from "locations" pages, monitors with webhooks, news search.</td></tr>
+</table></div>
+<p><strong>Resolver:</strong> each name is scored on name similarity (0.5), country (0.2) and whether the three sources agree on the domain (0.3).</p>
+<ul>
+  <li>A score of 0.85 or more is accepted automatically.</li>
+  <li>A score between 0.6 and 0.85 shows a one-click chooser. That is a nice live moment where a judge resolves an ambiguity.</li>
+  <li>Anything lower is flagged and asks for a domain.</li>
+</ul>
+<p><strong>Target:</strong> 10 pasted names fully monitored in under 60 seconds, live. The 40-supplier demo client is pre-loaded and labelled SEEDED.</p>
+<p class="muted"><strong>Note on Cala's prize:</strong> its challenge requires a founder or investor need. Here Cala is a data source, so don't expect to win its track without a separate investor story, which split the demo in every proposal that tried it.</p>
+
+<h2>4. The incident model and the "same incident" rule</h2>
+<p>An incident and every company carry a <strong>footprint</strong>: a set of typed keys, each with a source URL and a state of <code>CONFIRMED</code>, <code>INFERRED</code> or <code>UNKNOWN</code>.</p>
+<ul>
+  <li><strong>Key formats:</strong> <code>REGION:FI-UUS</code>, <code>PORT:NLRTM</code>, <code>PLANT:&lt;id&gt;</code>, <code>SANCTION:&lt;programme&gt;</code>, <code>PARENT:&lt;cala id&gt;</code>.</li>
+  <li><strong>Regions are nested.</strong> A strike in <code>FI</code> also covers <code>FI-UUS</code>.</li>
+  <li><strong>Names the system can't match block the alert.</strong> If an incident names a company or place we cannot resolve, it does not alert automatically; a person maps it first.</li>
+</ul>
+<div class="card">
+<h3 style="margin-top:0">The check every alternative must pass</h3>
+<div class="scroll"><table>
+<tr><th>Check</th><th>Rule</th><th>Example result</th></tr>
+<tr><td>C1 Region</td><td>no shared region, including parent and child regions</td><td><span class="pill pass">PASS</span> SE-O vs FI-UUS</td></tr>
+<tr><td>C2 Port</td><td>no shared port, including inbound lanes</td><td><span class="pill fail">FAIL</span> both ship via NLRTM</td></tr>
+<tr><td>C3 Upstream plant</td><td>the candidate's own tier-2 suppliers don't touch the incident's plants</td><td><span class="pill pass">PASS</span></td></tr>
+<tr><td>C4 Sanction</td><td>neither the candidate nor its parent is on the incident's sanctions programme</td><td><span class="pill pass">PASS</span></td></tr>
+<tr><td>C5 Parent</td><td>no shared owner within 2 hops (Cala)</td><td><span class="pill unk">UNKNOWN</span> no ownership data</td></tr>
+<tr><td>Live check</td><td>a fresh Context.dev news search on the candidate's region shows no sign of the same incident type in the last 14 days</td><td><span class="pill pass">CLEAN</span></td></tr>
+</table></div>
+<p style="margin-bottom:0">All checks PASS: offered as <strong>verified</strong>. Any FAIL: shown greyed out with the failing row. Any UNKNOWN: <strong>unverified</strong>, only a human can use it, and it never ranks above a verified candidate. Verified candidates are ranked by capacity fit, product match, sourced lead time and a quiet track record. The top 3 are shown, each card cell linked to its evidence.</p>
+</div>
+
+<h2>5. Monitoring design</h2>
+<ul>
+  <li><strong>Per supplier:</strong>
+    <ul>
+      <li>a Context.dev page monitor on <code>/news</code>, <code>/press</code> and its status or locations page, with a webhook on change;</li>
+      <li>a Context.dev news query: <code>"&lt;name&gt;" strike OR fire OR recall OR sanction OR insolvency OR "port closure"</code>.</li>
+    </ul></li>
+  <li><strong>Per footprint key</strong> (shared across all suppliers): one monitor per port authority, regional notice page or sanctions list page. One incident then fans out to every affected supplier.</li>
+  <li><strong>Noise control:</strong>
+    <ul>
+      <li>Skip changes that are only layout or timestamps.</li>
+      <li>Gemini must return a verbatim quote.</li>
+      <li>A news item is attributed to a company only on a domain match, or on a name match <em>plus</em> a matching region.</li>
+      <li><strong>Confirmed</strong> means an official or primary source, or two independent domains within 48 hours. Everything else stays <em>Unconfirmed</em> and is never pushed to the client.</li>
+    </ul></li>
+  <li><strong>Latency:</strong> every event stores <code>t_source → t_webhook → t_classified → t_alert</code>. The screen shows each stage as a chip and the p50/p95 over recent events.</li>
+  <li><strong>Accuracy:</strong> a funnel from raw items to classified, quote verified, corroborated and alerted, plus precision and recall on a labelled set of about 40 items. Be upfront that we wrote that set ourselves.</li>
+</ul>
+
+<h2>6. Upstream and downstream</h2>
+<div class="grid">
+  <div class="card" style="margin:0"><h3 style="margin-top:0">Upstream: in, narrow</h3><p style="margin-bottom:0">Two hops through Cala ownership, plus any tier-2 rows the client gives us. It feeds checks C3 and C5, which is where it earns its keep. Upstream companies get news monitors only.</p></div>
+  <div class="card" style="margin:0"><h3 style="margin-top:0">Downstream: stretch, about 4 hours</h3><p style="margin-bottom:0">A "Customer watch" lane that reuses the same pipeline: news monitors on the client's customers for insolvency, restructuring and layoffs. Show coverage honestly ("signal on 9 of 20 customers"). Public signals on small private customers are thin, so this is the first thing to cut.</p></div>
+</div>
+
+<h2>7. Demo script (3:30)</h2>
+<ol class="script">
+  <li><span class="t">0:00</span>Hook: "A supplier posts a notice. How long until you know, and where do you buy instead?"</li>
+  <li><span class="t">0:20</span><strong>Onboarding, live:</strong> paste 10 real supplier names. The clock runs, rows go from pending to monitored, and a judge clicks the chooser on one ambiguous name.</li>
+  <li><span class="t">0:55</span>Open a supplier: plants and ports from its own site, each with a source URL, and its monitors armed.</li>
+  <li><span class="t">1:15</span><strong>The live moment:</strong> a presenter publishes a "port strike" notice on our labelled test page from a phone. The timer runs, the webhook chip lights up, the classifier card appears with the quote, and the timer stops when the alert renders. Real web changes stream in the feed alongside it.</li>
+  <li><span class="t">2:00</span><strong>The incident:</strong> the footprint (port, region) lights up the 3 affected suppliers.</li>
+  <li><span class="t">2:20</span><strong>Alternatives:</strong> three candidates. One fails C2 (same port), one is unverified on C5, and one passes all checks plus the live news check, with evidence links. Approve.</li>
+  <li><span class="t">3:00</span>Latency histogram, accuracy funnel, then a second client logs in and sees none of the first client's data. Close on the five criteria.</li>
+</ol>
+<p class="muted">Backup video recorded by hour 34. If webhooks fail at the venue, the same pipeline polls with a Context.dev scrape every 30–60 seconds, and the chip honestly reads "poll".</p>
+
+<h2>8. 40-hour build plan</h2>
+<div class="scroll"><table>
+<tr><th>Who</th><th>Owns</th></tr>
+<tr><td>E1</td><td>Context.dev monitors, webhook receiver, classifier, latency timestamps</td></tr>
+<tr><td>E2</td><td>Exa and Cala sourcing, footprint extraction, the five checks, ranking</td></tr>
+<tr><td>E3</td><td>Schema, row-level security, queue, resolver and onboarding pipeline</td></tr>
+<tr><td>E4</td><td>UI (paste grid, feed, incident, alternatives), the test notice page, seed data, video</td></tr>
+</table></div>
+<div class="scroll"><table>
+<tr><th>Hour</th><th>Milestone</th></tr>
+<tr><td>H0–2</td><td><strong>Verify the unknowns first:</strong> the minimum Context.dev monitor interval and the webhook payload shape; Cala name search; Exa access. If the monitor interval floor is above a few minutes, the stage moment switches to the scrape-poll path.</td></tr>
+<tr><td>H8</td><td>Schema live; 12 real companies resolved with footprints</td></tr>
+<tr><td>H16</td><td>The first real webhook flows end to end into an alert with a source URL</td></tr>
+<tr><td>H24</td><td>Alternatives with the check table on real data</td></tr>
+<tr><td>H32</td><td>UI complete; accuracy funnel; second-client privacy check</td></tr>
+<tr><td>H34–40</td><td>Backup video, freeze at H36, three full rehearsals</td></tr>
+</table></div>
+<p><strong>Cheap side bounties:</strong> Gemini runs all the AI steps; Aiven provides Postgres and Runtime; CRACI adds SBOM CI in 20 minutes; log any Codex use. <strong>Valio:</strong> optional. Placing the approved switch as a Valio mock order costs about 8 hours, so do it only if H26 is green.</p>
+
+<h2>9. Risks and what to cut</h2>
+<div class="scroll"><table>
+<tr><th>Risk</th><th>Mitigation</th></tr>
+<tr><td>Context.dev monitor interval and webhook timing are unknown</td><td>Measure in hour 1. Use the scrape-poll fallback and show measured numbers only.</td></tr>
+<tr><td>Public footprints are sparse, so many results come back UNKNOWN</td><td>Pick a product category with dense public data; fail closed; seed a labelled demo case.</td></tr>
+<tr><td>The live stage change looks staged</td><td>Label it clearly and run real monitors in parallel.</td></tr>
+<tr><td>Coverage and speed of Cala for small companies</td><td>Exa and Context.dev as fallbacks; a visible "unresolved" state.</td></tr>
+<tr><td>The LLM invents facts</td><td>Verbatim quote check; code drops claims without a URL.</td></tr>
+</table></div>
+<p><strong>Cut in this order:</strong></p>
+<ol>
+  <li>Downstream lane.</li>
+  <li>Valio order.</li>
+  <li>Exa Websets (keep Exa search).</li>
+  <li>Cala beyond ownership.</li>
+  <li>Upstream beyond 1 hop.</li>
+  <li>PDF parsing.</li>
+</ol>
+<p><strong>Never cut:</strong> the live webhook moment, the check table, the source URLs, and the approval step.</p>
+
+<h2>10. The bracket</h2>
+<div class="bracket">
+  <div class="round"><h4>Round of 16</h4>
+    <div class="m"><span class="w">02 Incident model</span> › <span class="l">01 Context.dev maximalist</span></div>
+    <div class="m"><span class="w">03 Real-time on stage</span> › <span class="l">04 Ruthless minimum</span></div>
+    <div class="m"><span class="w">05 Exa/Cala bootstrap</span> › <span class="l">06 Downstream first</span></div>
+    <div class="m"><span class="w">08 Accuracy and noise</span> › <span class="l">07 Monitor fleet</span></div>
+    <div class="m"><span class="w">09 Alternatives agent</span> › <span class="l">10 Geography</span></div>
+    <div class="m"><span class="w">11 Client UX</span> › <span class="l">12 Valio stacking</span></div>
+    <div class="m"><span class="w">14 Observable pipeline</span> › <span class="l">13 Flat feed (contrarian)</span></div>
+    <div class="m"><span class="w">16 Balanced</span> › <span class="l">15 Real-world impact</span></div>
+  </div>
+  <div class="round"><h4>Quarterfinals</h4>
+    <div class="m"><span class="w">03</span> › <span class="l">02</span></div>
+    <div class="m"><span class="w">08</span> › <span class="l">05</span></div>
+    <div class="m"><span class="w">09</span> › <span class="l">11</span></div>
+    <div class="m"><span class="w">16</span> › <span class="l">14</span></div>
+  </div>
+  <div class="round"><h4>Semifinals</h4>
+    <div class="m"><span class="w">03 Real-time on stage</span> › <span class="l">08</span></div>
+    <div class="m"><span class="w">09 Alternatives agent</span> › <span class="l">16</span></div>
+  </div>
+  <div class="round"><h4>Final</h4>
+    <div class="m"><span class="w">09 SecondSource</span> › <span class="l">03 Canary</span></div>
+    <p class="muted" style="font-size:.84rem">09 wins because it is <em>your</em> differentiator and adds a creative live-data use (vetting each candidate with a fresh news search). 03's stage moment is merged into the plan.</p>
+  </div>
+</div>
+
+<h3>Ideas taken from the losers</h3>
+<ul>
+  <li><strong>02:</strong> footprint states (Confirmed, Inferred, Unknown), nested regions, unresolved names block alerts.</li>
+  <li><strong>03:</strong> the phone-published notice and the per-stage timer.</li>
+  <li><strong>05:</strong> resolver scoring and the one-click chooser.</li>
+  <li><strong>06:</strong> the customer-watch lane as a stretch, with a coverage metric.</li>
+  <li><strong>08:</strong> the strict news-attribution rule and the accuracy funnel.</li>
+  <li><strong>11:</strong> "no independent alternative found" shows the closest candidates and why they failed.</li>
+  <li><strong>12:</strong> the Valio step costed at about 8 hours, gated at H26.</li>
+  <li><strong>14:</strong> stage-by-stage latency.</li>
+  <li><strong>15:</strong> pitch framing on the Nexperia-style case, where the real risk hid in the parent company and back-end plant. Check the facts before using it on stage.</li>
+  <li><strong>16:</strong> shared port and region monitors that fan out to every supplier.</li>
+</ul>
+
+<footer>
+  <p><strong>Method:</strong> 16 Haiku 5.5 entrants, each with the same brief and rules and a different angle; single elimination; judged by Claude Opus 5.5. <strong>Weights:</strong> Context.dev criteria 40%, feasibility 25%, incident model and the alternatives check 15%, bootstrap 10%, concreteness 10%.</p>
+  <p><strong>Limits:</strong> one model wrote every proposal, and nobody tested the real Context.dev, Exa or Cala APIs. Every API behaviour above is an assumption to verify in hour 1. All 16 proposals are in <code>arena2/entrants/</code>.</p>
+</footer>
+</main>
+</body>
+</html>
