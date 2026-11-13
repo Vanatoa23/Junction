@@ -8,11 +8,12 @@ import { contextdev } from "./providers/contextdev";
 import { exa } from "./providers/exa";
 import { cala } from "./providers/cala";
 import { gemini } from "./providers/gemini";
+import { local } from "./providers/local";
 import type { Provider, SourceRequest, SourceResult } from "./types";
 
 export * from "./types";
 
-export const providers: Record<ProviderName, Provider> = { contextdev, exa, cala, gemini };
+export const providers: Record<ProviderName, Provider> = { contextdev, exa, cala, gemini, local };
 
 const FIXTURE_DIR = join(dirname(fileURLToPath(import.meta.url)), "../../fixtures/rec");
 
@@ -32,6 +33,7 @@ function canonical(v: unknown): string {
 
 /** The mode a provider will use right now (for /health and UI badges): LIVE only if a key exists and SOURCE_MODE=auto; REC if fixtures exist; else SEED. */
 export function currentMode(name: ProviderName): SourceMode {
+  if (providers[name].alwaysLive) return providers[name].liveMode ?? "LIVE";
   if (config.SOURCE_MODE === "auto" && providers[name].hasKey()) return "LIVE";
   // No live call possible: REC if any recorded fixture exists for this provider, else the SEED providers answer.
   return config.SOURCE_MODE !== "seed" && existsSync(join(FIXTURE_DIR, name)) ? "REC" : "SEED";
@@ -50,7 +52,8 @@ export async function source<T = unknown>(req: SourceRequest): Promise<SourceRes
   const done = (r: Omit<SourceResult<T>, "provider" | "op" | "fetchedAt" | "latencyMs" | "recordedAt"> & { recordedAt?: string | null }): SourceResult<T> => ({
     ...base, latencyMs: Date.now() - started, recordedAt: null, ...r,
   });
-  const mode = req.forceMode ?? (config.SOURCE_MODE === "auto" ? "live" : config.SOURCE_MODE);
+  // alwaysLive providers (local) make no external call, so SOURCE_MODE=seed/rec does not switch them off.
+  const mode = req.forceMode ?? (provider.alwaysLive || config.SOURCE_MODE === "auto" ? "live" : config.SOURCE_MODE);
   let note: string | null = null;
 
   if (mode === "live") {
@@ -60,7 +63,7 @@ export async function source<T = unknown>(req: SourceRequest): Promise<SourceRes
       try {
         const r = await provider.live(req.op, req.params, ctrl.signal);
         if (config.SOURCE_RECORD === "1") record(req, r.data, r.sourceUrls);
-        return done({ ok: true, mode: "LIVE", data: r.data as T, note: null, sourceUrls: r.sourceUrls });
+        return done({ ok: true, mode: provider.liveMode ?? "LIVE", data: r.data as T, note: null, sourceUrls: r.sourceUrls });
       } catch (e) {
         note = `live failed: ${ctrl.signal.aborted ? "timeout" : (e as Error).message}`;
       } finally {

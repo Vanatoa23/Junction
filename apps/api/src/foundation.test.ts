@@ -25,10 +25,21 @@ describe("source() adapter", () => {
     expect(r.ok).toBe(true);
     expect(r.mode).toBe("SEED");
   });
-  it("never invents data: gemini has no seed", async () => {
-    const r = await source({ provider: "gemini", op: "classify", params: { text: "x" } });
+  it("no key: gemini.classify answers from the rule-based classifier, labelled SEED", async () => {
+    const r = await source<{ incident: boolean; classifier: string }>({ provider: "gemini", op: "classify", params: { text: "Strike at the Port of Rotterdam. Terminals closed." } });
+    expect(r.mode).toBe("SEED");
+    expect(r.data?.incident).toBe(true);
+    expect(r.data?.classifier).toBe("rule-based-v1");
+  });
+  it("unknown op with no seed returns ok:false, never invented data", async () => {
+    const r = await source({ provider: "exa", op: "nonexistent", params: {} });
     expect(r.ok).toBe(false);
     expect(r.data).toBeNull();
+  });
+  it("local.scrape refuses hosts other than our own", async () => {
+    const r = await source({ provider: "local", op: "scrape", params: { url: "https://example.com/" } });
+    expect(r.ok).toBe(false);
+    expect(r.note).toMatch(/our own host/);
   });
 });
 

@@ -8,7 +8,7 @@ import { SSE_EVENT_TYPES, type HealthResponse, type SseEnvelope, type SupplierRo
 const api = (path: string) => fetch(`/api${path}`).then((r) => r.json());
 
 const badge = (m: string) => (
-  <span style={{ fontSize: 11, padding: "1px 6px", borderRadius: 6, background: m === "LIVE" ? "#d6f5dd" : m === "REC" ? "#dce8ff" : "#ffe9c2", marginLeft: 6 }}>{m}</span>
+  <span style={{ fontSize: 11, padding: "1px 6px", borderRadius: 6, background: m === "LIVE" ? "#d6f5dd" : m === "REC" ? "#dce8ff" : m === "LOCAL" ? "#e6dcff" : "#ffe9c2", marginLeft: 6 }}>{m}</span>
 );
 
 export function App() {

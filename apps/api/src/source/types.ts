@@ -8,7 +8,8 @@ import type { ProviderName, SourceMode } from "@secondsource/shared";
  * Honesty rule: `mode` on the result is the truth about where `data` came from.
  *   LIVE = a real vendor call made just now
  *   REC  = a recorded real vendor response from apps/api/fixtures/rec (recordedAt set)
- *   SEED = hand-made data from seed providers (labelled in the UI)
+ *   SEED = hand-made / deterministic data from seed providers, including the rule-based classifier (labelled in the UI)
+ *   LOCAL = our own code against our own host (local provider); not vendor data
  * Callers MUST persist `mode` next to the data and the UI MUST show it.
  */
 export interface SourceRequest {
@@ -52,6 +53,10 @@ export class NotImplementedError extends Error {
 
 export interface Provider {
   name: ProviderName;
+  /** Mode reported for a successful live() call. Default LIVE; the local provider reports LOCAL. */
+  liveMode?: SourceMode;
+  /** True for in-process providers that need no key and no external service (local). */
+  alwaysLive?: boolean;
   /** True if a key is configured; without it LIVE is never attempted. */
   hasKey(): boolean;
   /** Real call. Must honour `signal`. Throw on failure; throw NotImplementedError for ops that are stubs. */

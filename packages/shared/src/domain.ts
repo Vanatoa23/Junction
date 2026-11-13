@@ -6,11 +6,18 @@ import { FootprintKey } from "./footprint";
 const id = z.string().uuid();
 const iso = z.string().datetime({ offset: true });
 
-/** How a piece of data was obtained. The UI shows this as a badge on every result. */
-export const SourceMode = z.enum(["LIVE", "REC", "SEED"]);
+/**
+ * How a piece of data was obtained. The UI shows this as a badge on every result.
+ *   LIVE  real vendor call just now
+ *   REC   recorded real vendor response
+ *   SEED  hand-made / deterministic seed or rule-based stand-in (no external call)
+ *   LOCAL produced by our own code against our own host (e.g. fetch + diff of the TEST page). Not vendor data.
+ */
+export const SourceMode = z.enum(["LIVE", "REC", "SEED", "LOCAL"]);
 export type SourceMode = z.infer<typeof SourceMode>;
 
-export const ProviderName = z.enum(["contextdev", "exa", "cala", "gemini"]);
+/** "local" = our own in-process providers (no vendor, no key). */
+export const ProviderName = z.enum(["contextdev", "exa", "cala", "gemini", "local"]);
 export type ProviderName = z.infer<typeof ProviderName>;
 
 /** A web page or API response a fact came from. */

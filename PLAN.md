@@ -4,11 +4,21 @@ Source of truth for product decisions: the design recommendation (`report.html`)
 
 Purpose of the MVP: compare this idea with the other on a working thing. It must work end to end, show clearly what we are going for, and be a foundation we can keep building on (no throwaway hacks in the core).
 
+## 0. Keyless mode (decision: no API keys for now)
+
+The MVP runs entirely without keys and makes **no external calls**. It must showcase the idea and be trivial to switch on later.
+
+- Providers: `contextdev`, `exa`, `cala`, `gemini` each have a deterministic **SEED** implementation and a **LIVE** implementation written against `docs/api-findings.md`, enabled only when the key env var is set (`CONTEXT_DEV_API_KEY`, `EXA_API_KEY`, `CALA_API_KEY`, `GEMINI_API_KEY`). LIVE code is **UNVERIFIED** (never run) and says so in code and docs.
+- New mode **LOCAL** and provider **`local`** (`op: scrape`): fetches our own TEST page over HTTP. This makes the live-change flow genuinely work offline. The UI labels it LOCAL and "poll", never Context.dev. It refuses any other host.
+- With no Gemini key the classifier is the deterministic **rule-based** one (`seed/classifier.ts`, `classifier: "rule-based-v1"`, mode SEED). It returns type, severity, footprint keys and a verbatim quote (`ClassifyOutput` in `packages/shared/src/classify.ts`), and the Engine **still runs `verifyQuote()`** (`apps/api/src/lib/quote.ts`) and drops failures.
+- Honesty: every badge says LIVE / REC / SEED / LOCAL truthfully. Nothing seeded, rule-based or local is shown as live Context.dev or Gemini output.
+- Ingest therefore builds the poll over `source({provider:"local", op:"scrape"})` first; swapping to `contextdev.scrape` when a key exists is a one-line change at the call site (same `{url}` -> text shape handling aside, see the op docs).
+
 ## 1. The one flow
 
 1. Paste 5-10 suppliers (name, optional domain, optional country). Each is resolved and enriched (Context.dev company search; Exa and Cala as fallbacks). Row status: PENDING -> RESOLVED -> MONITORED, with source URLs.
 2. Each supplier gets a footprint of REGION / PORT / PLANT / SANCTION / PARENT keys, each CONFIRMED / INFERRED / UNKNOWN with a source URL; seeded or user-typed facts are labelled SEEDED.
-3. A TEST notice page we host is watched. **Default live path: a Context.dev scrape-and-diff poll every 30-60 s (UI says "poll")**, because the monitor minimum interval is 10 minutes (see `docs/api-findings.md`). The signed webhook receiver feeds the same `ingestChange()` function. Editing the page produces an event.
+3. A TEST notice page we host is watched. **Default path: a scrape-and-diff poll every 30-60 s (UI says "poll")**, via the `local` provider without keys (mode LOCAL) or `contextdev.scrape` with a key (mode LIVE); the Context.dev monitor minimum interval is 10 minutes (see `docs/api-findings.md`). The signed webhook receiver feeds the same `ingestChange()` function. Editing the page produces an event.
 4. Gemini classifies the change: type, severity, footprint keys, **verbatim quote**. Code checks the quote is a substring of the fetched text; otherwise the event is dropped and logged.
 5. The incident footprint is matched against the client's suppliers (regions nested); an alert appears in the live feed with source URL, quote and latency `t_source`, `t_received`, `t_classified`, `t_alert`.
 6. Alternatives: candidates (seeded pool, Exa if available) run C1 region, C2 port, C3 upstream plant, C4 sanction, C5 parent. Pure, unit-tested; **UNKNOWN never passes**. UI: per candidate a PASS / FAIL / UNKNOWN table with evidence links. Live news re-check is a stretch goal.
@@ -122,8 +132,9 @@ Need a schema or contract change? Message the integrator with the exact change; 
 
 | Risk | Mitigation |
 |---|---|
+| Audience reads SEED/LOCAL results as proof of the real APIs | Badges everywhere, STATUS and MVP-SUMMARY say exactly what is unverified; first keyed run is the next milestone |
 | Monitor minimum interval is 10 min | Poll is the default live path and says "poll"; webhook is secondary. Only measured numbers shown. |
-| API shapes are all DOCUMENTED, none verified live | `docs/api-findings.md` tags every claim; first live call per vendor records fixtures; REC/SEED keep the app working |
+| API shapes are all DOCUMENTED, LIVE provider code UNVERIFIED | `docs/api-findings.md` tags every claim; first live call per vendor records fixtures; REC/SEED/LOCAL keep the app working |
 | Gemini request shape is unsettled (docs conflict) | Use the SDK or try both shapes; model is `GEMINI_MODEL`; verify quotes in code |
 | Public footprints are sparse (many UNKNOWN) | Fail closed; seeded labelled demo case; dense product category |
 | Cala coverage for small Nordic firms unknown | Exa and Context.dev fallbacks; visible UNRESOLVED / UNKNOWN |
