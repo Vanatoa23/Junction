@@ -26,7 +26,7 @@ It runs with **no API keys**: every vendor call falls back to a recorded respons
 - Without Docker: `scripts/db.mjs` starts a private cluster in `.data/pgdata` using locally installed PostgreSQL binaries. Port 5434, trust auth, localhost only.
 - Aiven later: set `DATABASE_URL` (and `DATABASE_SSL=require`). Nothing else changes.
 
-Other commands: `pnpm db:migrate`, `pnpm db:seed` (idempotent), `pnpm db:reset` (local DB only), `pnpm db:down`, `pnpm typecheck`, `pnpm test` (the API tests need the database up).
+Other commands: `pnpm db:migrate`, `pnpm db:seed` (idempotent), `pnpm db:reset` (local DB only), `pnpm db:down`, `pnpm typecheck`, `pnpm test` (API tests use their own throwaway `<db>_test` database and need Postgres up), `pnpm e2e` (full flow check against a running `pnpm dev`; honours `E2E_BASE_URL` and `DATABASE_URL`). `API_PORT` changes the API port and the web proxy follows it; `INGEST_POLL_INTERVAL_MS` sets the TEST-page poll interval (10 s in dev). See `DEMO.md` for the 3-minute click-through.
 
 ### Keyless by default, easy to switch on
 No keys are needed. Each provider answers from deterministic seed data (mode SEED). Setting one env var in `.env` (never commit it) flips that provider to LIVE for its ops, and nothing else changes:

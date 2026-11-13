@@ -1,18 +1,54 @@
-# MVP summary
+# MVP summary (SecondSource)
 
-**Scope and confidence.** At foundation commit `6efaa22`, this is a keyless scaffold, not the complete demo. `STATUS.md` reports local verification; the design report (`report.html`) was not available in the repository or attached artifacts, so the estimate below uses `PLAN.md` as a proxy and cannot cover report-only requirements.
+Purpose: compare this idea with the other on a working thing. State: `main` at the integration commit; details in `STATUS.md`, click-through in `DEMO.md`.
 
-**Working locally.** `pnpm dev` starts the database, API, worker and web shell; health, the 10-supplier list, editable TEST notice, job queue and cross-process SSE transport work according to STATUS. The page edit is real and LOCAL, but no poll or event pipeline connects it to an alert. Supplier data, footprints and candidate pool are fictional SEED; the keyless classifier is deterministic SEED rules, not Gemini. REC is a recorded-response mode, not a live call; no real vendor fixtures are documented as captured. LOCAL scraping is restricted to our own host. LIVE vendor implementations exist but have never been verified against the services.
+## What works, and what each part really is
 
-**Not yet working.** Paste/resolve and chooser, monitoring, webhook ingestion, event/alert/incident routes, incident matching, alternatives and approval return 501 or lack handlers; the web is a minimal shell. C1–C5 currently return UNKNOWN, except for a real nested-region helper. The expected candidate verdicts in the plan are targets, not results produced by this branch. Quote verification code exists, but the full classification-to-alert path is not wired.
+The whole flow runs end to end on one command (`pnpm dev`) with no API keys, and `pnpm e2e` drives it in about 3 s: paste suppliers, resolve and footprint them, edit the TEST page, detect the change, classify it with a code-checked verbatim quote, match it to suppliers (nested regions), raise alerts with per-stage latency, check alternatives (C1 to C5), approve with an audit row.
 
-**API findings — documented or assumed, all unverified live** (see `docs/api-findings.md`; exact fields and current availability need first-call confirmation):
+| Part | Mode today | Honest label |
+|---|---|---|
+| Supplier resolution, chooser, footprints | **SEED** | Fictional companies from a seed catalog; scoring (0.5 name, 0.2 country, 0.3 source agreement) and the chooser are real code |
+| Watching the TEST page | **LOCAL** | Our own scrape-and-diff of our own page ("poll"); not a Context.dev monitor |
+| Incident classifier | **SEED** | Deterministic rule-based stand-in, not an LLM; the quote check runs in code either way |
+| Matching, alerts, latency | real code on the above | Latency chips are measured; `t_source` is the page's own timestamp |
+| C1 to C5, verdict, ranking, approve + audit | real code on seed footprints | 25 unit tests; unknown never passes; approval re-verified server-side |
+| Live news re-check | not run | Interface exists, answers UNKNOWN "not run" without a key |
+| Candidate pool | **SEED** | 4 fictional candidates built to give VERIFIED, UNVERIFIED and two FAILED outcomes |
+| Context.dev, Exa, Cala, Gemini | **UNVERIFIED** | Live code written from the docs, enabled by one env var each (`CONTEXT_DEV_API_KEY`, `EXA_API_KEY`, `CALA_API_KEY`, `GEMINI_API_KEY`), never run against the real services |
 
-- **Context.dev:** company search and fresh scrape are documented; a monitor has a documented 10-minute minimum and a baseline run, making a 3-minute autonomous webhook demo unsuitable. Webhooks require a public URL and signature verification; fresh scrapes specify `maxAgeMs: 0`. The “Run now” endpoint remains unknown.
-- **Exa:** `/search` with company category is the proposed candidate discovery path; Websets is asynchronous and requires a paid plan. Limits and real result shapes need verification.
-- **Cala:** fuzzy entity search and relationship queries are documented; discover available ownership edges via introspection. Coverage for small Nordic suppliers is unknown.
-- **Gemini:** structured output is documented but request shapes conflict in the findings. Confirm model and schema on a real call; validate the returned quote against source text in code.
+Nothing seeded, recorded or local is shown as live; the UI badges every result (LIVE / REC / SEED / LOCAL, SEEDED, TEST, poll). Tests: 25 checks tests and 63 API tests pass against a throwaway database.
 
-**Biggest risks.** Unverified integrations, quotas and coverage can prevent a real-data demo; sparse or inferred footprints can leave alternatives UNKNOWN; poll/webhook reliability and a public tunnel affect timing; and fictional or recorded evidence can be mistaken for live evidence unless provenance is visible throughout. Fail closed on unknowns and measure actual latency.
+## What we learned about the real APIs (documentation only, none verified live; see `docs/api-findings.md`)
 
-**Rough extra effort:** approximately **3–6 engineer-weeks** to implement and integrate the PLAN's keyless end-to-end flow (onboarding and footprint UI, poll/diff and event processing, classification/matching, checks and approval, tests and rehearsal), plus **1–3 engineer-weeks** for keyed vendor validation, fixture capture and fixes, tunnel/webhook testing and real-data coverage checks. These are overlapping, highly uncertain person-week estimates, not a delivery commitment; access to keys, vendor behaviour and requirements in the missing report could materially change them.
+- **Context.dev:** monitors have a 10-minute minimum interval and a baseline run, so a stage demo must use a scrape-and-diff poll with the webhook as a second path; webhooks are signed (`t=,v1=` HMAC-SHA256 over `"t.rawbody"`, 5 min tolerance) and need a public URL. Scrape defaults to a 3-day cache (`maxAgeMs: 0` for fresh). There is no single enrich endpoint; company search is free text. News search exists. Free-tier limits are 10 requests per minute.
+- **Gemini:** the docs show two conflicting structured-output request shapes and the model list changed; the quote must be verified in code because the schema enforces shape, not truth.
+- **Exa:** plain `/search` with category company is enough; Websets are paid and asynchronous, so skipped.
+- **Cala:** fuzzy name search works on paper; ownership edges must be discovered with introspection, and coverage of small Nordic firms is unknown.
+
+## Biggest risks found
+
+1. Every real-API behaviour is still an assumption; the first keyed run will force fixes (field names, shapes, quotas).
+2. Sparse public data: many footprint keys would be UNKNOWN on real suppliers, leaving alternatives UNVERIFIED. The design fails closed, which is honest but less impressive.
+3. The live stage moment depends on a poll or webhook plus a tunnel; the monitor floor is 10 minutes.
+4. Seed or local results can be mistaken for live ones; the badges are the mitigation and the demo script says it out loud.
+5. Single-client MVP: `client_id` is on every private table, but there is no row-level security and no second login yet.
+
+## Rough effort to reach the full demo in the design report
+
+Estimates are rough and assume one engineer unless noted; the design report's own plan was 4 people for about 40 hours. The MVP already covers the core path of that plan (paste, resolve, footprints, poll, classify with quote check, incident, alternatives with five checks, approve). Remaining:
+
+| Work | Estimate |
+|---|---|
+| Keys, first live call per vendor, fix live providers, record REC fixtures | 2 to 3 days |
+| Context.dev monitors with webhooks per supplier and per shared port/region key (fan-out), tunnel or Aiven Runtime, signature test against a real secret | 1 to 2 days |
+| Corroboration (official source or two independent domains in 48 h), strict news attribution rule | 1 to 2 days |
+| Live news re-check on each candidate (real parsing, 14-day window) | 0.5 to 1 day |
+| Exa candidate discovery of new companies (onboard them, footprint them) and Cala 2-hop ownership | 1.5 to 2 days |
+| Real Gemini footprint extraction from supplier pages (plants, ports) | 1 to 2 days |
+| Accuracy funnel and labelled set of about 40 items, latency p50/p95 | 1 to 2 days |
+| Second client with Postgres row-level security and a login | 1 to 1.5 days |
+| 40-supplier seeded client, UI polish, backup video, three rehearsals | 1.5 to 2 days |
+| Aiven Postgres and Runtime deploy | 0.5 to 1 day |
+
+Roughly **10 to 16 engineer-days**, or about **3 to 5 working days with four people** if work parallelises as before. Downstream monitoring (about 4 h) and the Valio order (about 8 h, optional) are out of scope here and would be on top. Access to keys and what the real APIs actually return are the largest uncertainty.

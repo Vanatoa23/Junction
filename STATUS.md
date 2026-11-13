@@ -1,31 +1,42 @@
 # STATUS
 
-Last updated: 2026-11-14 (foundation).
+Last updated: 2026-11-14, after merging foundation, ingest, onboarding, engine, UI, e2e and docs onto `main`.
 
-## Works (verified on this machine)
-- `pnpm install`, `pnpm typecheck` (shared, checks, api, web), `pnpm test` (checks: 3 tests; api: 5 tests incl. job-queue SKIP LOCKED and contract checks).
-- `pnpm dev`: starts local Postgres, migrates, seeds, runs api + worker + web. `GET /health`, `GET /suppliers` (10 seeded), `/test-notice` (page and edit), web proxy `/api/*`.
-- SSE: a `publish()` from another process reaches `GET /stream` (Postgres LISTEN/NOTIFY).
-- Job queue: enqueue, claim, retry with backoff, stale re-queue; the worker fails jobs with no handler loudly.
-- `source()` adapter: LIVE -> REC -> SEED, runs with no keys, mode on every result.
+## Works (verified on this machine, no API keys)
+- `pnpm install`, `pnpm typecheck` (4 packages), `pnpm test`: 25 checks tests and 63 API tests pass. API tests run against their own throwaway database (`<db>_test`, recreated and seeded each run), so they never touch dev data or race a dev worker.
+- `pnpm dev`: Postgres (Docker if present, else a private local cluster on port 5434), migrate, seed, then api + worker + web.
+- **Full flow, driven over HTTP on a fresh database and by clicking through the real UI (API: real only):**
+  1. Paste the demo list: 10 rows, 8 reach MONITORED, 1 AMBIGUOUS (chooser works, then MONITORED), 1 UNRESOLVED (domain input). About 2 s.
+  2. Edit the TEST page (UI or API): the poll sees the change, event is created (`via=POLL`, mode LOCAL, TEST), classified, quote verified in code, incident STRIKE/HIGH with `PORT:NLRTM` (confirmed) and `REGION:NL-ZH` (inferred).
+  3. Alerts for every supplier touching Rotterdam, each with quote, source URL and `t_source` / `t_received` / `t_classified` / `t_alert`. Edit to alert 1.5 s with a 5 s poll.
+  4. Alternatives for Nordpack: Karlstad Pack VERIFIED, Tampere Board UNVERIFIED (C5 unknown), Lodz Pack FAILED (C5), Maasvlakte Wrap FAILED (C1, C2). All four are returned, ranked.
+  5. Approve: only Karlstad can be approved; the others get 409; an `approval_audit` row with a snapshot is written. Same in the UI (other Approve buttons disabled).
+  6. SSE delivers `supplier.status`, `event.received`, `alert.created`, `alternatives.ready`.
+- `pnpm e2e` (with `pnpm dev` up): 10 steps pass in about 3.2 s. Set `E2E_BASE_URL` and `DATABASE_URL` if the stack is not on the defaults.
 
-## Keyless mode (decision: no keys for now)
-- No external call is ever made without a key. Each provider has a SEED implementation; `local.scrape` (mode LOCAL) fetches our own TEST page; gemini without a key = rule-based classifier (mode SEED, `rule-based-v1`, not an LLM).
-- LIVE implementations exist for contextdev (company_search, scrape, news_search, monitor_create), exa (search), cala (entity_search, ownership), gemini (classify), enabled by `CONTEXT_DEV_API_KEY` / `EXA_API_KEY` / `CALA_API_KEY` / `GEMINI_API_KEY`. **All UNVERIFIED: never run against the real services.**
-- Tests: 12 API tests + 3 checks tests pass (adds quote check, rule-based classifier, local-host restriction).
+## What is SEED, LOCAL, REC, UNVERIFIED
+- **SEED:** all companies, footprints, resolver catalog, candidate pool and tier-2 suppliers are fictional (`.example` domains). The incident classifier is a deterministic rule-based stand-in (`rule-based-v1`), not an LLM.
+- **LOCAL:** the TEST page watch (our own fetch and diff of our own page). Never presented as Context.dev.
+- **REC:** none recorded yet (needs live keys; `SOURCE_RECORD=1`).
+- **UNVERIFIED (never run against the real services):** live code for Context.dev (company search, scrape, news, monitors), Exa (search), Cala (entity search, ownership), Gemini (classify), and the signed webhook receiver. Flip each with one env var: `CONTEXT_DEV_API_KEY`, `EXA_API_KEY`, `CALA_API_KEY`, `GEMINI_API_KEY` (see README). Webhook also needs `CONTEXT_DEV_WEBHOOK_SECRET` and a public URL.
+- **Not run:** live news re-check (interface exists; answers UNKNOWN "not run" without a key and does not change the verdict).
 
-## Stubbed / not built yet
-- Routes returning 501: `POST /suppliers/resolve`, `POST /suppliers/:edgeId/choose`, `POST /webhooks/contextdev`, `GET /events`, `GET /alerts`, `GET /incidents/:id`, `GET /incidents/:id/alternatives`, `POST /candidates/:id/approve`.
-- No job handlers registered yet.
-- `packages/checks` C1..C5 return UNKNOWN ("not implemented"); only the nested-region helper is real.
-- Web is a minimal shell (health, supplier list, raw SSE list).
+## Decisions made while integrating
+- Alerts are created once per (client, company), so pasting the same supplier twice does not double alerts. The supplier grid still shows duplicate rows (no paste-level dedupe against existing rows).
+- TEST-page incidents are CONFIRMED (the page stands in for an official notice, labelled TEST); anything else stays UNCONFIRMED and never alerts.
+- Alert and candidate `mode` is the least-live of the inputs (SEED > LOCAL > REC > LIVE).
+- Engine returns all four ranked candidates (not truncated to 3); `?limit=3` is available.
+- `apps/web/vite.config.ts` proxies to `API_PORT` (default 3001) so the web app can follow a non-default API port.
 
-## Seeded (all labelled SEEDED / mode SEED; fictional, `.example` domains)
-Demo client "Demo Dairy Oy", 10 suppliers (3 touch Rotterdam: Nordpack, Rhine Foils, Antwerp Resins via an INFERRED key), 4 candidates (1 VERIFIED, 2 FAILED, 1 UNVERIFIED by design), 2 tier-2 suppliers, a TEST notice page. Seeded suppliers stay RESOLVED, not MONITORED, until Ingest really arms a watch.
-
-## Known issues / notes
-- API reality check is unverified against live services (see `docs/api-findings.md`).
-- Dev environment note: Docker is not installed on this machine; the local fallback cluster uses port 5434. An earlier throwaway Postgres on port 5433 (from a first attempt) was left running as an orphan process and can be closed from Task Manager.
+## Known issues
+- The 10 pre-loaded seeded suppliers stay RESOLVED (not MONITORED): nothing arms a watch for them. Only pasted rows reach MONITORED.
+- Duplicate pastes create duplicate grid rows.
+- On startup the first poll job can fail once if the API is not up yet; it retries and succeeds.
+- C5 compares ultimate-parent keys only (no 2-hop chain). C4 is UNKNOWN for sanctions incidents without screening data.
+- `api-findings.md` is documentation-only. No vendor has ever been called.
+- Docker is untested on this machine (not installed); the compose file is unverified.
 
 ## Next
-Ingest, Onboarding, Engine and UI threads build against `PLAN.md`; get keys and do the first live call per vendor.
+1. Keys: one live call per vendor, fix live providers, record fixtures (see `MVP-SUMMARY.md` for the effort estimate).
+2. Webhook monitors and a public URL; real Gemini classification and footprint extraction.
+3. Corroboration, live news check, accuracy funnel, second client with row-level security, Aiven deploy.
