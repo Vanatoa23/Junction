@@ -23,6 +23,8 @@ async function newEvent(text: string): Promise<string> {
   return r.rows[0].id;
 }
 
+const dupEdges: string[] = [];
+
 afterAll(async () => {
   const inc = (await pool.query(`SELECT id FROM incident WHERE event_id = ANY($1)`, [eventIds])).rows.map((r) => r.id);
   await pool.query(`DELETE FROM approval_audit WHERE candidate_id IN (SELECT id FROM candidate WHERE incident_id = ANY($1))`, [inc]);
@@ -32,6 +34,7 @@ afterAll(async () => {
   await pool.query(`DELETE FROM footprint_key WHERE incident_id = ANY($1)`, [inc]);
   await pool.query(`DELETE FROM incident WHERE id = ANY($1)`, [inc]);
   await pool.query(`DELETE FROM event WHERE id = ANY($1)`, [eventIds]);
+  await pool.query(`DELETE FROM supplier_edge WHERE id = ANY($1)`, [dupEdges]);
   await pool.end();
 });
 
@@ -164,5 +167,20 @@ describe("drop and block paths", () => {
     expect(mapped.json().incident.footprint.some((k: any) => k.value === "BEZEE" && k.seeded)).toBe(true);
     // the queued match_incident job is for the worker; clear it so no stray job is left behind
     await pool.query(`DELETE FROM job WHERE kind = 'match_incident' AND payload->>'incidentId' = $1`, [r.incidentId]);
+  });
+});
+
+describe("duplicate supplier edges", () => {
+  it("alerts once per (client, company) even if the same supplier was pasted twice", async () => {
+    const dup = await pool.query(
+      `INSERT INTO supplier_edge (client_id, tier, company_id, input_name, status, mode) VALUES ($1, 1, $2, 'Nordpack dup', 'MONITORED', 'SEED') RETURNING id`,
+      [config.DEMO_CLIENT_ID, "10000000-0000-4000-8000-000000000001"],
+    );
+    dupEdges.push(dup.rows[0].id);
+    const id = await newEvent("NOTICE: Strike action at the Port of Rotterdam (NLRTM, region NL-ZH). Terminals closed.");
+    const r = await runInline(id, noPublish);
+    if (r.outcome !== "incident") throw new Error("expected incident");
+    const alerts = await loadAlerts(config.DEMO_CLIENT_ID, { incidentId: r.incidentId });
+    expect(alerts.filter((a) => a.supplierName === "Nordpack Packaging")).toHaveLength(1);
   });
 });

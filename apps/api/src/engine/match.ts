@@ -39,9 +39,14 @@ export async function matchIncident(incidentId: string, deps: EngineDeps = defau
   const fps = await companyFootprint(edges.map((e) => e.company_id));
 
   const alertIds: string[] = [];
+  // Pasting the same supplier twice creates two edges to ONE company: alert once per (client, company).
+  const alerted = new Set<string>();
   for (const e of edges) {
+    const dedupe = `${e.client_id}|${e.company_id}`;
+    if (alerted.has(dedupe)) continue;
     const matched = matchKeys(incident.footprint, fps.get(e.company_id) ?? []);
     if (!matched.length) continue;
+    alerted.add(dedupe);
     const ins = await pool.query(
       `INSERT INTO alert (client_id, incident_id, edge_id, matched_keys) VALUES ($1,$2,$3,$4)
        ON CONFLICT (client_id, incident_id, edge_id) DO NOTHING RETURNING id`,
