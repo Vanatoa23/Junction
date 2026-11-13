@@ -1,23 +1,35 @@
-import { notImplemented, type ModuleDef } from "../module";
+import { ListEventsResponse } from "@secondsource/shared";
+import type { ModuleDef } from "../module";
+import { listEvents } from "./ingest";
+import { pollOnce, POLL_INTERVAL_MS, startPollScheduler, testNoticeUrl } from "./poll";
 import { registerTestNotice } from "./testNotice";
+import { registerWebhook } from "./webhook";
 
 /**
- * OWNER: Ingest thread. See README.md in this folder.
- * Foundation scaffold: the TEST notice page works; webhook/events are 501.
- *
- * Plan decision (docs/api-findings.md): Context.dev monitors have a 10 min minimum interval, so the DEFAULT
- * live path is a scrape-and-diff POLL (UI says "poll"). The webhook receiver is the second path. Both MUST call
- * one shared ingestChange() function that writes the event row and enqueues classify_event.
+ * OWNER: Ingest thread. See README.md.
+ * Default live path = scrape-and-diff POLL (LOCAL without keys; UI says "poll"). Webhook = second path.
+ * Both call ingestChange() (ingest.ts): writes the event, publishes event.received, enqueues classify_event.
  */
 const mod: ModuleDef = {
   name: "ingest",
-  registerRoutes(app) {
+  async registerRoutes(app) {
     registerTestNotice(app);
-    app.post("/webhooks/contextdev", notImplemented("Ingest"));
-    app.get("/events", notImplemented("Ingest"));
+    await registerWebhook(app);
+    app.get<{ Querystring: { limit?: string } }>("/events", async (req) => {
+      const limit = Math.min(200, Math.max(1, Number(req.query.limit ?? 50) || 50));
+      return ListEventsResponse.parse({ events: await listEvents(limit) });
+    });
+    // Dev: poll the TEST page right now and report the outcome.
+    app.post("/dev/poll-now", async () => ({ intervalMs: POLL_INTERVAL_MS, via: "POLL", ...(await pollOnce(testNoticeUrl())) }));
   },
   jobHandlers: {
-    // arm_monitors, poll_page
+    async poll_page({ url }) {
+      const r = await pollOnce(url);
+      if (r.status === "error") throw new Error(r.note);
+    },
+  },
+  startWorker() {
+    startPollScheduler();
   },
 };
 export default mod;
