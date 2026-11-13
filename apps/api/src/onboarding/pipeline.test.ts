@@ -105,6 +105,9 @@ describe("paste flow over the API (SEED, keyless)", () => {
     expect(amb.resolveScore).toBeGreaterThanOrEqual(0.6);
     expect(amb.resolveScore).toBeLessThan(0.85);
     expect(amb.company).toBeNull();
+    // Regression (chooser "This one" was disabled on a fresh DB): options for companies not stored yet have
+    // companyId null, so EVERY option must carry a domain the client can choose by.
+    expect(amb.options.every((o) => !!o.companyId || !!o.domain)).toBe(true);
 
     const unres = byName(rows, "Northwind Industrial Fasteners");
     expect(unres.status).toBe("UNRESOLVED");

@@ -133,7 +133,7 @@ function Detail({ s, onChoose }: { s: SupplierRow; onChoose: (b: { companyId?: s
                 <div className="small muted">{o.domain ?? "no domain"} · {o.country ?? "?"}</div>
                 <div className="row" style={{ marginTop: 8 }}>
                   <ModeBadge mode={o.mode} />
-                  <button className="primary" disabled={busy || !o.companyId} onClick={() => run({ companyId: o.companyId ?? undefined })}>This one</button>
+                  <button className="primary" disabled={busy || (!o.companyId && !o.domain)} onClick={() => run(o.companyId ? { companyId: o.companyId } : { domain: o.domain ?? undefined })}>This one</button>
                 </div>
                 {o.sourceUrls.length > 0 && <div className="small" style={{ marginTop: 6 }}><Sources urls={o.sourceUrls} /></div>}
               </div>
