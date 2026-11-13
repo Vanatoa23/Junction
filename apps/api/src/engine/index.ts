@@ -1,19 +1,20 @@
-import { notImplemented, type ModuleDef } from "../module";
+import type { ModuleDef } from "../module";
+import { findAlternatives } from "./alternatives";
+import { classifyEvent } from "./classify";
+import { matchIncident } from "./match";
+import { registerEngineRoutes } from "./routes";
 
 /**
- * OWNER: Engine thread (with packages/checks). See README.md in this folder.
- * Foundation scaffold: all routes 501.
+ * OWNER: Engine thread. See README.md in this folder.
+ * Jobs: classify_event -> match_incident -> find_alternatives. Routes: /alerts, /incidents*, /candidates/:id/approve.
  */
 const mod: ModuleDef = {
   name: "engine",
-  registerRoutes(app) {
-    app.get("/alerts", notImplemented("Engine"));
-    app.get("/incidents/:id", notImplemented("Engine"));
-    app.get("/incidents/:id/alternatives", notImplemented("Engine"));
-    app.post("/candidates/:id/approve", notImplemented("Engine"));
-  },
+  registerRoutes: registerEngineRoutes,
   jobHandlers: {
-    // classify_event, match_incident, find_alternatives
+    classify_event: async ({ eventId }) => void (await classifyEvent(eventId)),
+    match_incident: async ({ incidentId }) => void (await matchIncident(incidentId)),
+    find_alternatives: async (p) => void (await findAlternatives(p)),
   },
 };
 export default mod;
