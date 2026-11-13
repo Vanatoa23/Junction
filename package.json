@@ -14,7 +14,8 @@
     "db:reset": "pnpm --filter @secondsource/api reset",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r --if-present test",
-    "build": "pnpm --filter @secondsource/web build"
+    "build": "pnpm --filter @secondsource/web build",
+    "e2e": "node scripts/e2e/run.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.1.0",
