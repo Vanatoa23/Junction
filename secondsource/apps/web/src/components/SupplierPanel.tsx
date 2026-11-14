@@ -88,6 +88,13 @@ export function SupplierPanel({ edgeId, onClose, onFindReplacement }: { edgeId: 
         </Section>
       )}
 
+      {s.sites.length > 0 && (
+        <Section title="Known facilities">
+          <p>{s.sites.reduce((n, x) => n + x.count, 0)} sites: {s.sites.map((x) => `${COUNTRIES[x.country]?.name ?? x.country} ${x.count}`).join(", ")}.</p>
+          <p className="muted small">From a public supplier disclosure. Only the country is known, so the dots on the map are approximate.{s.anonymised ? " The company name is hidden in the dataset, so it shows as a code." : ""}</p>
+        </Section>
+      )}
+
       <Section title="What you told us">
         {editing ? (
           <DetailsForm s={s} contact={row?.input.contact ?? null} notes={row?.input.notes ?? null} onDone={async () => { setEditing(false); await reload(); }} />

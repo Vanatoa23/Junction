@@ -163,3 +163,9 @@ details summary { cursor: pointer; margin-top: 8px; font-size: 13px; color: var(
 .coverage-key { position: absolute; top: 53px; left: 14px; z-index: 1000; display: inline-flex; align-items: center; gap: 7px; padding: 5px 8px; border-radius: 7px; background: #fff; font-size: 12px; box-shadow: var(--shadow); }
 .coverage-key i, .sup.limited::after, .bubble.limited::after { width: 10px; height: 10px; border: 1px dashed currentColor; border-radius: 50%; }
 .sup.limited::after, .bubble.limited::after { content: ""; position: absolute; inset: -4px; width: auto; height: auto; color: #fff; pointer-events: none; }
+
+/* ports (anchors) and facility counts */
+.port { position: relative; width: 9px; height: 9px; pointer-events: none; }
+.port i { position: absolute; inset: 0; transform: rotate(45deg); background: #e9eef2; border: 1.5px solid #4a6b82; border-radius: 2px; }
+.port span { position: absolute; left: 13px; top: -4px; white-space: nowrap; font-size: 11px; color: #dbe6ee; text-shadow: 0 1px 3px #0b1424, 0 0 4px #0b1424; }
+.site { min-width: 20px; height: 20px; padding: 0 5px; display: grid; place-items: center; border-radius: 10px; background: rgba(255, 255, 255, 0.92); color: #1f2933; font-size: 11px; font-weight: 700; border: 1.5px solid #6c818a; pointer-events: auto; }

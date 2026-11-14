@@ -13,17 +13,25 @@ if (!existsSync(join(root, ".env")) && existsSync(join(root, ".env.example"))) {
   console.log("Created .env from .env.example (no keys: running on SEED/REC).");
 }
 
-for (const [cmd, args] of [
-  ["node", ["scripts/db.mjs", "up"]],
-  ["pnpm", ["--filter", "@secondsource/api", "migrate"]],
-  ["pnpm", ["--filter", "@secondsource/api", "seed"]],
+// `pnpm dev:real` runs the real-data scenario (public Cala packs) instead of the fictional demo company.
+// The fictional seed always runs under its own client id; only the running stack switches to the real-data client.
+const real = process.argv.includes("--real");
+const FICTIONAL_CLIENT = "00000000-0000-4000-8000-000000000001";
+const REAL_CLIENT = "00000000-0000-4000-8000-000000000002";
+
+for (const [cmd, args, env] of [
+  ["node", ["scripts/db.mjs", "up"], {}],
+  ["pnpm", ["--filter", "@secondsource/api", "migrate"], {}],
+  ["pnpm", ["--filter", "@secondsource/api", "seed"], { DEMO_CLIENT_ID: FICTIONAL_CLIENT }],
+  ...(real ? [["pnpm", ["--filter", "@secondsource/api", "seed:cala"], {}]] : []),
 ]) {
-  const r = spawnSync(cmd, args, sh);
+  const r = spawnSync(cmd, args, { ...sh, env: { ...process.env, ...env } });
   if (r.status !== 0) {
     console.error(`\nStep failed: ${cmd} ${args.join(" ")}`);
     process.exit(r.status ?? 1);
   }
 }
+if (real) process.env.DEMO_CLIENT_ID = REAL_CLIENT;
 
 console.log("\nAPI http://localhost:3001  |  Web http://localhost:5173  |  TEST page http://localhost:3001/test-notice\n");
 const q = (c) => `"${c}"`;

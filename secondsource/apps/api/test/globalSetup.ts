@@ -19,8 +19,10 @@ export default async function setup() {
 
   const { migrate } = await import("../src/db/migrate");
   const { seed } = await import("../src/seed/seed");
+  const { seedCala } = await import("../src/seed/cala");
   const { pool } = await import("../src/db/pool");
   await migrate(() => {});
   await seed(() => {});
+  await seedCala(() => {}); // real-data scenario (skipped when the packs are absent)
   await pool.end();
 }

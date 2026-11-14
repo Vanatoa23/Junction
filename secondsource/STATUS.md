@@ -2,6 +2,13 @@
 
 Last updated: 2026-11-14, after the design arena and the plain-language redesign (see `ARENA.md`).
 
+## Real-data scenario (latest)
+- `pnpm dev:real` / `pnpm db:seed:cala`: imports the public Cala packs (`world_v0`: 218 supplier links, 607 facility records, 16 routes; `starting_grid_v0`: 43 ports, 578 headquarters) as recorded real data (mode REC). Names stay aliases. See `docs/REAL_DATA.md`.
+- A second client ("Real-data demo") with 12 direct suppliers; 48 supplier-to-supplier links stay hidden and feed risk. Sites and ports are shown on the map; "Add supplier" can snap to a known company (`GET /known`, `POST /suppliers/snap`).
+- **Assumptions, labelled as such:** which port a supplier ships through, the Helsinki hub, the demo notice. Ownership is unknown, so no replacement can be fully verified in this scenario (approval is demoed in the fictional scenario).
+- The fictional demo is untouched and remains the default. Tests: 82 API tests pass (adds `cala.test.ts`).
+- Risk formula unchanged.
+
 ## Redesign (latest)
 - **New UI** for a non-technical Head of Supply / Head of Sales: Map (home), Suppliers, Alerts, Add supplier, supplier card, replacements. No provider names, modes (SEED/LIVE/REC/LOCAL), check codes or job talk on screen. See `apps/web/README.md`.
 - **Zoomable map** (Leaflet; bundled world outline works offline, muted OpenStreetMap tiles when online): the hub plus one line to each **direct** supplier only; country bubbles when zoomed out, names and cities when zoomed in; a soft red area and pulsing dots for a disruption.

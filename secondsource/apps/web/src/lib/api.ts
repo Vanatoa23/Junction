@@ -1,4 +1,5 @@
 import type {
+  KnownCompaniesResponse, SnapSupplierRequest,
   AlternativesResponse, ApproveCandidateResponse, MapResponse, ListSuppliersResponse, ResolveSuppliersResponse, SaveDependencyRequest, SupplierDependency, SupplierInput, SupplierRow, TestNoticeState,
 } from "@secondsource/shared";
 
@@ -29,5 +30,8 @@ export const api = {
   publishNotice: (text: string) => call<TestNoticeState>("/test-notice", { method: "PUT", body: JSON.stringify({ text }) }),
   notice: () => call<TestNoticeState>("/test-notice/state"),
   updateDetails: (edgeId: string, body: Record<string, unknown>) => call<MapResponse>(`/suppliers/${edgeId}/details`, { method: "PUT", body: JSON.stringify(body) }),
+  known: (q: { q?: string; country?: string; city?: string }) =>
+    call<KnownCompaniesResponse>(`/known?${new URLSearchParams(Object.entries(q).filter(([, v]) => v) as [string, string][])}`),
+  snap: (body: SnapSupplierRequest) => call<{ edgeId: string; map: MapResponse }>("/suppliers/snap", { method: "POST", body: JSON.stringify(body) }),
   updateProfile: (body: { name?: string; city?: string | null; country?: string | null }) => call<MapResponse>("/profile", { method: "PUT", body: JSON.stringify(body) }),
 };

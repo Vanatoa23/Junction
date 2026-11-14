@@ -169,6 +169,10 @@ export const MapSupplier = z.object({
   leadTimeDays: z.number().nullable(),
   risk: SupplierRisk,
   exposures: z.array(SupplierExposure).default([]),
+  /** Known facilities of this supplier from the data pack (positions are country centres when only the country is known). */
+  sites: z.array(z.object({ country: z.string(), count: z.number().int(), lat: z.number().nullable(), lng: z.number().nullable() })),
+  /** True when the name is an alias because the public dataset anonymises it. */
+  anonymised: z.boolean(),
   /** Latest open alert for this supplier, in plain words. */
   alert: z.object({ alertId: z.string().uuid(), incidentId: z.string().uuid(), headline: z.string(), severity: z.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]) }).nullable(),
 });
@@ -198,9 +202,42 @@ export const MapResponse = z.object({
   hub: z.object({ name: z.string(), city: z.string().nullable(), country: z.string().nullable(), lat: z.number().nullable(), lng: z.number().nullable() }),
   suppliers: z.array(MapSupplier),
   incidents: z.array(MapIncident),
+  /** Ports that matter right now (used by a direct supplier or named by an open incident). Anchors on the map, not suppliers. */
+  ports: z.array(z.object({ id: z.string(), label: z.string(), lat: z.number(), lng: z.number() })),
+  /** What the "Test a disruption" control publishes for this client's data. */
+  demo: z.object({ noticeText: z.string(), noticeLabel: z.string() }),
+  /** "fictional" (built-in seed) or "cala" (real public data pack). */
+  scenario: z.string(),
 });
 export type MapResponse = z.infer<typeof MapResponse>;
 
 /** PUT /profile: tell us who you are (your company name and where it is). */
 export const UpdateProfileRequest = z.object({ name: z.string().min(1).optional(), city: z.string().nullable().optional(), country: z.string().length(2).nullable().optional() });
 export type UpdateProfileRequest = z.infer<typeof UpdateProfileRequest>;
+
+/** GET /known?q=&country=&city=  Known companies from the data pack the user can snap a new supplier to. */
+export const KnownCompany = z.object({
+  companyId: z.string().uuid(),
+  name: z.string(),
+  city: z.string().nullable(),
+  country: z.string().nullable(),
+  category: z.string().nullable(),
+  sites: z.number().int(),
+  anonymised: z.boolean(),
+});
+export type KnownCompany = z.infer<typeof KnownCompany>;
+export const KnownCompaniesResponse = z.object({ companies: z.array(KnownCompany) });
+export type KnownCompaniesResponse = z.infer<typeof KnownCompaniesResponse>;
+
+/** POST /suppliers/snap  Add a supplier that is a known company from the data pack (no lookup needed). */
+export const SnapSupplierRequest = z.object({
+  companyId: z.string().uuid(),
+  name: z.string().min(1).optional(),
+  supplies: z.string().nullable().optional(),
+  criticality: Criticality.nullable().optional(),
+  annualSpendEur: z.number().nonnegative().nullable().optional(),
+  leadTimeDays: z.number().int().nonnegative().nullable().optional(),
+  contact: z.string().nullable().optional(),
+  notes: z.string().nullable().optional(),
+});
+export type SnapSupplierRequest = z.infer<typeof SnapSupplierRequest>;

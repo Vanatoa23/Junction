@@ -63,7 +63,7 @@ export async function findAlternatives(
     if (news.result.status === "FAIL") verdict = "FAILED";
     evaluated.push({ company: c, name: c.name as string, verdict, results: [...results, news.result], mode: leastLive([c.mode, news.mode]) });
   }
-  const ranked = rankCandidates(evaluated);
+  const ranked = rankCandidates(evaluated).slice(0, 12); // a large pool (the real-data scenario has 200) shows its best 12
 
   const candidateIds = await tx(async (cx) => {
     const out: string[] = [];

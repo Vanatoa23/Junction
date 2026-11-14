@@ -11,6 +11,8 @@
     "db:down": "node scripts/db.mjs down",
     "db:migrate": "pnpm --filter @secondsource/api migrate",
     "db:seed": "pnpm --filter @secondsource/api seed",
+    "db:seed:cala": "pnpm --filter @secondsource/api seed:cala",
+    "dev:real": "node scripts/dev.mjs --real",
     "db:reset": "pnpm --filter @secondsource/api reset",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r --if-present test",

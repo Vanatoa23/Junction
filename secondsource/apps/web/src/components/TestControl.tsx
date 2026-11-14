@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../lib/api";
+import { useData } from "../lib/data";
 
 const TRIGGER =
   "NOTICE: Strike action at the Port of Rotterdam (NLRTM, region NL-ZH). All container terminals are closed until further notice. Inbound and outbound cargo is delayed.";
@@ -8,7 +9,10 @@ const QUIET = "Supplier and port notices. No active disruptions are listed. All 
 /** Presenter control: publish a notice on our own demo page. Small, grey, out of the way, clearly marked TEST. */
 export function TestControl() {
   const [open, setOpen] = useState(false);
-  const [text, setText] = useState(TRIGGER);
+  const { map } = useData();
+  const trigger = map?.demo.noticeText ?? TRIGGER;
+  const [text, setText] = useState(trigger);
+  useEffect(() => setText(trigger), [trigger]);
   const [msg, setMsg] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
