@@ -1,5 +1,5 @@
 import type { ClassifiedKey, ClassifyOutput, IncidentType, Severity } from "@secondsource/shared";
-import { PORTS, SANCTION_PROGRAMMES } from "./gazetteer";
+import { allPorts, SANCTION_PROGRAMMES } from "./gazetteer";
 
 /**
  * Deterministic RULE-BASED classifier: the SEED-mode stand-in for Gemini (no key, no network).
@@ -41,12 +41,14 @@ export function classifyRuleBased(text: string): ClassifyOutput {
   const add = (k: ClassifiedKey) => { if (!keys.some((x) => x.type === k.type && x.value === k.value)) keys.push(k); };
   const unmapped: string[] = [];
 
-  for (const p of PORTS) {
-    const byName = new RegExp(`\\b${p.name}\\b`, "i");
+  const ports = allPorts();
+  const escapeRe = (x: string) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  for (const p of ports) {
+    const byName = new RegExp(`\\b${escapeRe(p.name)}\\b`, "i");
     const named = all.find((s) => byName.test(s) || s.includes(p.locode));
     if (named) {
       add({ type: "PORT", value: p.locode, state: "CONFIRMED", quote: named });
-      add({ type: "REGION", value: p.region, state: "INFERRED", quote: named });
+      if (p.region) add({ type: "REGION", value: p.region, state: "INFERRED", quote: named });
     }
   }
   // explicit region codes like NL-ZH are CONFIRMED (they are in the text)
@@ -56,7 +58,8 @@ export function classifyRuleBased(text: string): ClassifyOutput {
   for (const sp of SANCTION_PROGRAMMES) if (sp.pattern.test(text)) add({ type: "SANCTION", value: sp.id, state: "CONFIRMED", quote });
   // "Port of X" where X is not in the gazetteer cannot be mapped -> blocks the automatic alert
   for (const m of text.matchAll(/\bPort of ([A-Z][\w-]+)/g)) {
-    if (!PORTS.some((p) => p.name.toLowerCase() === m[1]!.toLowerCase())) unmapped.push(`Port of ${m[1]}`);
+    const rest = text.slice((m.index ?? 0) + "Port of ".length).toLowerCase();
+    if (!ports.some((p) => rest.startsWith(p.name.toLowerCase()))) unmapped.push(`Port of ${m[1]}`);
   }
 
   const title = quote.length > 90 ? quote.slice(0, 87) + "..." : quote;

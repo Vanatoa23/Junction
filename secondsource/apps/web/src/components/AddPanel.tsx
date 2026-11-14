@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { COUNTRIES, type Criticality } from "@secondsource/shared";
+import { useEffect, useMemo, useState } from "react";
+import { COUNTRIES, type Criticality, type KnownCompany } from "@secondsource/shared";
 import { api } from "../lib/api";
 import { useData } from "../lib/data";
 import { CRITICALITY_WORD, foundLines, statusWord } from "../lib/words";
@@ -41,6 +41,40 @@ function parseSupplierList(text: string) {
   }).filter(([name, website], index) =>
     name && !(index === 0 && /^(?:name|supplier|company|supplier name|company name)$/i.test(name) && (!website || /^(?:website|domain)$/i.test(website))),
   ).map(([name, domain, country]) => ({ name: name!, domain: domain || null, country: country || null }));
+}
+
+/**
+ * Known companies from the data pack that match what was typed. Picking one adds the supplier straight away
+ * (no lookup), with its real location and facilities. Names in the public dataset are anonymised aliases.
+ */
+function KnownPicker({ q, country, city, busy, onPick }: { q: string; country: string; city: string; busy: boolean; onPick: (c: KnownCompany) => void }) {
+  const [list, setList] = useState<KnownCompany[]>([]);
+  useEffect(() => {
+    const ready = q.trim().length >= 3 || country || city.trim().length >= 3;
+    if (!ready) { setList([]); return; }
+    let live = true;
+    const t = window.setTimeout(() => {
+      api.known({ q: q.trim().length >= 3 ? q.trim() : undefined, country, city: city.trim() || undefined })
+        .then((r) => live && setList(r.companies)).catch(() => live && setList([]));
+    }, 300);
+    return () => { live = false; window.clearTimeout(t); };
+  }, [q, country, city]);
+  if (!list.length) return null;
+  return (
+    <section className="sect known">
+      <h3>Known companies like this</h3>
+      <p className="muted small">Real records from a public dataset. Their names are hidden in the data, so they show as codes. Pick one to add it with its known location and sites.</p>
+      {list.map((c) => (
+        <div className="choice" key={c.companyId}>
+          <div>
+            <b>{c.name}</b>
+            <div className="muted small">{[c.city, COUNTRIES[c.country ?? ""]?.name ?? c.country, c.category, c.sites ? `${c.sites} known site${c.sites > 1 ? "s" : ""}` : null].filter(Boolean).join(" · ")}</div>
+          </div>
+          <button type="button" className="primary small" disabled={busy} onClick={() => onPick(c)}>Add this one</button>
+        </div>
+      ))}
+    </section>
+  );
 }
 
 export function AddPanel({ onClose, onOpen }: { onClose: () => void; onOpen: (edgeId: string) => void }) {
@@ -85,6 +119,24 @@ export function AddPanel({ onClose, onOpen }: { onClose: () => void; onOpen: (ed
       supplies: v.supplies?.trim() || null, criticality: crit, annualSpendEur: num(v.spend), leadTimeDays: num(v.lead),
       contact: v.contact?.trim() || null, notes: v.notes?.trim() || null,
     }]);
+
+  const snap = async (c: KnownCompany) => {
+    setBusy(true);
+    setErr(null);
+    try {
+      const r = await api.snap({
+        companyId: c.companyId, name: name.trim() || undefined, supplies: v.supplies?.trim() || null, criticality: crit,
+        annualSpendEur: num(v.spend), leadTimeDays: num(v.lead) === null ? null : Math.round(num(v.lead)!), contact: v.contact?.trim() || null, notes: v.notes?.trim() || null,
+      });
+      setAdded([r.edgeId]);
+      setName(""); setV({}); setOpen(new Set()); setCrit(null);
+      await reload();
+    } catch (e) {
+      setErr((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  };
 
   const saveList = () => {
     try {
@@ -138,6 +190,7 @@ export function AddPanel({ onClose, onOpen }: { onClose: () => void; onOpen: (ed
           {open.has("lead") && <label className="field"><span>Usual lead time (days)</span><input inputMode="numeric" value={v.lead ?? ""} onChange={(e) => set("lead", e.target.value)} placeholder="14" /></label>}
           {open.has("contact") && <label className="field"><span>Contact</span><input value={v.contact ?? ""} onChange={(e) => set("contact", e.target.value)} placeholder="Name or email" /></label>}
           {open.has("notes") && <label className="field"><span>Notes</span><textarea rows={3} value={v.notes ?? ""} onChange={(e) => set("notes", e.target.value)} /></label>}
+          <KnownPicker q={name} country={v.country ?? ""} city={v.city ?? ""} busy={busy} onPick={snap} />
           <button className="primary wide" type="submit" disabled={busy || !name.trim()}>Add supplier</button>
         </form>
       ) : (

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Criticality, incidentHeadline, incidentPoint, locate, UpdateProfileRequest, type MapIncident, type MapResponse, type MapSupplier } from "@secondsource/shared";
+import { Criticality, PORTS, SnapSupplierRequest, incidentHeadline, incidentPoint, locate, placeLabel, UpdateProfileRequest, type MapIncident, type MapResponse, type MapSupplier } from "@secondsource/shared";
 import { config } from "../config";
 import { companyFootprint, loadSuppliers } from "../db/mappers";
 import { pool } from "../db/pool";
@@ -16,6 +16,8 @@ import { dependencyEvidence, loadDependencies } from "./dependencies";
  * Seeded deeper tiers feed risk. Matching buyer-confirmed paths explain exposure on the supplier card.
  */
 const OPEN_DAYS = 7;
+const DEMO_NOTICE_FICTIONAL =
+  "NOTICE: Strike action at the Port of Rotterdam (NLRTM, region NL-ZH). All container terminals are closed until further notice. Inbound and outbound cargo is delayed.";
 
 export async function buildMap(clientId: string): Promise<MapResponse> {
   const client = (await pool.query(`SELECT * FROM client WHERE id = $1`, [clientId])).rows[0];
@@ -40,6 +42,14 @@ export async function buildMap(clientId: string): Promise<MapResponse> {
     walk(companyId);
     return out;
   };
+
+  // known facilities (data pack): grouped per company; positions are the country centre when only the country is known
+  const siteRows = (await pool.query(`SELECT company_id, country, count(*)::int AS n FROM site WHERE company_id = ANY($1) GROUP BY company_id, country ORDER BY n DESC, country`, [suppliers.map((x) => x.company?.id).filter(Boolean)])).rows;
+  const sitesOf = new Map<string, MapSupplier["sites"]>();
+  for (const r of siteRows) {
+    const pt = locate(null, r.country);
+    sitesOf.set(r.company_id, [...(sitesOf.get(r.company_id) ?? []), { country: r.country.trim(), count: r.n, lat: pt?.lat ?? null, lng: pt?.lng ?? null }]);
+  }
 
   const since = Date.now() - OPEN_DAYS * 86400_000;
   const incidents = (await loadIncidents({ limit: 50 })).filter((i) => i.confirmation === "CONFIRMED" && i.unmappedNames.length === 0 && Date.parse(i.createdAt) >= since);
@@ -73,10 +83,25 @@ export async function buildMap(clientId: string): Promise<MapResponse> {
       annualSpendEur: s.input.annualSpendEur,
       leadTimeDays: s.input.leadTimeDays,
       risk,
+      sites: company ? sitesOf.get(company.id) ?? [] : [],
+      anonymised: /^(Supplier|Company|Buyer)-/.test(company?.name ?? s.input.name),
       exposures: evidence.exposures,
       alert: latest && inc ? { alertId: latest.id, incidentId: latest.incidentId, headline: incidentHeadline(inc.type, inc.footprint), severity: latest.severity } : null,
     };
   });
+
+  // Suppliers that are only known by country share one point (the country centre): spread them on a small ring so they stay
+  // separate and clickable. Still "approximate location".
+  const sharing = new Map<string, MapSupplier[]>();
+  for (const m of out) if (m.precision === "COUNTRY" && m.lat != null && m.lng != null) sharing.set(`${m.lat},${m.lng}`, [...(sharing.get(`${m.lat},${m.lng}`) ?? []), m]);
+  for (const group of sharing.values()) {
+    if (group.length < 2) continue;
+    group.sort((a, b) => a.edgeId.localeCompare(b.edgeId)).forEach((m, i) => {
+      const a = (2 * Math.PI * i) / group.length;
+      m.lat = m.lat! + 1.6 * Math.sin(a);
+      m.lng = m.lng! + 2.2 * Math.cos(a);
+    });
+  }
 
   const mapIncidents: MapIncident[] = incidents.map((i) => {
     const mine = alerts.filter((a) => a.incidentId === i.id);
@@ -92,8 +117,31 @@ export async function buildMap(clientId: string): Promise<MapResponse> {
     };
   });
 
+  // ports that matter now: used by a direct supplier (own or assumed) or named by an open incident. Anchors, not suppliers.
+  const wanted = new Set<string>();
+  for (const sup of suppliers) for (const k of sup.footprint) if (k.type === "PORT" && k.state !== "UNKNOWN") wanted.add(k.value);
+  for (const inc of incidents) for (const k of inc.footprint) if (k.type === "PORT") wanted.add(k.value);
+  const dbPorts = wanted.size ? (await pool.query(`SELECT id, name, lat, lng FROM port WHERE id = ANY($1) AND lat IS NOT NULL`, [[...wanted]])).rows : [];
+  const dbPort = new Map<string, { lat: number; lng: number }>(dbPorts.map((r) => [r.id, { lat: r.lat, lng: r.lng }]));
+  const ports: MapResponse["ports"] = [];
+  for (const id of wanted) {
+    const at = PORTS[id] ?? dbPort.get(id);
+    if (at) ports.push({ id, label: placeLabel("PORT", id), lat: at.lat, lng: at.lng });
+  }
+  for (const mi of mapIncidents) {
+    if (mi.point) continue;
+    const inc = incidentById.get(mi.id);
+    const port = inc?.footprint.find((k) => k.type === "PORT" && dbPort.has(k.value));
+    if (port) mi.point = { ...dbPort.get(port.value)!, label: placeLabel("PORT", port.value) };
+  }
+
   const hub = client ?? { name: "Your company", city: null, country: null, lat: null, lng: null };
-  return { hub: { name: hub.name, city: hub.city, country: hub.country?.trim() || null, lat: hub.lat, lng: hub.lng }, suppliers: out, incidents: mapIncidents };
+  return {
+    hub: { name: hub.name, city: hub.city, country: hub.country?.trim() || null, lat: hub.lat, lng: hub.lng },
+    suppliers: out, incidents: mapIncidents, ports,
+    demo: { noticeText: client?.demo_notice ?? DEMO_NOTICE_FICTIONAL, noticeLabel: client?.demo_label ?? "Strike at the Port of Rotterdam" },
+    scenario: client?.scenario ?? "fictional",
+  };
 }
 
 const mod: ModuleDef = {
@@ -120,6 +168,43 @@ const mod: ModuleDef = {
       }
       await pool.query(`UPDATE supplier_edge SET details = $2, input_city = $3, updated_at = now() WHERE id = $1`, [req.params.edgeId, JSON.stringify(details), city === undefined ? cur.input_city : city?.trim() || null]);
       return buildMap(config.DEMO_CLIENT_ID);
+    });
+    // Known companies from the data pack, so a new supplier can snap to a real record (name, city, country) instead of being looked up.
+    app.get<{ Querystring: { q?: string; country?: string; city?: string } }>("/known", async (req) => {
+      const q = (req.query.q ?? "").trim();
+      const country = (req.query.country ?? "").trim().toUpperCase();
+      const city = (req.query.city ?? "").trim();
+      if (!q && !country && !city) return { companies: [] };
+      const r = await pool.query(
+        `SELECT c.id, c.name, c.city, c.country, c.category, (SELECT count(*)::int FROM site s WHERE s.company_id = c.id) AS sites
+         FROM company c
+         WHERE c.mode = 'REC' AND NOT c.seeded
+           AND ($1 = '' OR c.name ILIKE '%' || $1 || '%')
+           AND ($2 = '' OR c.country = $2)
+           AND ($3 = '' OR c.city ILIKE $3 || '%')
+           AND NOT EXISTS (SELECT 1 FROM supplier_edge e WHERE e.client_id = $4 AND e.tier = 1 AND e.company_id = c.id)
+         ORDER BY (c.city IS NOT NULL) DESC, (SELECT count(*) FROM site s WHERE s.company_id = c.id) DESC, c.name
+         LIMIT 8`,
+        [q, country, city, config.DEMO_CLIENT_ID],
+      );
+      return { companies: r.rows.map((x) => ({ companyId: x.id, name: x.name, city: x.city, country: x.country?.trim() ?? null, category: x.category, sites: x.sites, anonymised: /^(Supplier|Company|Buyer)-/.test(x.name) })) };
+    });
+    app.post("/suppliers/snap", async (req, reply) => {
+      const body = SnapSupplierRequest.safeParse(req.body);
+      if (!body.success) return reply.code(400).send({ error: "bad_request", detail: body.error.flatten() });
+      const co = (await pool.query(`SELECT * FROM company WHERE id = $1 AND mode = 'REC' AND NOT seeded`, [body.data.companyId])).rows[0];
+      if (!co) return reply.code(404).send({ error: "not_found", detail: "no such known company" });
+      const dup = await pool.query(`SELECT 1 FROM supplier_edge WHERE client_id = $1 AND tier = 1 AND company_id = $2`, [config.DEMO_CLIENT_ID, co.id]);
+      if (dup.rowCount) return reply.code(409).send({ error: "already_added", detail: "this company is already one of your suppliers" });
+      const { name, companyId: _c, ...rest } = body.data;
+      const details: Record<string, unknown> = { _pack: "snapped" };
+      for (const [k, v] of Object.entries(rest)) if (v !== undefined && v !== null && v !== "") details[k] = v;
+      const created = await pool.query(
+        `INSERT INTO supplier_edge (client_id, tier, company_id, input_name, input_country, input_city, status, monitors, resolve_score, seeded, mode, source_urls, details)
+         VALUES ($1,1,$2,$3,$4,$5,'MONITORED',$6,1.000,false,$7,$8,$9) RETURNING id`,
+        [config.DEMO_CLIENT_ID, co.id, name ?? co.name, co.country?.trim() ?? null, co.city, JSON.stringify([{ url: `${config.PUBLIC_BASE_URL}/test-notice`, kind: "POLL" }]), co.mode, co.source_urls ?? [], JSON.stringify(details)],
+      );
+      return reply.code(201).send({ edgeId: created.rows[0].id as string, map: await buildMap(config.DEMO_CLIENT_ID) });
     });
     app.put("/profile", async (req, reply) => {
       const body = UpdateProfileRequest.safeParse(req.body);

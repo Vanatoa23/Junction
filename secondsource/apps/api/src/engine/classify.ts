@@ -1,6 +1,7 @@
 import { ClassifyOutput, type ClassifiedKey } from "@secondsource/shared";
 import { pool, tx } from "../db/pool";
 import { verifyQuote } from "../lib/quote";
+import { setExtraPorts } from "../seed/gazetteer";
 import { defaultDeps, type EngineDeps } from "./deps";
 
 export type ClassifyOutcome =
@@ -34,6 +35,7 @@ export async function classifyEvent(eventId: string, deps: EngineDeps = defaultD
   const text: string = ev.fetched_text ?? "";
   if (!text.trim()) return drop("no fetched text to classify");
 
+  await refreshExtraPorts();
   const res = await deps.classify(text, ev.source_url);
   if (!res.ok) throw new Error(`classifier unavailable: ${res.note}`); // job retries with backoff
   const parsed = ClassifyOutput.safeParse(res.data);
@@ -78,4 +80,16 @@ export async function classifyEvent(eventId: string, deps: EngineDeps = defaultD
   await deps.enqueue("match_incident", { incidentId });
   deps.log(`event ${eventId} -> incident ${incidentId} (${out.type}/${out.severity}, ${keys.length} keys, classifier ${out.classifier}, mode ${res.mode})`);
   return { outcome: "incident", incidentId };
+}
+
+/** Public-pack ports teach the rule-based classifier new port names (cached for a minute). */
+let portsLoadedAt = 0;
+async function refreshExtraPorts() {
+  if (Date.now() - portsLoadedAt < 60_000) return;
+  portsLoadedAt = Date.now();
+  try {
+    setExtraPorts((await pool.query(`SELECT id, name FROM port`)).rows);
+  } catch {
+    /* no port table (older database): the built-in ports still work */
+  }
 }

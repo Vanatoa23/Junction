@@ -27,6 +27,16 @@ export const COUNTRIES: Record<string, { name: string } & LatLng> = {
   IN: { name: "India", lat: 21.0, lng: 78.0 }, VN: { name: "Vietnam", lat: 16.0, lng: 107.8 }, TH: { name: "Thailand", lat: 15.0, lng: 101.0 },
   ID: { name: "Indonesia", lat: -2.5, lng: 118.0 }, MY: { name: "Malaysia", lat: 4.2, lng: 102.0 }, SG: { name: "Singapore", lat: 1.35, lng: 103.8 },
   AU: { name: "Australia", lat: -25.7, lng: 134.5 }, ZA: { name: "South Africa", lat: -29.0, lng: 24.0 }, EG: { name: "Egypt", lat: 26.8, lng: 30.8 },
+  TW: { name: "Taiwan", lat: 23.7, lng: 121.0 }, HK: { name: "Hong Kong", lat: 22.3, lng: 114.2 }, PH: { name: "Philippines", lat: 12.9, lng: 122.0 },
+  IL: { name: "Israel", lat: 31.5, lng: 34.9 }, PK: { name: "Pakistan", lat: 30.4, lng: 69.3 }, BD: { name: "Bangladesh", lat: 23.7, lng: 90.4 },
+  NZ: { name: "New Zealand", lat: -41.0, lng: 172.5 }, LK: { name: "Sri Lanka", lat: 7.9, lng: 80.7 }, KH: { name: "Cambodia", lat: 12.6, lng: 104.9 },
+  HR: { name: "Croatia", lat: 45.1, lng: 15.2 }, SI: { name: "Slovenia", lat: 46.1, lng: 14.8 }, LU: { name: "Luxembourg", lat: 49.8, lng: 6.1 },
+  IS: { name: "Iceland", lat: 64.9, lng: -18.6 }, CY: { name: "Cyprus", lat: 35.1, lng: 33.4 }, MT: { name: "Malta", lat: 35.9, lng: 14.4 },
+  RS: { name: "Serbia", lat: 44.0, lng: 21.0 }, BY: { name: "Belarus", lat: 53.7, lng: 28.0 }, KZ: { name: "Kazakhstan", lat: 48.0, lng: 67.0 },
+  QA: { name: "Qatar", lat: 25.3, lng: 51.2 }, KW: { name: "Kuwait", lat: 29.3, lng: 47.5 }, OM: { name: "Oman", lat: 21.5, lng: 55.9 },
+  CO: { name: "Colombia", lat: 4.6, lng: -74.1 }, PE: { name: "Peru", lat: -9.2, lng: -75.0 }, EC: { name: "Ecuador", lat: -1.4, lng: -78.4 },
+  NG: { name: "Nigeria", lat: 9.1, lng: 8.7 }, KE: { name: "Kenya", lat: 0.0, lng: 37.9 }, TN: { name: "Tunisia", lat: 33.9, lng: 9.5 },
+  DZ: { name: "Algeria", lat: 28.0, lng: 1.7 }, GH: { name: "Ghana", lat: 7.9, lng: -1.0 }, MM: { name: "Myanmar", lat: 21.9, lng: 96.0 },
   MA: { name: "Morocco", lat: 31.8, lng: -7.1 }, AE: { name: "United Arab Emirates", lat: 24.3, lng: 54.3 }, SA: { name: "Saudi Arabia", lat: 24.0, lng: 45.0 },
 };
 
@@ -89,7 +99,13 @@ export const REGION_NAMES: Record<string, string> = {
 
 /** Plain-language label for a footprint key, e.g. PORT:NLRTM -> "Port of Rotterdam". Falls back to the raw value. */
 export function placeLabel(type: string, value: string): string {
-  if (type === "PORT") return PORTS[value] ? `Port of ${PORTS[value]!.name}` : `Port ${value}`;
+  if (type === "PORT") {
+    if (PORTS[value]) return `Port of ${PORTS[value]!.name}`;
+    // ports from the public data pack are "<country>-<NAME>" (spaces as "_"), e.g. TW-KAOHSIUNG
+    const m = value.match(/^[A-Z]{2}-(.+)$/);
+    if (m) return `Port of ${m[1]!.split("_").map((w) => w.charAt(0) + w.slice(1).toLowerCase()).join(" ")}`;
+    return `Port ${value}`;
+  }
   if (type === "REGION") {
     const base = REGION_NAMES[value];
     const country = COUNTRIES[value.slice(0, 2)]?.name;

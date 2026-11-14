@@ -246,6 +246,24 @@ export function MapView({ data, selectedId, onSelect }: Props) {
       addMarker(center, anchor);
     }
 
+    // ports that matter now: small anchors (not suppliers)
+    for (const port of data.ports) {
+      const anchor = mapLabel("div", "", "port");
+      anchor.title = port.label;
+      anchor.append(document.createElement("i"));
+      if (zoom >= 3.4) anchor.append(mapLabel("span", port.label.replace(/^Port of /, "")));
+      addMarker([port.lng, port.lat], anchor);
+    }
+
+    // facilities of the selected supplier (data pack): country-level points with a count
+    const chosen = data.suppliers.find((s) => s.edgeId === selectedId);
+    for (const site of chosen?.sites ?? []) {
+      if (site.lat == null || site.lng == null) continue;
+      const dot = mapLabel("div", String(site.count), "site");
+      dot.title = `${site.count} known facilit${site.count === 1 ? "y" : "ies"} in ${site.country}`;
+      addMarker([site.lng, site.lat], dot);
+    }
+
     routes.setData(collection(routeFeatures));
     disruptions.setData(collection(areas));
   }

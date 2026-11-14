@@ -23,6 +23,9 @@ pnpm dev
 
 It runs with **no API keys**: every vendor call falls back to a recorded response (REC) or seed data (SEED), and the UI labels which.
 
+### Real-data scenario
+`pnpm dev:real` runs the same app on recorded real data from the public Cala packs (anonymised suppliers, real facility records and ports, a hidden supplier graph). See `docs/REAL_DATA.md` for what is real, what is assumed, and the limits.
+
 ### Database
 - With Docker: `docker compose up -d db` (done for you by `pnpm dev`).
 - Without Docker: `scripts/db.mjs` starts a private cluster in `.data/pgdata` using locally installed PostgreSQL binaries. Port 5434, trust auth, localhost only.

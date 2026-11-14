@@ -9,6 +9,7 @@
     "start": "tsx --env-file-if-exists=../../.env src/server.ts",
     "migrate": "tsx --env-file-if-exists=../../.env src/db/migrate.ts",
     "seed": "tsx --env-file-if-exists=../../.env src/seed/seed.ts",
+    "seed:cala": "tsx --env-file-if-exists=../../.env src/seed/cala.ts",
     "reset": "tsx --env-file-if-exists=../../.env src/db/reset.ts",
     "typecheck": "tsc -p tsconfig.json",
     "test": "vitest run --passWithNoTests --no-file-parallelism"
