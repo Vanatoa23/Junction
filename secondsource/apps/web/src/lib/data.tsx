@@ -9,6 +9,7 @@ import { api } from "./api";
 interface Data {
   map: MapResponse | null;
   rows: SupplierRow[];
+  merged: Record<string, string>;
   error: string | null;
   /** Bumps whenever the server told us something changed (used to refresh open panels). */
   version: number;
@@ -21,6 +22,7 @@ const Ctx = createContext<Data | null>(null);
 export function DataProvider({ children }: { children: ReactNode }) {
   const [map, setMap] = useState<MapResponse | null>(null);
   const [rows, setRows] = useState<SupplierRow[]>([]);
+  const [merged, setMerged] = useState<Record<string, string>>({});
   const [error, setError] = useState<string | null>(null);
   const [version, setVersion] = useState(0);
   const [live, setLive] = useState(false);
@@ -30,7 +32,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
     try {
       const [m, r] = await Promise.all([api.map(), api.suppliers()]);
       setMap(m);
-      setRows(r);
+      setRows(r.suppliers);
+      setMerged(r.merged ?? {});
       setError(null);
       setVersion((v) => v + 1);
     } catch (e) {
@@ -54,7 +57,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     };
   }, [reload]);
 
-  const value = useMemo(() => ({ map, rows, error, version, reload, live }), [map, rows, error, version, reload, live]);
+  const value = useMemo(() => ({ map, rows, merged, error, version, reload, live }), [map, rows, merged, error, version, reload, live]);
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 

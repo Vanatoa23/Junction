@@ -4,7 +4,7 @@ import { UNKNOWN_VALUE } from "@secondsource/shared";
 import { publish } from "../bus";
 import { config } from "../config";
 import { enqueue } from "../db/jobs";
-import { mapCompany } from "../db/mappers";
+import { loadSuppliers, mapCompany } from "../db/mappers";
 import { pool, tx, type Queryable } from "../db/pool";
 import { source } from "../source";
 import { catalogByDomain } from "./demoCatalog";
@@ -22,46 +22,64 @@ const OPTION_LIMIT = 5;
 const OPTION_MIN_SCORE = 0.3;
 const ALL_TYPES: FootprintType[] = ["REGION", "PORT", "PLANT", "PARENT", "SANCTION"];
 
-async function emit(edgeId: string, status: SupplierStatus, mode: SourceMode | null, note: string | null) {
-  await publish({ type: "supplier.status", data: { edgeId, status, mode, note } });
+async function emit(edgeId: string, status: SupplierStatus, mode: SourceMode | null, note: string | null, db?: Queryable) {
+  await publish({ type: "supplier.status", data: { edgeId, status, mode, note } }, db);
 }
 
 // ------------------------------------------------------------------ paste: create rows
-export async function createPendingRows(clientId: string, inputs: SupplierInput[], db: Queryable = pool) {
-  const seen = new Set<string>();
-  const ids: string[] = [];
-  for (const raw of inputs) {
-    const name = raw.name.trim().replace(/\s+/g, " ");
-    const domain = normalizeDomain(raw.domain);
-    const country = normalizeCountry(raw.country);
-    const key = `${name.toLowerCase()}|${domain ?? ""}`;
-    if (!name || seen.has(key)) continue; // same name+domain twice in one paste: one row
-    seen.add(key);
-    // optional facts the user typed (never required); kept as typed, shown back in the UI
-    const details = Object.fromEntries(
-      Object.entries({ supplies: raw.supplies, criticality: raw.criticality, annualSpendEur: raw.annualSpendEur, leadTimeDays: raw.leadTimeDays, contact: raw.contact, notes: raw.notes })
-        .filter(([, v]) => v !== null && v !== undefined && v !== ""),
+export async function importSuppliers(clientId: string, inputs: SupplierInput[]) {
+  return tx(async (db) => {
+    await db.query("SELECT id FROM client WHERE id = $1 FOR UPDATE", [clientId]);
+    const { rows } = await db.query<{
+      id: string; input_name: string; input_country: string | null; domain: string | null;
+    }>(
+      `SELECT e.id, e.input_name, e.input_country, COALESCE(c.domain, e.input_domain) AS domain
+       FROM supplier_edge e LEFT JOIN company c ON c.id = e.company_id
+       WHERE e.tier = 1 AND e.client_id = $1 AND e.duplicate_of IS NULL
+       ORDER BY e.created_at, e.id`,
+      [clientId],
     );
-    const r = await db.query(
-      `INSERT INTO supplier_edge (client_id, tier, input_name, input_domain, input_country, input_city, details, status, mode, seeded)
-       VALUES ($1, 1, $2, $3, $4, $5, $6, 'PENDING', 'SEED', false) RETURNING id`,
-      [clientId, name, domain, country, raw.city?.trim() || null, JSON.stringify(details)],
-    );
-    ids.push(r.rows[0].id as string);
-  }
-  return ids;
-}
+    const ids = new Set<string>();
+    let duplicates = 0;
+    for (const raw of inputs) {
+      const name = raw.name.trim().replace(/\s+/g, " ");
+      if (!name) continue;
+      const domain = normalizeDomain(raw.domain);
+      const country = normalizeCountry(raw.country);
+      const candidates = rows.filter((row) =>
+        row.input_name.trim().replace(/\s+/g, " ").toLowerCase() === name.toLowerCase() &&
+        (!country || !row.input_country || country === normalizeCountry(row.input_country)),
+      );
+      const existing = domain
+        ? rows.find((row) => normalizeDomain(row.domain) === domain)
+        : candidates.length === 1 ? candidates[0] : candidates.find((row) => !row.domain && row.input_country === country);
+      if (existing) {
+        ids.add(existing.id);
+        duplicates++;
+        continue;
+      }
 
-export async function enqueueResolution(clientId: string, edgeIds: string[]) {
-  for (const edgeId of edgeIds) {
-    await enqueue("resolve_supplier", { edgeId }, { clientId });
-    await emit(edgeId, "PENDING", null, "queued for resolution");
-  }
+      const { name: _name, domain: _domain, country: _country, city, ...fields } = raw;
+      const details = Object.fromEntries(Object.entries(fields).filter(([, value]) => value != null && value !== ""));
+      const inserted = await db.query<{ id: string }>(
+        `INSERT INTO supplier_edge (client_id, tier, input_name, input_domain, input_country, input_city, details)
+         VALUES ($1, 1, $2, $3, $4, $5, $6) RETURNING id`,
+        [clientId, name, domain, country, city?.trim() || null, JSON.stringify(details)],
+      );
+      const id = inserted.rows[0]!.id;
+      rows.push({ id, input_name: name, input_country: country, domain });
+      ids.add(id);
+      await enqueue("resolve_supplier", { edgeId: id }, { clientId, db });
+      await emit(id, "PENDING", null, "queued for resolution", db);
+    }
+    const suppliers = (await loadSuppliers(clientId, undefined, db)).filter((row) => ids.has(row.edgeId));
+    return { suppliers, duplicates };
+  });
 }
 
 // ------------------------------------------------------------------ resolve
-async function loadEdge(edgeId: string, db: Queryable = pool) {
-  const r = await db.query(`SELECT * FROM supplier_edge WHERE id = $1`, [edgeId]);
+async function loadEdge(edgeId: string, db: Queryable = pool, clientId?: string) {
+  const r = await db.query(`SELECT * FROM supplier_edge WHERE id = $1 AND duplicate_of IS NULL AND ($2::uuid IS NULL OR (client_id = $2 AND tier = 1))`, [edgeId, clientId ?? null]);
   return r.rows[0] as
     | { id: string; client_id: string; company_id: string | null; input_name: string; input_domain: string | null; input_country: string | null; status: SupplierStatus; resolve_options: ResolveOption[]; resolve_score: string | null }
     | undefined;
@@ -69,7 +87,7 @@ async function loadEdge(edgeId: string, db: Queryable = pool) {
 
 export async function resolveSupplier(edgeId: string) {
   const edge = await loadEdge(edgeId);
-  if (!edge) throw new Error(`supplier_edge ${edgeId} not found`);
+  if (!edge) return;
   if (edge.status !== "PENDING") return; // idempotent: a retry after success does nothing
 
   const input = { name: edge.input_name, domain: edge.input_domain, country: edge.input_country };
@@ -87,11 +105,11 @@ export async function resolveSupplier(edgeId: string) {
   const options = await toOptions(ranked);
   const status: SupplierStatus = decision.kind;
   const worst = options.length ? options.map((o) => o.mode).reduce((a, b) => (MODE_RANK[a] <= MODE_RANK[b] ? a : b)) : "SEED";
-  await pool.query(
-    `UPDATE supplier_edge SET status = $2, resolve_score = $3, resolve_options = $4, mode = $5, updated_at = now() WHERE id = $1`,
+  const updated = await pool.query(
+    `UPDATE supplier_edge SET status = $2, resolve_score = $3, resolve_options = $4, mode = $5, updated_at = now() WHERE id = $1 AND status = 'PENDING' AND duplicate_of IS NULL RETURNING id`,
     [edge.id, status, bestScore, JSON.stringify(options), worst],
   );
-  await emit(edge.id, status, worst, decision.kind === "AMBIGUOUS" ? `choose one of ${options.length}: ${decision.reason}` : `needs a domain: ${decision.reason}`);
+  if (updated.rowCount) await emit(edge.id, status, worst, decision.kind === "AMBIGUOUS" ? `choose one of ${options.length}: ${decision.reason}` : `needs a domain: ${decision.reason}`);
 }
 
 /** Options for the chooser. companyId is filled when the company already exists; otherwise the chooser sends the domain. */
@@ -117,11 +135,15 @@ async function finalizeResolved(edgeId: string, c: Candidate, score: number | nu
   if (!domain) throw new Error("cannot resolve to a company without a domain");
   const seeded = c.mode === "SEED" || userTyped;
   const urls = c.sourceUrls.length ? c.sourceUrls : [`https://${domain}`];
-  const edgeRow = (await loadEdge(edgeId))!;
+  const edgeRow = await loadEdge(edgeId);
+  if (!edgeRow) return;
   const clientId = edgeRow.client_id;
   // where the supplier is: catalog city (seed world) > city the user typed > country centre (approximate)
   const place = locate(catalogByDomain(domain)?.city ?? (edgeRow as any).input_city, c.country ?? edgeRow.input_country);
-  await tx(async (db) => {
+  const resolved = await tx(async (db) => {
+    await db.query("SELECT id FROM client WHERE id = $1 FOR UPDATE", [clientId]);
+    const current = await loadEdge(edgeId, db, clientId);
+    if (!current || !["PENDING", "AMBIGUOUS", "UNRESOLVED"].includes(current.status)) return false;
     const co = await db.query(
       `INSERT INTO company (name, legal_name, domain, country, cala_id, seeded, mode, source_urls, category, city, lat, lng)
        VALUES ($1,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
@@ -130,14 +152,26 @@ async function finalizeResolved(edgeId: string, c: Candidate, score: number | nu
       [c.name, domain, c.country, c.calaId, seeded, c.mode, urls, catalogByDomain(domain)?.category ?? null, place?.city ?? null, place?.lat ?? null, place?.lng ?? null],
     );
     const companyId = co.rows[0].id as string;
+    const duplicate = await db.query<{ id: string }>(
+      `SELECT id FROM supplier_edge WHERE tier = 1 AND client_id = $1 AND company_id = $2
+       AND id <> $3 AND duplicate_of IS NULL ORDER BY created_at, id LIMIT 1`,
+      [clientId, companyId, edgeId],
+    );
+    const existing = duplicate.rows[0];
+    if (existing) {
+      await db.query("UPDATE supplier_edge SET duplicate_of = $2, updated_at = now() WHERE id = $1", [edgeId, existing.id]);
+      await emit(edgeId, "RESOLVED", c.mode, "matched a supplier already on your list", db);
+      return false;
+    }
     await db.query(
       `UPDATE supplier_edge SET company_id = $2, status = 'RESOLVED', resolve_score = COALESCE($3, resolve_score), resolve_options = '[]',
          seeded = $4, mode = $5, source_urls = $6, updated_at = now() WHERE id = $1`,
       [edgeId, companyId, score, seeded, c.mode, urls],
     );
     await enqueue("extract_footprint", { companyId, edgeId }, { clientId, db });
+    return true;
   });
-  await emit(edgeId, "RESOLVED", c.mode, note);
+  if (resolved) await emit(edgeId, "RESOLVED", c.mode, note);
 }
 
 // ------------------------------------------------------------------ choose (chooser / needs-domain)
@@ -145,12 +179,13 @@ export class ChooseError extends Error {
   constructor(public status: number, message: string) { super(message); }
 }
 
-export async function chooseSupplier(edgeId: string, body: { companyId?: string; domain?: string }) {
-  const edge = await loadEdge(edgeId);
+export async function chooseSupplier(clientId: string, edgeId: string, body: { companyId?: string; domain?: string }) {
+  const edge = await loadEdge(edgeId, pool, clientId);
   if (!edge) throw new ChooseError(404, "not_found");
   if (edge.status !== "AMBIGUOUS" && edge.status !== "UNRESOLVED") throw new ChooseError(409, `row is ${edge.status}, nothing to choose`);
 
   if (body.companyId) {
+    if (!edge.resolve_options.some((option) => option.companyId === body.companyId)) throw new ChooseError(400, "Choose one of the suggested companies.");
     const co = await pool.query(`SELECT * FROM company WHERE id = $1`, [body.companyId]);
     if (!co.rows[0]) throw new ChooseError(404, "company not found");
     const c = mapCompany(co.rows[0]);

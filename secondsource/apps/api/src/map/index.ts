@@ -6,25 +6,23 @@ import { pool } from "../db/pool";
 import { loadAlerts, loadIncidents } from "../engine/mappers";
 import type { ModuleDef } from "../module";
 import { scoreSupplier, type DeeperNode } from "./risk";
+import { dependencyEvidence, loadDependencies } from "./dependencies";
 
 /**
  * OWNER: Foundation / integrator. Read-only view for the web app's map and dashboard.
  *  GET /map      hub + DIRECT suppliers (position, plain-language risk with reasons, latest alert) + open incidents
  *  PUT /profile  our own company name and city (the hub on the map)
  *  PUT /suppliers/:edgeId/details  add or change the optional facts about a supplier (null/empty clears one)
- * Deeper tiers (tier >= 2) are read here only to compute risk; they are never returned.
+ * Seeded deeper tiers feed risk. Matching buyer-confirmed paths explain exposure on the supplier card.
  */
 const OPEN_DAYS = 7;
 
 export async function buildMap(clientId: string): Promise<MapResponse> {
   const client = (await pool.query(`SELECT * FROM client WHERE id = $1`, [clientId])).rows[0];
-  const suppliers = await loadSuppliers(clientId);
+  const [suppliers, dependencyLinks] = await Promise.all([loadSuppliers(clientId), loadDependencies(clientId)]);
 
   // deeper tiers: companies reachable from each direct supplier through tier >= 2 edges
   const deepEdges = (await pool.query(`SELECT company_id, buyer_company_id, tier FROM supplier_edge WHERE client_id = $1 AND tier >= 2 AND company_id IS NOT NULL AND buyer_company_id IS NOT NULL`, [clientId])).rows;
-  const names = new Map<string, string>(
-    (await pool.query(`SELECT id, name FROM company WHERE id = ANY($1)`, [deepEdges.map((e) => e.company_id)])).rows.map((r) => [r.id, r.name]),
-  );
   const fps = await companyFootprint(deepEdges.map((e) => e.company_id));
   const children = new Map<string, Array<{ company_id: string; tier: number }>>();
   for (const e of deepEdges) children.set(e.buyer_company_id, [...(children.get(e.buyer_company_id) ?? []), { company_id: e.company_id, tier: e.tier }]);
@@ -35,7 +33,7 @@ export async function buildMap(clientId: string): Promise<MapResponse> {
       for (const c of children.get(id) ?? []) {
         if (seen.has(c.company_id)) continue;
         seen.add(c.company_id);
-        out.push({ name: names.get(c.company_id) ?? "supplier", tier: c.tier, keys: fps.get(c.company_id) ?? [] });
+        out.push({ tier: c.tier, keys: fps.get(c.company_id) ?? [] });
         walk(c.company_id);
       }
     };
@@ -54,7 +52,10 @@ export async function buildMap(clientId: string): Promise<MapResponse> {
       company?.lat != null && company?.lng != null
         ? { lat: company.lat, lng: company.lng, precision: "CITY" as const, city: company.city ?? s.input.city }
         : locate(s.input.city, s.input.country ?? company?.country);
-    const risk = scoreSupplier(s.footprint, company ? deeperOf(company.id) : [], incidents);
+    const evidence = dependencyEvidence(dependencyLinks.get(s.edgeId) ?? [], incidents);
+    const own = [...evidence.direct, ...s.footprint];
+    const deeper = [...(company ? deeperOf(company.id) : []), ...evidence.deeper];
+    const risk = scoreSupplier(own, deeper, incidents, evidence.limited);
     const latest = alerts.find((a) => a.edgeId === s.edgeId && incidentById.has(a.incidentId));
     const inc = latest ? incidentById.get(latest.incidentId)! : null;
     return {
@@ -72,6 +73,7 @@ export async function buildMap(clientId: string): Promise<MapResponse> {
       annualSpendEur: s.input.annualSpendEur,
       leadTimeDays: s.input.leadTimeDays,
       risk,
+      exposures: evidence.exposures,
       alert: latest && inc ? { alertId: latest.id, incidentId: latest.incidentId, headline: incidentHeadline(inc.type, inc.footprint), severity: latest.severity } : null,
     };
   });
@@ -79,11 +81,13 @@ export async function buildMap(clientId: string): Promise<MapResponse> {
   const mapIncidents: MapIncident[] = incidents.map((i) => {
     const mine = alerts.filter((a) => a.incidentId === i.id);
     const first = mine[0];
+    const exposureCount = out.filter((s) => s.exposures.some((exposure) => exposure.incidentId === i.id) && !mine.some((alert) => alert.edgeId === s.edgeId)).length;
     const tSource = first?.latency.tSource ? Date.parse(first.latency.tSource) : null;
     const tAlert = first?.latency.tAlert ? Date.parse(first.latency.tAlert) : null;
     return {
       id: i.id, headline: incidentHeadline(i.type, i.footprint), type: i.type, severity: i.severity, createdAt: i.createdAt,
       affected: [...new Set(mine.map((a) => a.supplierName))], point: incidentPoint(i.footprint), isTest: i.isTest, sourceUrl: i.sourceUrl, quote: i.quote,
+      exposureCount,
       noticedInSeconds: tSource !== null && tAlert !== null ? Math.max(0, Math.round((tAlert - tSource) / 1000)) : null,
     };
   });
@@ -105,7 +109,7 @@ const mod: ModuleDef = {
       if (!/^[0-9a-f-]{36}$/i.test(req.params.edgeId)) return reply.code(400).send({ error: "bad_id" });
       const body = Details.safeParse(req.body);
       if (!body.success) return reply.code(400).send({ error: "bad_request", detail: body.error.flatten() });
-      const cur = (await pool.query(`SELECT details, input_city FROM supplier_edge WHERE id = $1 AND client_id = $2 AND tier = 1`, [req.params.edgeId, config.DEMO_CLIENT_ID])).rows[0];
+      const cur = (await pool.query(`SELECT details, input_city FROM supplier_edge WHERE id = $1 AND client_id = $2 AND tier = 1 AND duplicate_of IS NULL`, [req.params.edgeId, config.DEMO_CLIENT_ID])).rows[0];
       if (!cur) return reply.code(404).send({ error: "not_found" });
       const { city, ...rest } = body.data;
       const details: Record<string, unknown> = { ...(cur.details ?? {}) };

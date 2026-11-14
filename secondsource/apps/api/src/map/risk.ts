@@ -13,7 +13,6 @@ import { matchKeys } from "../engine/matching";
  * Level: < 30 LOW, < 60 MEDIUM, otherwise HIGH. Every point has a plain-language reason.
  */
 export interface DeeperNode {
-  name: string;
   tier: number;
   keys: FootprintKey[];
 }
@@ -31,7 +30,7 @@ function why(m: { incident: FootprintKey; supplier: FootprintKey }): string {
   return "it shares an owner with an affected company";
 }
 
-export function scoreSupplier(own: FootprintKey[], deeper: DeeperNode[], incidents: Incident[]): SupplierRisk {
+export function scoreSupplier(own: FootprintKey[], deeper: DeeperNode[], incidents: Incident[], evidenceLimited = deeper.length === 0): SupplierRisk {
   let score = 12;
   const reasons: string[] = [];
 
@@ -67,10 +66,10 @@ export function scoreSupplier(own: FootprintKey[], deeper: DeeperNode[], inciden
     }
   }
 
-  const coverage = deeper.length === 0 ? "LIMITED" : "GOOD";
+  const coverage = evidenceLimited ? "LIMITED" : "GOOD";
   if (coverage === "LIMITED") {
-    score += 8;
-    reasons.push("We have not found who supplies them yet, so this score may be too low.");
+    if (!deeper.length) score += 8;
+    reasons.push("Coverage is limited, so this score may be too low.");
   } else if (!reasons.length) {
     reasons.push(`No disruption found for it or its ${deeper.length} suppliers.`);
   }

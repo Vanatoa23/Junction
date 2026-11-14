@@ -33,13 +33,13 @@ export async function matchIncident(incidentId: string, deps: EngineDeps = defau
   const edges = (
     await pool.query(
       `SELECT id, client_id, company_id FROM supplier_edge
-       WHERE tier = 1 AND company_id IS NOT NULL AND status IN ('RESOLVED','MONITORED') ORDER BY created_at, id`,
+       WHERE tier = 1 AND duplicate_of IS NULL AND company_id IS NOT NULL AND status IN ('RESOLVED','MONITORED') ORDER BY created_at, id`,
     )
   ).rows;
   const fps = await companyFootprint(edges.map((e) => e.company_id));
 
   const alertIds: string[] = [];
-  // Pasting the same supplier twice creates two edges to ONE company: alert once per (client, company).
+  // Keep one alert per client and company, including older data.
   const alerted = new Set<string>();
   for (const e of edges) {
     const dedupe = `${e.client_id}|${e.company_id}`;

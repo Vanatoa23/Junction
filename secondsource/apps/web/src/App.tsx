@@ -18,11 +18,10 @@ const viewFromHash = (): View => {
 };
 
 export function App() {
-  const { map, error, live } = useData();
+  const { map, merged, error, live } = useData();
   const [view, setView] = useState<View>(viewFromHash);
   const [panel, setPanel] = useState<Panel>(null);
   const [incident, setIncident] = useState<string | null>(null);
-  const [fitKey, setFitKey] = useState(0);
 
   useEffect(() => {
     const on = () => setView(viewFromHash());
@@ -66,24 +65,27 @@ export function App() {
               <span className="dotred" />
               <div>
                 <b>{newest.headline}.</b>{" "}
-                {newest.affected.length ? `${newest.affected.length} of your suppliers ${newest.affected.length === 1 ? "is" : "are"} affected.` : "None of your suppliers is directly affected."}
+                {newest.affected.length ? `${newest.affected.length} of your suppliers ${newest.affected.length === 1 ? "is" : "are"} affected.` : "No direct supplier alerts."}
+                {newest.exposureCount > 0 && ` ${newest.exposureCount} ${newest.exposureCount === 1 ? "supplier has" : "suppliers have"} exposure through recorded dependencies.`}
               </div>
               <button className="small" onClick={() => { setIncident(newest.id); go("alerts"); }}>See what to do</button>
             </div>
           )}
           {map ? (
-            <MapView data={map} selectedId={panel?.kind === "supplier" ? panel.edgeId : null} onSelect={(id) => setPanel(id ? { kind: "supplier", edgeId: id } : null)} fitKey={fitKey} />
+            <MapView data={map} selectedId={panel?.kind === "supplier" ? merged[panel.edgeId] ?? panel.edgeId : null} onSelect={(id) => setPanel(id ? { kind: "supplier", edgeId: id } : null)} />
           ) : <div className="map loading">Loading your map…</div>}
 
           {map && map.suppliers.length === 0 && (
             <div className="hint"><b>Your map is empty.</b><p className="muted">Add the companies you buy from and they appear here.</p><button className="primary" onClick={() => setPanel({ kind: "add" })}>Add your first supplier</button></div>
           )}
 
+          {map?.suppliers.some((supplier) => supplier.risk.coverage === "LIMITED") && (
+            <div className="coverage-key"><i aria-hidden /> Limited coverage</div>
+          )}
           <div className="legend">
             {(["LOW", "MEDIUM", "HIGH"] as const).map((l) => <span key={l}><i style={{ background: RISK_COLOR[l] }} /> {RISK_HELP[l]}</span>)}
             <div className="muted small">Lines go to your direct suppliers. Their own suppliers are checked in the background and counted in the colour.</div>
           </div>
-          <button className="resetview small" onClick={() => setFitKey((k) => k + 1)}>Show all</button>
           <TestControl />
           {panelNode}
         </div>
@@ -92,7 +94,7 @@ export function App() {
       {view !== "map" && (
         <div className="split">
           {view === "suppliers" ? (
-            <SuppliersView selected={panel?.kind === "supplier" ? panel.edgeId : null} onSelect={(id) => setPanel({ kind: "supplier", edgeId: id })} onAdd={() => setPanel({ kind: "add" })} />
+            <SuppliersView selected={panel?.kind === "supplier" ? merged[panel.edgeId] ?? panel.edgeId : null} onSelect={(id) => setPanel({ kind: "supplier", edgeId: id })} onAdd={() => setPanel({ kind: "add" })} />
           ) : (
             <AlertsView selected={incident} onSelect={(id) => { setIncident(id); setPanel(null); }} hideDetail={panel !== null}
               onFindReplacement={(incidentId, edgeId) => setPanel({ kind: "alt", incidentId, edgeId })} onOpenSupplier={(edgeId) => setPanel({ kind: "supplier", edgeId })} />
