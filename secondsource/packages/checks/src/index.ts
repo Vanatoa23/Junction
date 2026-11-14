@@ -158,3 +158,4 @@ export function rankCandidates<T extends { name: string; verdict: Verdict; resul
       a.name.localeCompare(b.name),
   );
 }
+export * from './risk30';
