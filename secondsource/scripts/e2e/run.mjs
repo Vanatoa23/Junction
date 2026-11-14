@@ -83,9 +83,10 @@ try {
     const health = await json('/health'); assert(health.ok && health.db, 'API or database is unhealthy');
     await db.connect(); await openStream();
   });
-  const rows = await step('Submit demo suppliers', async () => {
+  const rows = await step('Import the same demo suppliers without duplicating them', async () => {
     const { response, data } = await request('/suppliers/resolve', post({ suppliers }));
     assert(response.status === 202, `/suppliers/resolve: expected HTTP 202, got ${response.status} ${JSON.stringify(data)}`);
+    assert(data.duplicates === suppliers.length, 'previously seeded suppliers should all be reused');
     assert(Array.isArray(data.suppliers) && data.suppliers.length === suppliers.length, 'resolve did not return all suppliers');
     assert(new Set(data.suppliers.map((row) => row.edgeId)).size === suppliers.length && data.suppliers.every((row) => row.edgeId), 'resolve returned missing or duplicate edge IDs');
     return data.suppliers;
@@ -124,7 +125,6 @@ try {
   const alert = await step('Wait for matching alert.created over SSE', async () => until('alert.created for the event and Nordpack', async () => {
     for (const message of messages) {
       const alert = message.type === 'alert.created' && message.data?.alert;
-      // the demo client already has Nordpack Packaging; alerts are created once per company, so match by supplier name, not by our pasted duplicate's edge id
       if (!alert || !String(alert.supplierName).startsWith('Nordpack Packaging')) continue;
       const detail = await json(`/incidents/${encodeURIComponent(alert.incidentId)}`);
       if (detail.incident?.eventId === event.id) return alert;

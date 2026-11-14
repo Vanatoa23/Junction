@@ -27,11 +27,11 @@ export type HealthResponse = z.infer<typeof HealthResponse>;
 /** POST /suppliers/resolve  (owner: Onboarding). 202; rows come back PENDING, progress arrives via SSE supplier.status. */
 export const ResolveSuppliersRequest = z.object({ suppliers: z.array(SupplierInput).min(1).max(25) });
 export type ResolveSuppliersRequest = z.infer<typeof ResolveSuppliersRequest>;
-export const ResolveSuppliersResponse = z.object({ suppliers: z.array(SupplierRow) });
+export const ResolveSuppliersResponse = z.object({ suppliers: z.array(SupplierRow), duplicates: z.number().int().nonnegative() });
 export type ResolveSuppliersResponse = z.infer<typeof ResolveSuppliersResponse>;
 
 /** GET /suppliers */
-export const ListSuppliersResponse = z.object({ suppliers: z.array(SupplierRow) });
+export const ListSuppliersResponse = z.object({ suppliers: z.array(SupplierRow), merged: z.record(z.string().uuid()).default({}) });
 export type ListSuppliersResponse = z.infer<typeof ListSuppliersResponse>;
 
 /** POST /suppliers/:edgeId/choose  (owner: Onboarding). Chooser for AMBIGUOUS/UNRESOLVED rows. */
@@ -91,6 +91,47 @@ export const UpdateTestNoticeRequest = z.object({ text: z.string().max(5000) });
 export type UpdateTestNoticeRequest = z.infer<typeof UpdateTestNoticeRequest>;
 
 
+export const DependencyKind = z.enum(["PORT", "PLANT", "SUPPLIER"]);
+export const DependencyConfidence = z.enum(["LOW", "MEDIUM", "HIGH"]);
+export const SaveDependencyRequest = z.object({
+  parentId: z.string().uuid().nullable(),
+  kind: DependencyKind,
+  name: z.string().trim().min(1).max(140),
+  matchKey: z.string().trim().max(140).default(""),
+  source: z.string().trim().min(1).max(300),
+  sourceUrl: z.string().trim().url().refine((value) => /^https?:\/\//i.test(value)).nullable(),
+  confidence: DependencyConfidence,
+  verifiedOn: z.string().date(),
+}).superRefine((link, ctx) => {
+  if (link.kind === "PORT" && !/^[A-Z]{2}[A-Z0-9]{3}$/i.test(link.matchKey)) {
+    ctx.addIssue({ code: "custom", path: ["matchKey"], message: "Enter a five-character port code, such as NLRTM." });
+  }
+  if (link.kind === "PLANT" && !/^[a-z0-9][a-z0-9._-]*$/i.test(link.matchKey)) {
+    ctx.addIssue({ code: "custom", path: ["matchKey"], message: "Enter a stable plant identifier." });
+  }
+});
+export type SaveDependencyRequest = z.infer<typeof SaveDependencyRequest>;
+
+export const SupplierDependency = z.object({
+  id: z.string().uuid(),
+  parentId: z.string().uuid().nullable(),
+  kind: DependencyKind,
+  name: z.string(),
+  matchKey: z.string(),
+  source: z.string(),
+  sourceUrl: z.string().url().nullable(),
+  confidence: DependencyConfidence,
+  verifiedOn: z.string().date(),
+});
+export type SupplierDependency = z.infer<typeof SupplierDependency>;
+
+export const SupplierExposure = z.object({
+  incidentId: z.string().uuid(),
+  headline: z.string(),
+  path: z.array(SupplierDependency).min(1),
+});
+export type SupplierExposure = z.infer<typeof SupplierExposure>;
+
 // ---------------------------------------------------------------- map (served by apps/api/src/map)
 export const RiskLevel = z.enum(["LOW", "MEDIUM", "HIGH"]);
 export type RiskLevel = z.infer<typeof RiskLevel>;
@@ -127,6 +168,7 @@ export const MapSupplier = z.object({
   annualSpendEur: z.number().nullable(),
   leadTimeDays: z.number().nullable(),
   risk: SupplierRisk,
+  exposures: z.array(SupplierExposure).default([]),
   /** Latest open alert for this supplier, in plain words. */
   alert: z.object({ alertId: z.string().uuid(), incidentId: z.string().uuid(), headline: z.string(), severity: z.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]) }).nullable(),
 });
@@ -139,6 +181,7 @@ export const MapIncident = z.object({
   severity: z.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]),
   createdAt: z.string(),
   affected: z.array(z.string()),
+  exposureCount: z.number().int().nonnegative().default(0),
   /** Where to pulse it on the map (port position), if known. */
   point: z.object({ lat: z.number(), lng: z.number(), label: z.string() }).nullable(),
   /** The page text the notice came from (a demo TEST notice is labelled as such). */

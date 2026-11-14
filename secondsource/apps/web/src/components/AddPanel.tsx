@@ -15,8 +15,36 @@ const CHIPS: Array<[Chip, string]> = [
   ["spend", "Yearly spend"], ["lead", "Usual lead time"], ["contact", "Contact"], ["notes", "Notes"],
 ];
 
+function parseSupplierList(text: string) {
+  const lines = text.split(/\r?\n/).filter((line) => line.trim());
+  const delimiter = lines[0]?.includes("\t") ? "\t" : lines[0]?.includes(";") ? ";" : ",";
+  return lines.map((line) => {
+    const values: string[] = [];
+    let field = "";
+    let quoted = false;
+    for (let i = 0; i < line.length; i++) {
+      const character = line[i];
+      if (character === '"' && quoted && line[i + 1] === '"') {
+        field += '"';
+        i++;
+      } else if (character === '"' && (quoted || !field.trim())) {
+        quoted = !quoted;
+      } else if (character === delimiter && !quoted) {
+        values.push(field.trim());
+        field = "";
+      } else {
+        field += character;
+      }
+    }
+    if (quoted) throw new Error("Close quoted fields before importing.");
+    return [...values, field.trim()];
+  }).filter(([name, website], index) =>
+    name && !(index === 0 && /^(?:name|supplier|company|supplier name|company name)$/i.test(name) && (!website || /^(?:website|domain)$/i.test(website))),
+  ).map(([name, domain, country]) => ({ name: name!, domain: domain || null, country: country || null }));
+}
+
 export function AddPanel({ onClose, onOpen }: { onClose: () => void; onOpen: (edgeId: string) => void }) {
-  const { rows, map, reload } = useData();
+  const { rows, map, merged, reload } = useData();
   const [tab, setTab] = useState<"one" | "list">("one");
   const [name, setName] = useState("");
   const [open, setOpen] = useState<Set<Chip>>(new Set());
@@ -26,6 +54,9 @@ export function AddPanel({ onClose, onOpen }: { onClose: () => void; onOpen: (ed
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [added, setAdded] = useState<string[]>([]);
+  const [duplicates, setDuplicates] = useState(0);
+  const resultIds = [...new Set(added.map((id) => merged[id] ?? id))];
+  const duplicateCount = duplicates + added.filter((id) => merged[id]).length;
   const countries = useMemo(() => Object.entries(COUNTRIES).sort((a, b) => a[1].name.localeCompare(b[1].name)), []);
 
   const set = (k: string, val: string) => setV((x) => ({ ...x, [k]: val }));
@@ -38,6 +69,7 @@ export function AddPanel({ onClose, onOpen }: { onClose: () => void; onOpen: (ed
     try {
       const r = await api.addSuppliers(suppliers);
       setAdded(r.suppliers.map((s) => s.edgeId));
+      setDuplicates(r.duplicates);
       setName(""); setV({}); setOpen(new Set()); setCrit(null); setList("");
       await reload();
     } catch (e) {
@@ -54,13 +86,16 @@ export function AddPanel({ onClose, onOpen }: { onClose: () => void; onOpen: (ed
       contact: v.contact?.trim() || null, notes: v.notes?.trim() || null,
     }]);
 
-  const saveList = () =>
-    submit(
-      list.split(/\r?\n/).map((l) => l.trim()).filter(Boolean).map((l) => {
-        const [n, site, country] = l.split(/\t|;|,/).map((p) => p.trim());
-        return { name: n ?? "", domain: site || null, country: country || null };
-      }).filter((s) => s.name),
-    );
+  const saveList = () => {
+    try {
+      const suppliers = parseSupplierList(list);
+      if (!suppliers.length) throw new Error("Enter at least one supplier name.");
+      if (suppliers.length > 25) throw new Error("Import up to 25 suppliers at a time.");
+      void submit(suppliers);
+    } catch (error) {
+      setErr((error as Error).message);
+    }
+  };
 
   return (
     <PanelShell title="Add suppliers" sub="Only the name is needed. We look up the rest." onClose={onClose}>
@@ -111,16 +146,17 @@ export function AddPanel({ onClose, onOpen }: { onClose: () => void; onOpen: (ed
             <span>One supplier per line</span>
             <textarea rows={8} value={list} onChange={(e) => setList(e.target.value)} placeholder={"Nordpack Packaging, www.nordpack.com, DE\nBaltic Carton\nHansa Labels, , DE"} />
           </label>
-          <div className="muted small">You can add a website and a two-letter country code after each name, separated by commas. Both are optional.</div>
+          <div className="muted small">Paste up to 25 rows. Website and two-letter country code are optional. Commas and spreadsheet tabs are supported.</div>
           <button className="primary wide" disabled={busy || !list.trim()} onClick={saveList}>Add these suppliers</button>
         </div>
       )}
       {err && <p className="error">{err}</p>}
 
-      {added.length > 0 && (
+      {duplicateCount > 0 && <p className="muted small" role="status">{duplicateCount === 1 ? "1 duplicate was matched to an existing supplier." : `${duplicateCount} duplicates were matched to existing suppliers.`}</p>}
+      {resultIds.length > 0 && (
         <section className="sect">
           <h3>What we found</h3>
-          {added.map((id) => {
+          {resultIds.map((id) => {
             const row = rows.find((r) => r.edgeId === id);
             const ms = map?.suppliers.find((x) => x.edgeId === id);
             if (!row) return null;
@@ -133,7 +169,7 @@ export function AddPanel({ onClose, onOpen }: { onClose: () => void; onOpen: (ed
                   <>
                     {lines.found.length > 0 && <div className="found small"><b>Found:</b> {lines.found.join(", ")}.</div>}
                     {lines.missing.length > 0 && <div className="missing small"><b>Could not find:</b> {lines.missing.join(", ")}.</div>}
-                    {row.status === "AMBIGUOUS" && <div className="small">Two companies match. Open it to choose.</div>}
+                    {row.status === "AMBIGUOUS" && <div className="small">Several companies may match. Open it to choose.</div>}
                     {row.status === "UNRESOLVED" && <div className="small">We could not find it. Open it to add a website.</div>}
                     <button className="link" onClick={() => onOpen(id)}>Open</button>
                   </>

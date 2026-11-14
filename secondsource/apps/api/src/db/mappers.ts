@@ -46,7 +46,7 @@ export async function loadSuppliers(clientId: string, edgeId?: string, db: Query
   const r = await db.query(
     `SELECT e.*, row_to_json(c.*) AS company FROM supplier_edge e
      LEFT JOIN company c ON c.id = e.company_id
-     WHERE e.client_id = $1 AND e.tier = 1 AND ($2::uuid IS NULL OR e.id = $2)
+     WHERE e.client_id = $1 AND e.tier = 1 AND e.duplicate_of IS NULL AND ($2::uuid IS NULL OR e.id = $2)
      ORDER BY e.created_at, e.input_name`,
     [clientId, edgeId ?? null],
   );
@@ -65,4 +65,12 @@ export async function loadSuppliers(clientId: string, edgeId?: string, db: Query
     sourceUrls: e.source_urls ?? [],
     updatedAt: iso(e.updated_at),
   }));
+}
+
+export async function loadMergedSuppliers(clientId: string): Promise<Record<string, string>> {
+  const { rows } = await pool.query<{ id: string; duplicate_of: string }>(
+    "SELECT id, duplicate_of FROM supplier_edge WHERE client_id = $1 AND duplicate_of IS NOT NULL",
+    [clientId],
+  );
+  return Object.fromEntries(rows.map((row) => [row.id, row.duplicate_of]));
 }

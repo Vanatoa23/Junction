@@ -1,8 +1,8 @@
 import { ChooseSupplierRequest, ResolveSuppliersRequest } from "@secondsource/shared";
 import { config } from "../config";
-import { loadSuppliers } from "../db/mappers";
+import { loadMergedSuppliers, loadSuppliers } from "../db/mappers";
 import type { ModuleDef } from "../module";
-import { ChooseError, chooseSupplier, createPendingRows, enqueueResolution, extractFootprint, resolveSupplier } from "./pipeline";
+import { ChooseError, chooseSupplier, importSuppliers, extractFootprint, resolveSupplier } from "./pipeline";
 
 /**
  * OWNER: Onboarding thread. See README.md in this folder.
@@ -17,7 +17,10 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const mod: ModuleDef = {
   name: "onboarding",
   registerRoutes(app) {
-    app.get("/suppliers", async () => ({ suppliers: await loadSuppliers(config.DEMO_CLIENT_ID) }));
+    app.get("/suppliers", async () => {
+      const [suppliers, merged] = await Promise.all([loadSuppliers(config.DEMO_CLIENT_ID), loadMergedSuppliers(config.DEMO_CLIENT_ID)]);
+      return { suppliers, merged };
+    });
 
     app.get<{ Params: { edgeId: string } }>("/suppliers/:edgeId", async (req, reply) => {
       if (!UUID.test(req.params.edgeId)) return reply.code(400).send({ error: "bad_id" });
@@ -28,11 +31,9 @@ const mod: ModuleDef = {
     app.post("/suppliers/resolve", async (req, reply) => {
       const parsed = ResolveSuppliersRequest.safeParse(req.body);
       if (!parsed.success) return reply.code(400).send({ error: "bad_request", detail: parsed.error.flatten() });
-      const ids = await createPendingRows(config.DEMO_CLIENT_ID, parsed.data.suppliers);
-      if (!ids.length) return reply.code(400).send({ error: "bad_request", detail: "no usable supplier names" });
-      await enqueueResolution(config.DEMO_CLIENT_ID, ids);
-      const rows = await loadSuppliers(config.DEMO_CLIENT_ID);
-      return reply.code(202).send({ suppliers: rows.filter((r) => ids.includes(r.edgeId)) });
+      const { suppliers, duplicates } = await importSuppliers(config.DEMO_CLIENT_ID, parsed.data.suppliers);
+      if (!suppliers.length) return reply.code(400).send({ error: "Enter at least one supplier name." });
+      return reply.code(202).send({ suppliers, duplicates });
     });
 
     app.post<{ Params: { edgeId: string } }>("/suppliers/:edgeId/choose", async (req, reply) => {
@@ -40,12 +41,13 @@ const mod: ModuleDef = {
       const parsed = ChooseSupplierRequest.safeParse(req.body);
       if (!parsed.success) return reply.code(400).send({ error: "bad_request", detail: parsed.error.flatten() });
       try {
-        await chooseSupplier(req.params.edgeId, parsed.data);
+        await chooseSupplier(config.DEMO_CLIENT_ID, req.params.edgeId, parsed.data);
       } catch (e) {
         if (e instanceof ChooseError) return reply.code(e.status).send({ error: e.message });
         throw e;
       }
-      const [supplier] = await loadSuppliers(config.DEMO_CLIENT_ID, req.params.edgeId);
+      const merged = await loadMergedSuppliers(config.DEMO_CLIENT_ID);
+      const [supplier] = await loadSuppliers(config.DEMO_CLIENT_ID, merged[req.params.edgeId] ?? req.params.edgeId);
       return { supplier };
     });
   },

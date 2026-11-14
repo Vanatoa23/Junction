@@ -3,14 +3,16 @@ import { COUNTRIES } from "@secondsource/shared";
 import { api } from "../lib/api";
 import { useData } from "../lib/data";
 import { CRITICALITY_WORD, foundLines, statusWord } from "../lib/words";
+import { DependenciesPanel } from "./DependenciesPanel";
 import { PanelShell, Score, Section } from "./Ui";
 import type { MapSupplier } from "@secondsource/shared";
 
 /** One supplier: where it is, how risky and why, what we found, what you told us, and what to do about an alert. */
 export function SupplierPanel({ edgeId, onClose, onFindReplacement }: { edgeId: string; onClose: () => void; onFindReplacement: (incidentId: string, edgeId: string) => void }) {
-  const { map, rows, reload } = useData();
-  const s = map?.suppliers.find((x) => x.edgeId === edgeId);
-  const row = rows.find((r) => r.edgeId === edgeId);
+  const { map, rows, merged, reload } = useData();
+  const currentId = merged[edgeId] ?? edgeId;
+  const s = map?.suppliers.find((x) => x.edgeId === currentId);
+  const row = rows.find((r) => r.edgeId === currentId);
   const [all, setAll] = useState(false);
   const [domain, setDomain] = useState("");
   const [busy, setBusy] = useState(false);
@@ -26,7 +28,7 @@ export function SupplierPanel({ edgeId, onClose, onFindReplacement }: { edgeId: 
     setBusy(true);
     setErr(null);
     try {
-      await api.choose(edgeId, body);
+      await api.choose(currentId, body);
       await reload();
     } catch (e) {
       setErr((e as Error).message);
@@ -72,10 +74,12 @@ export function SupplierPanel({ edgeId, onClose, onFindReplacement }: { edgeId: 
           <ul className="reasons">{reasons.map((r) => <li key={r}>{r}</li>)}</ul>
           {s.risk.reasons.length > 3 && <button className="link" onClick={() => setAll(!all)}>{all ? "Show less" : "Show all reasons"}</button>}
           <div className="muted small">
-            {s.risk.coverage === "GOOD" ? `Based on ${s.name} and ${s.risk.deeperChecked} of its own suppliers.` : "Based on this supplier only."}
+            {s.risk.coverage === "GOOD" ? `Based on ${s.name} and ${s.risk.deeperChecked} of its own suppliers.` : "Coverage is limited. Some plants, ports, or upstream links may be missing or out of date."}
           </div>
         </Section>
       ) : null}
+
+      {row?.company && <DependenciesPanel key={s.edgeId} supplier={s} row={row} onChange={reload} />}
 
       {(found.length > 0 || missing.length > 0) && (
         <Section title="What we found">

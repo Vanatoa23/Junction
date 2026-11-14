@@ -1,212 +1,319 @@
-import { useEffect, useRef } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import { useEffect, useRef, useState } from "react";
+import circle from "@turf/circle";
+import greatCircle from "@turf/great-circle";
+import maplibregl, { type GeoJSONSource, type StyleSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import "@maplibre/maplibre-gl-leaflet";
 import { feature } from "topojson-client";
 import worldTopo from "world-atlas/countries-110m.json";
+import type { Feature, FeatureCollection, Geometry, MultiPolygon, Polygon } from "geojson";
 import type { MapResponse, MapSupplier, RiskLevel } from "@secondsource/shared";
 import { RISK_COLOR } from "../lib/words";
 
-/**
- * The supply-chain map. Hub = our company; one line to each DIRECT supplier (never deeper tiers).
- *  - Base: a bundled world outline (works offline) with muted street tiles on top when online.
- *  - Zoomed out (<= 4): suppliers in the same country merge into a numbered bubble coloured by the worst risk inside.
- *  - Zoomed in: each supplier shows its name (>= 5) and its city (>= 7).
- *  - A disruption is a soft red area at its place; affected suppliers pulse once.
- */
 interface Props {
   data: MapResponse;
   selectedId: string | null;
   onSelect: (edgeId: string | null) => void;
-  /** Change this to re-fit the view to all suppliers. */
-  fitKey: number;
 }
 
+type LngLatTuple = [longitude: number, latitude: number];
+type PlacedSupplier = MapSupplier & { lat: number; lng: number };
+const isPlaced = (s: MapSupplier): s is PlacedSupplier => s.lat != null && s.lng != null;
 const RANK: Record<RiskLevel, number> = { LOW: 0, MEDIUM: 1, HIGH: 2 };
-const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
-const world = feature(worldTopo as any, (worldTopo as any).objects.countries) as unknown as GeoJSON.FeatureCollection;
+const WORLD_CENTER: LngLatTuple = [12, 35];
+const world = feature(worldTopo as unknown as Parameters<typeof feature>[0], "countries") as unknown as FeatureCollection<Polygon | MultiPolygon>;
 
-export function MapView({ data, selectedId, onSelect, fitKey }: Props) {
+for (const { geometry, properties } of world.features) {
+  // Antarctica encircles the pole, so its ring spans the entire map.
+  if (properties?.name === "Antarctica") continue;
+  const polygons = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
+  for (const polygon of polygons) {
+    for (const ring of polygon) {
+      // Unwrap rings that cross the date line so the renderer can clip
+      // them at the edge instead of drawing a chord across the ocean.
+      for (let i = 1; i < ring.length; i++) {
+        const vertex = ring[i]!;
+        const previousLongitude = ring[i - 1]![0]!;
+        vertex[0] = vertex[0]! + 360 * Math.round((previousLongitude - vertex[0]!) / 360);
+      }
+    }
+  }
+}
+
+const collection = (features: Feature<Geometry>[]): FeatureCollection => ({ type: "FeatureCollection", features });
+
+const style: StyleSpecification = {
+  version: 8,
+  projection: { type: "globe" },
+  sky: {
+    "sky-color": "#111f35",
+    "horizon-color": "#a4cbec",
+    "fog-color": "#c7daeb",
+    "fog-ground-blend": 0.1,
+    "horizon-fog-blend": 0.12,
+    "atmosphere-blend": ["interpolate", ["linear"], ["zoom"], 1, 0.85, 5, 0],
+  },
+  sources: {
+    world: { type: "geojson", data: world, tolerance: 0.125, attribution: "Natural Earth" },
+    routes: { type: "geojson", data: collection([]) },
+    disruptions: { type: "geojson", data: collection([]) },
+  },
+  layers: [
+    { id: "ocean", type: "background", paint: { "background-color": "#285778" } },
+    { id: "land", type: "fill", source: "world", paint: { "fill-color": "#6c818a" } },
+    {
+      id: "borders", type: "line", source: "world",
+      paint: { "line-color": "#a9bbc0", "line-opacity": 0.5, "line-width": 0.7 },
+    },
+    {
+      id: "disruption-area", type: "fill", source: "disruptions",
+      paint: { "fill-color": "#f95c4e", "fill-opacity": 0.25, "fill-outline-color": "#ff8b7e" },
+    },
+    {
+      id: "route-outline", type: "line", source: "routes",
+      layout: { "line-cap": "round", "line-join": "round" },
+      paint: { "line-color": "#102638", "line-width": ["+", ["get", "width"], 1.5], "line-opacity": 0.65 },
+    },
+    {
+      id: "supplier-routes", type: "line", source: "routes",
+      layout: { "line-cap": "round", "line-join": "round" },
+      paint: { "line-color": ["get", "color"], "line-width": ["get", "width"], "line-opacity": 0.93 },
+    },
+  ],
+};
+
+function hubPosition({ hub }: MapResponse): LngLatTuple | null {
+  return hub.lat != null && hub.lng != null ? [hub.lng, hub.lat] : null;
+}
+
+function supplierBounds(data: MapResponse) {
+  const bounds = new maplibregl.LngLatBounds();
+  const hub = hubPosition(data);
+  if (hub) bounds.extend(hub);
+  for (const s of data.suppliers.filter(isPlaced)) bounds.extend([s.lng, s.lat]);
+  return bounds.isEmpty() ? null : bounds.adjustAntiMeridian();
+}
+
+function supplierItems(suppliers: PlacedSupplier[], grouped: boolean) {
+  const groups = new Map<string, PlacedSupplier[]>();
+  for (const s of suppliers) {
+    const key = (grouped && s.country) || s.edgeId;
+    const members = groups.get(key) ?? [];
+    members.push(s);
+    groups.set(key, members);
+  }
+  return [...groups.values()].map((members) => {
+    const lng = members[0]!.lng;
+    const center: LngLatTuple = [
+      members.reduce((sum, s) => sum + lng + ((s.lng - lng + 540) % 360 - 180), 0) / members.length,
+      members.reduce((sum, s) => sum + s.lat, 0) / members.length,
+    ];
+    const risk = members.reduce<RiskLevel>((worst, s) => RANK[s.risk.level] > RANK[worst] ? s.risk.level : worst, "LOW");
+    return { members, center, risk };
+  });
+}
+
+function mapLabel(tag: "b" | "span" | "div", text: string, className = "") {
+  const el = document.createElement(tag);
+  el.className = className;
+  el.textContent = text;
+  return el;
+}
+
+export function MapView({ data, selectedId, onSelect }: Props) {
   const el = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<L.Map | null>(null);
-  const overlay = useRef<L.LayerGroup | null>(null);
+  const mapRef = useRef<maplibregl.Map | null>(null);
+  const markers = useRef<maplibregl.Marker[]>([]);
   const latest = useRef({ data, selectedId, onSelect });
   latest.current = { data, selectedId, onSelect };
-  const fitted = useRef(false);
+  const [unavailable, setUnavailable] = useState(false);
 
-  const draw = () => {
+  function showGlobe(duration = 650) {
     const map = mapRef.current;
-    const group = overlay.current;
-    if (!map || !group) return;
+    if (!map) return;
+    const midpoint = supplierBounds(latest.current.data)?.getCenter();
+    const center: LngLatTuple = midpoint
+      ? [midpoint.lng, Math.max(-48, Math.min(48, midpoint.lat))]
+      : WORLD_CENTER;
+    const minimumSide = Math.min(map.getContainer().clientWidth, map.getContainer().clientHeight);
+    const radius = minimumSide * 0.46;
+    const zoom = Math.log2(radius * 2 * Math.PI * Math.cos(center[1] * Math.PI / 180) / 512);
+    map.easeTo({ center, zoom, bearing: 0, pitch: 0, duration });
+  }
+
+  function showAll() {
+    const map = mapRef.current;
+    if (!map) return;
+    const bounds = supplierBounds(latest.current.data);
+    if (!bounds) {
+      showGlobe();
+      return;
+    }
+    const container = map.getContainer();
+    const inset = Math.min(86, Math.floor(Math.min(container.clientWidth, container.clientHeight) * 0.15));
+    const padding = { top: inset, right: inset, bottom: container.clientWidth > 900 ? 138 : inset, left: inset };
+    map.fitBounds(bounds, { padding, maxZoom: 6, pitch: 0, bearing: 0, duration: 650 });
+  }
+
+  function draw() {
+    const map = mapRef.current;
+    const routes = map?.getSource<GeoJSONSource>("routes");
+    const disruptions = map?.getSource<GeoJSONSource>("disruptions");
+    if (!map || !routes || !disruptions) return;
+    for (const marker of markers.current) marker.remove();
+    markers.current = [];
+
     const { data, selectedId, onSelect } = latest.current;
-    group.clearLayers();
-    const z = map.getZoom();
-    const hub = data.hub.lat != null && data.hub.lng != null ? L.latLng(data.hub.lat, data.hub.lng) : null;
+    const zoom = map.getZoom();
+    const hub = hubPosition(data);
+    const items = supplierItems(data.suppliers.filter(isPlaced), zoom < 4);
+    const routeFeatures: Feature<Geometry>[] = [];
+    const areas: Feature<Geometry>[] = [];
 
-    // disruption areas first (underneath)
-    for (const inc of data.incidents) {
-      if (!inc.point) continue;
-      L.circle([inc.point.lat, inc.point.lng], { radius: 90_000, color: "#c2412d", weight: 1, opacity: 0.5, fillColor: "#c2412d", fillOpacity: 0.15, interactive: false }).addTo(group);
-      L.marker([inc.point.lat, inc.point.lng], {
-        interactive: false, zIndexOffset: 3000,
-        icon: L.divIcon({ className: "", html: `<div class="disruption-tag">${esc(inc.headline)}</div>`, iconSize: [0, 0] }),
-      }).addTo(group);
+    function addMarker(center: LngLatTuple, element: HTMLElement) {
+      const marker = new maplibregl.Marker({ element })
+        .setOpacity(1, 0)
+        .setLngLat(center)
+        .addTo(map!);
+      markers.current.push(marker);
     }
 
-    const placed = data.suppliers.filter((s) => s.lat != null && s.lng != null);
-    type Item = { pos: L.LatLng; members: MapSupplier[] };
-    const items: Item[] = [];
-    if (z <= 4) {
-      const byCountry = new Map<string, MapSupplier[]>();
-      for (const s of placed) byCountry.set(s.country ?? s.edgeId, [...(byCountry.get(s.country ?? s.edgeId) ?? []), s]);
-      for (const members of byCountry.values()) {
-        const lat = members.reduce((a, m) => a + m.lat!, 0) / members.length;
-        const lng = members.reduce((a, m) => a + m.lng!, 0) / members.length;
-        items.push({ pos: L.latLng(lat, lng), members });
+    for (const { members, center, risk } of items) {
+      const color = RISK_COLOR[risk];
+      if (hub && (hub[0] !== center[0] || hub[1] !== center[1])) {
+        const width = risk === "HIGH" ? 3 : risk === "MEDIUM" ? 2.5 : 2;
+        const properties = { color, width };
+        // Opposite points have no unique shortest path. Pick one through an equatorial midpoint.
+        if (Math.abs(hub[1] + center[1]) < 1e-8 && Math.abs(Math.abs(hub[0] - center[0]) % 360 - 180) < 1e-8) {
+          const midpoint: LngLatTuple = [(hub[0] + 270) % 360 - 180, 0];
+          routeFeatures.push(greatCircle(hub, midpoint, { properties }), greatCircle(midpoint, center, { properties }));
+        } else {
+          routeFeatures.push(greatCircle(hub, center, { properties }));
+        }
       }
-    } else {
-      for (const s of placed) items.push({ pos: L.latLng(s.lat!, s.lng!), members: [s] });
-    }
 
-    // lines first so dots sit on top; coloured by the worst risk behind them (green / yellow / red)
-    for (const it of items) {
-      if (!hub) continue;
-      const worst = it.members.reduce<RiskLevel>((w, m) => (RANK[m.risk.level] > RANK[w] ? m.risk.level : w), "LOW");
-      const weight = worst === "HIGH" ? 3 : worst === "MEDIUM" ? 2.4 : 1.8;
-      L.polyline([hub, it.pos], { color: RISK_COLOR[worst], weight, opacity: worst === "LOW" ? 0.55 : 0.85, interactive: false }).addTo(group);
-    }
-
-    for (const it of items) {
-      const worst = it.members.reduce<RiskLevel>((w, m) => (RANK[m.risk.level] > RANK[w] ? m.risk.level : w), "LOW");
-      const color = RISK_COLOR[worst];
-      if (it.members.length > 1) {
-        const mk = L.marker(it.pos, {
-          icon: L.divIcon({ className: "", html: `<div class="bubble" style="background:${color}">${it.members.length}</div>`, iconSize: [30, 30], iconAnchor: [15, 15] }),
-          title: `${it.members.length} suppliers`,
-        });
-        mk.on("click", () => map.flyTo(it.pos, Math.max(5, z + 2), { duration: 0.6 }));
-        mk.addTo(group);
-        continue;
+      const pin = document.createElement("button");
+      pin.type = "button";
+      const limited = members.some((member) => member.risk.coverage === "LIMITED");
+      if (members.length > 1) {
+        pin.className = "bubble";
+        pin.style.background = color;
+        pin.textContent = String(members.length);
+        pin.title = `${members.length} suppliers in ${members[0]!.country}`;
+        pin.setAttribute("aria-label", pin.title);
+        pin.onclick = (event) => {
+          event.stopPropagation();
+          const bounds = new maplibregl.LngLatBounds();
+          for (const s of members) bounds.extend([s.lng, s.lat]);
+          const camera = map.cameraForBounds(bounds.adjustAntiMeridian(), { padding: 110, maxZoom: 7 });
+          map.flyTo({ center: camera?.center ?? center, zoom: Math.max(4.65, camera?.zoom ?? 4.65), pitch: 0 });
+        };
+      } else {
+        const s = members[0]!;
+        pin.className = `sup${s.edgeId === selectedId ? " sel" : ""}${(s.alert || s.exposures?.length) ? " pulse" : ""}`;
+        pin.style.setProperty("--c", color);
+        pin.title = s.name;
+        pin.setAttribute("aria-label", s.name);
+        pin.append(document.createElement("i"));
+        if (zoom >= 4.2) {
+          const label = mapLabel("div", "", "lbl");
+          label.append(mapLabel("b", s.name));
+          if (zoom >= 5.4 && s.city) label.append(mapLabel("span", s.city));
+          pin.append(label);
+        }
+        pin.onclick = (event) => {
+          event.stopPropagation();
+          onSelect(s.edgeId);
+        };
       }
-      const s = it.members[0]!;
-      const selected = s.edgeId === selectedId;
-      const pulse = !!s.alert;
-      const label = z >= 4.5 ? `<div class="lbl"><b>${esc(s.name)}</b>${z >= 6 && s.city ? `<span>${esc(s.city)}</span>` : ""}</div>` : "";
-      const mk = L.marker(it.pos, {
-        icon: L.divIcon({
-          className: "",
-          html: `<div class="sup${selected ? " sel" : ""}${pulse ? " pulse" : ""}" style="--c:${color}"><i></i>${label}</div>`,
-          iconSize: [14, 14], iconAnchor: [7, 7],
-        }),
-        title: s.name,
-      });
-      mk.on("click", () => onSelect(s.edgeId));
-      mk.addTo(group);
+      if (limited) {
+        pin.classList.add("limited");
+        pin.setAttribute("aria-label", `${pin.title}, limited coverage`);
+      }
+      addMarker(center, pin);
     }
 
     if (hub) {
-      L.marker(hub, {
-        zIndexOffset: 1000,
-        icon: L.divIcon({ className: "", html: `<div class="hub"><i></i><b>${esc(data.hub.name)}</b></div>`, iconSize: [18, 18], iconAnchor: [9, 9] }),
-        interactive: false,
-      }).addTo(group);
+      const pin = mapLabel("div", "", "hub");
+      pin.append(document.createElement("i"), mapLabel("b", data.hub.name));
+      addMarker(hub, pin);
     }
-  };
+    for (const inc of data.incidents) {
+      if (!inc.point) continue;
+      const center: LngLatTuple = [inc.point.lng, inc.point.lat];
+      areas.push(circle(center, 90, { steps: 48 }));
+      const anchor = mapLabel("div", "", "disruption-anchor");
+      anchor.append(mapLabel("b", inc.headline, "disruption-tag"));
+      addMarker(center, anchor);
+    }
 
-  const fit = () => {
-    const map = mapRef.current;
-    if (!map) return;
-    const { data } = latest.current;
-    const pts: L.LatLngExpression[] = data.suppliers.filter((s) => s.lat != null).map((s) => [s.lat!, s.lng!]);
-    if (data.hub.lat != null && data.hub.lng != null) pts.push([data.hub.lat, data.hub.lng]);
-    if (pts.length) map.fitBounds(L.latLngBounds(pts), { padding: [70, 70], maxZoom: 6, animate: false });
-    else map.setView([52, 12], 4);
-  };
+    routes.setData(collection(routeFeatures));
+    disruptions.setData(collection(areas));
+  }
 
   useEffect(() => {
-    if (!el.current || mapRef.current) return;
-    const map = L.map(el.current, { minZoom: 2, maxZoom: 13, zoomControl: false, worldCopyJump: true, attributionControl: true, zoomSnap: 0.5 });
-    L.control.zoom({ position: "bottomleft" }).addTo(map);
-    // Base: a light vector style (OpenFreeMap "positron") that fills the whole view at every zoom and pan.
-    // If it cannot load (offline), fall back to the bundled world outline so the dots and lines still make sense.
-    let fallback: L.GeoJSON | null = null;
-    const showFallback = () => {
-      if (fallback) return;
-      fallback = L.geoJSON(world, { style: { color: "#cfd5db", weight: 0.8, fillColor: "#f3f4f1", fillOpacity: 1 }, interactive: false }).addTo(map);
-      fallback.bringToBack();
-    };
+    if (!el.current) return;
+    let map: maplibregl.Map;
     try {
-      const gl = (L as any).maplibreGL({ style: "https://tiles.openfreemap.org/styles/positron", attribution: "&copy; OpenFreeMap &copy; OpenMapTiles, data from OpenStreetMap" }).addTo(map);
-      let tweaked = false;
-      let jiggled = false;
-      // The plugin builds its MapLibre map a moment after addTo; tweak and nudge it once it exists and its style has loaded.
-      const tweak = () => {
-        const ml = gl.getMaplibreMap?.();
-        if (!ml) return;
-        let hasStyle = false;
-        try { hasStyle = (ml.getStyle()?.layers?.length ?? 0) > 0; } catch { /* style not ready */ }
-        if (!tweaked && hasStyle) {
-          tweaked = true;
-          // calmer map: keep country and region names, hide the other basemap labels so our supplier names stay readable
-          for (const l of ml.getStyle().layers ?? []) {
-            if (l.type === "symbol" && !/country|continent|state|region/i.test(l.id)) ml.setLayoutProperty(l.id, "visibility", "none");
-          }
-        }
-        // one tiny zoom out-and-back makes the vector layer paint its first frame (it stays blank until the map "moves" in zoom)
-        if (tweaked && !jiggled) {
-          jiggled = true;
-          const z = map.getZoom();
-          map.invalidateSize({ pan: false });
-          map.setZoom(z + 0.5, { animate: false });
-          map.setZoom(z, { animate: false });
-        }
-      };
-      for (const ms of [300, 900, 1800, 3000, 5000]) window.setTimeout(tweak, ms);
-      document.addEventListener("visibilitychange", tweak);
-      window.addEventListener("focus", tweak);
-      window.setTimeout(() => { if (!navigator.onLine) showFallback(); }, 0);
-      gl.getMaplibreMap?.()?.on?.("error", (e: any) => { if (!e?.sourceId && !e?.tile) showFallback(); });
+      map = new maplibregl.Map({
+        container: el.current,
+        style,
+        center: WORLD_CENTER,
+        minZoom: -1,
+        maxZoom: 13,
+        maxPitch: 65,
+        attributionControl: { compact: true },
+      });
     } catch {
-      showFallback();
+      setUnavailable(true);
+      return;
     }
-    overlay.current = L.layerGroup().addTo(map);
+    mapRef.current = map;
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-left");
+    map.on("load", draw);
     map.on("zoomend", draw);
     map.on("click", () => latest.current.onSelect(null));
-    mapRef.current = map;
-    fit();
-    draw();
-    // the container may get its final size after mount (flex layout): keep Leaflet in sync and re-fit once
-    const ro = new ResizeObserver(() => {
-      map.invalidateSize();
-      if (!fitted.current && latest.current.data.suppliers.length) { fit(); fitted.current = true; }
+    map.once("style.load", () => {
+      map.setProjection({ type: "globe" });
+      showGlobe(0);
+      draw();
     });
-    ro.observe(el.current);
+    const observer = new ResizeObserver(() => map.resize());
+    observer.observe(el.current);
     return () => {
-      ro.disconnect();
+      observer.disconnect();
+      for (const marker of markers.current) marker.remove();
+      markers.current = [];
       map.remove();
       mapRef.current = null;
     };
   }, []);
 
+  useEffect(() => draw(), [data, selectedId]);
+
   useEffect(() => {
-    draw();
-    if (!fitted.current && data.suppliers.length) {
-      fit();
-      fitted.current = true;
+    const map = mapRef.current;
+    const supplier = latest.current.data.suppliers.find((item) => item.edgeId === selectedId);
+    if (!map || !supplier || !isPlaced(supplier)) return;
+    const location: LngLatTuple = [supplier.lng, supplier.lat];
+    const { x, y } = map.project(location);
+    const { clientWidth, clientHeight } = map.getContainer();
+    if (map.getZoom() < 4 || x < 36 || x > clientWidth - 36 || y < 36 || y > clientHeight - 36) {
+      map.flyTo({ center: location, zoom: Math.max(4.65, map.getZoom()), pitch: 0 });
     }
-  }, [data, selectedId]);
-
-  useEffect(() => {
-    if (fitKey > 0) fit();
-  }, [fitKey]);
-
-  // keep the selected supplier visible
-  useEffect(() => {
-    const s = data.suppliers.find((x) => x.edgeId === selectedId);
-    if (s?.lat != null && mapRef.current && !mapRef.current.getBounds().pad(-0.15).contains([s.lat, s.lng!])) mapRef.current.panTo([s.lat, s.lng!]);
   }, [selectedId]);
 
-  return <div ref={el} className="map" aria-label="Map of your suppliers" />;
+  return (
+    <>
+      <div ref={el} className="map globe-map" aria-label="Globe of your suppliers" />
+      {unavailable ? (
+        <div className="hint"><b>The globe needs WebGL.</b><p className="muted">You can still find your suppliers in the Suppliers tab.</p></div>
+      ) : (
+        <div className="map-actions">
+          <button className="small" onClick={showAll}>Show all</button>
+          <button className="small" onClick={() => showGlobe()}>Globe view</button>
+        </div>
+      )}
+    </>
+  );
 }
 

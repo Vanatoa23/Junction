@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import type { ServerResponse } from "node:http";
 import { SseEnvelope, type SsePayload } from "@secondsource/shared";
-import { listenClient, pool } from "./db/pool";
+import { listenClient, pool, type Queryable } from "./db/pool";
 
 /**
  * SSE bus. CONTRACT:
@@ -15,13 +15,13 @@ import { listenClient, pool } from "./db/pool";
 const CHANNEL = "sse";
 const MAX_NOTIFY_BYTES = 7500;
 
-export async function publish(payload: SsePayload): Promise<SseEnvelope> {
+export async function publish(payload: SsePayload, db: Queryable = pool): Promise<SseEnvelope> {
   const envelope = SseEnvelope.parse({ id: randomUUID(), at: new Date().toISOString(), ...payload });
   const text = JSON.stringify(envelope);
   if (Buffer.byteLength(text) > MAX_NOTIFY_BYTES) {
     throw new Error(`SSE payload for ${envelope.type} too large (${Buffer.byteLength(text)} B); send ids and let clients refetch`);
   }
-  await pool.query("SELECT pg_notify($1, $2)", [CHANNEL, text]);
+  await db.query("SELECT pg_notify($1, $2)", [CHANNEL, text]);
   return envelope;
 }
 
