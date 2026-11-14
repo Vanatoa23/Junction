@@ -47,7 +47,7 @@ export function MapView({ data, selectedId, onSelect, fitKey }: Props) {
       if (!inc.point) continue;
       L.circle([inc.point.lat, inc.point.lng], { radius: 90_000, color: "#c2412d", weight: 1, opacity: 0.5, fillColor: "#c2412d", fillOpacity: 0.15, interactive: false }).addTo(group);
       L.marker([inc.point.lat, inc.point.lng], {
-        interactive: false,
+        interactive: false, zIndexOffset: 3000,
         icon: L.divIcon({ className: "", html: `<div class="disruption-tag">${esc(inc.headline)}</div>`, iconSize: [0, 0] }),
       }).addTo(group);
     }

@@ -1,6 +1,15 @@
 # STATUS
 
-Last updated: 2026-11-14, after merging foundation, ingest, onboarding, engine, UI, e2e and docs onto `main`.
+Last updated: 2026-11-14, after the design arena and the plain-language redesign (see `ARENA.md`).
+
+## Redesign (latest)
+- **New UI** for a non-technical Head of Supply / Head of Sales: Map (home), Suppliers, Alerts, Add supplier, supplier card, replacements. No provider names, modes (SEED/LIVE/REC/LOCAL), check codes or job talk on screen. See `apps/web/README.md`.
+- **Zoomable map** (Leaflet; bundled world outline works offline, muted OpenStreetMap tiles when online): the hub plus one line to each **direct** supplier only; country bubbles when zoomed out, names and cities when zoomed in; a soft red area and pulsing dots for a disruption.
+- **Deeper tiers are backend-only.** Seeded tier-2/3 suppliers (18 fictional companies) feed a per-supplier risk score with plain reasons (`GET /map`, `apps/api/src/map`). After the Rotterdam strike: Nordpack 75, Rhine Foils 97, Antwerp Resins 71 (high); Baltic Carton and Hansa Labels 31 (medium, only through their own suppliers); the rest low.
+- **Optional supplier details** at add time and editable later (`PUT /suppliers/:id/details`); locations from a built-in gazetteer (city, else country centre = "approximate location").
+- Seeded direct suppliers are now **Watching** (the notice-page poll, the demo's real watch).
+- Tests: 25 checks + 74 API tests pass (risk scoring, gazetteer, map data, details route); `pnpm e2e` passes.
+- Still SEED/LOCAL/UNVERIFIED underneath exactly as listed below; the UI simply does not show those labels. `DEMO.md` says what to tell the audience about what is real.
 
 ## Works (verified on this machine, no API keys)
 - `pnpm install`, `pnpm typecheck` (4 packages), `pnpm test`: 25 checks tests and 63 API tests pass. API tests run against their own throwaway database (`<db>_test`, recreated and seeded each run), so they never touch dev data or race a dev worker.
@@ -29,7 +38,7 @@ Last updated: 2026-11-14, after merging foundation, ingest, onboarding, engine, 
 - `apps/web/vite.config.ts` proxies to `API_PORT` (default 3001) so the web app can follow a non-default API port.
 
 ## Known issues
-- The 10 pre-loaded seeded suppliers stay RESOLVED (not MONITORED): nothing arms a watch for them. Only pasted rows reach MONITORED.
+- Seeded suppliers show "Watching": the only thing actually watched is the demo notice page (matched against every supplier's footprint); no supplier website is monitored.
 - Duplicate pastes create duplicate grid rows.
 - On startup the first poll job can fail once if the API is not up yet; it retries and succeeds.
 - C5 compares ultimate-parent keys only (no 2-hop chain). C4 is UNKNOWN for sanctions incidents without screening data.

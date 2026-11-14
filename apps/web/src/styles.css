@@ -154,3 +154,4 @@ details summary { cursor: pointer; margin-top: 8px; font-size: 13px; color: var(
 @media (prefers-reduced-motion: reduce) { .sup.pulse i { animation: none; } }
 .cand button.link { display: block; margin-top: 8px; }
 .cand button.primary { width: 100%; }
+.pill { white-space: nowrap; }
