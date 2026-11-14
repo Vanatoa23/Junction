@@ -1,30 +1,26 @@
 # apps/web
 
-**Owner: UI thread.** React + Vite. Types come from `@secondsource/shared`; the API base is `/api` (Vite proxy to the API, prefix stripped). Run with the rest of the stack via `pnpm dev`, or alone with `pnpm --filter @secondsource/web dev` (port 5173).
+React 18 + Vite + Leaflet. Designed for a non-technical Head of Supply or Head of Sales (design chosen in `ARENA.md`: "The map is the beauty").
 
-## Screens (hash routes)
-
-| Route | Screen |
+## Screens
+| Screen | What it shows |
 |---|---|
-| `#/suppliers` | Paste grid (name, domain, country), row status pending → resolved → monitored over SSE, footprint chips with state (✓ confirmed, ~ inferred, ? unknown, S seeded), source links, chooser for AMBIGUOUS rows, domain field for UNRESOLVED rows |
-| `#/feed` | Live feed: events and alerts, source URL, verbatim quote, per-stage latency chips (`t_source`, `t_received`, `t_classified`, `t_alert`), `poll` / `webhook` and mode badges, dropped events logged |
-| `#/incident[/:id]` | Incident footprint keys with evidence, unmapped names, affected suppliers |
-| `#/alternatives[/:incidentId/:edgeId]` | Candidates grouped Verified / Unverified / Excluded, C1..C5 plus live news table with PASS / FAIL / UNKNOWN pills and evidence links, Approve only for verified, stored audit record |
-| `#/test` | TEST notice page: link, "how to trigger the live change", editor (PUT `/test-notice`) |
+| **Map** (home) | Pale atlas. Your company is the hub; one line to each **direct** supplier. Dots are coloured by risk (green, amber, red). Zoomed out, suppliers in one country merge into a numbered bubble; zoomed in, names (and cities when closer) appear. A disruption is a soft red area at its place, affected suppliers pulse once, and one plain headline sits above the map. Click a dot for the supplier card. |
+| **Suppliers** | Plain list, riskiest first: where, what they supply, status, risk. |
+| **Alerts** | What happened, newest first. Opening one shows five steps (We noticed, We checked, Suppliers affected, Replacements found, You approved), the affected suppliers, and the sentence from the notice. |
+| **Add supplier** (button) | Name is the only required field; website, country, city, what they supply, how important, yearly spend, lead time, contact and notes are optional chips. Or paste a list. Afterwards: "Found: ..." and "Could not find: ...". |
+| **Supplier card** | Risk score with up to three plain reasons, what we found and could not find, what you told us (editable), a replacement button when there is an alert, and a chooser when the name was ambiguous. |
+| **Replacements** | Ranked cards: Safe to approve, Needs a check, Ruled out, each with one sentence and "How we know". Approve is one click and is recorded with the time. |
+| **Test a disruption** | A small grey link at the bottom of the map (clearly marked TEST) that publishes a notice on our own demo page. |
 
-## Honesty rules in the UI
-- A mode badge (LIVE / REC / SEED / LOCAL) is shown wherever data appears; SEEDED is shown on seeded facts; TEST on anything from the TEST page; `poll` when `via=POLL`.
-- Unknown is shown as unknown and never as a pass; Approve is disabled unless the verdict is VERIFIED.
-- `t_source` shows "n/a" when the source gives no timestamp; the UI never invents one.
+## Rules the UI follows
+- Plain words only: no provider names, no SEED/LIVE/REC/LOCAL, no check codes, no job or footprint talk. (The adapters and modes still exist in the backend and in `/health`.)
+- Deeper tiers (a supplier's own suppliers, ports, plants) are never drawn. The backend uses them to compute each supplier's risk score and its reasons.
+- Unknown is never shown as safe: an unchecked candidate says "Needs a check" and why.
+- The demo notice is labelled TEST/"Demo notice" wherever it appears.
 
-## Mock layer (UI-only, flagged)
-`src/lib/mock.ts` is a typed stand-in for routes the backend has not built yet (same contract types, fictional `.example` data, mode SEED / LOCAL, never LIVE or REC).
-- Data source selector in the top bar, or `?mock=0|1` in the URL:
-  - **auto** (default): real backend first; a route falls back to the mock only if it is unreachable, 404, or 5xx (including 501 stubs).
-  - **real only**: never mock; backend errors are shown.
-  - **mock only**: no network calls at all (works with no backend).
-- A **MOCK UI** banner lists exactly which routes were served by the mock. To remove the mock for good: delete `src/lib/mock.ts` and the `mockApi` fallbacks in `src/lib/api.ts`.
-- In mock mode, publishing text on the TEST page drives an in-browser pipeline (about 2.5 s instead of a real poll): event, classified, three alerts, alternatives.
+## Map notes
+Base layer: a bundled world outline (works offline), with muted OpenStreetMap tiles on top when online. Supplier positions come from the API (`GET /map`): exact city if known, otherwise the country centre (the card says "approximate location").
 
-## Checks
-`pnpm --filter @secondsource/web typecheck` and `pnpm --filter @secondsource/web build`.
+## Dev
+`pnpm --filter @secondsource/web dev` (port 5173, proxies `/api` to the API; `API_PORT` changes the target). `pnpm --filter @secondsource/web typecheck`.

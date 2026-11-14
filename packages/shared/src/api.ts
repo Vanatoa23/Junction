@@ -1,6 +1,6 @@
 import { z } from "zod";
 import {
-  Alert, ApprovalAudit, Candidate, Event, Incident, ProviderName, SourceMode, SupplierInput, SupplierRow,
+  Criticality, Alert, ApprovalAudit, Candidate, Event, Incident, ProviderName, SourceMode, SupplierInput, SupplierRow,
 } from "./domain";
 
 /**
@@ -89,3 +89,75 @@ export const TestNoticeState = z.object({ text: z.string(), updatedAt: z.string(
 export type TestNoticeState = z.infer<typeof TestNoticeState>;
 export const UpdateTestNoticeRequest = z.object({ text: z.string().max(5000) });
 export type UpdateTestNoticeRequest = z.infer<typeof UpdateTestNoticeRequest>;
+
+
+// ---------------------------------------------------------------- map (served by apps/api/src/map)
+export const RiskLevel = z.enum(["LOW", "MEDIUM", "HIGH"]);
+export type RiskLevel = z.infer<typeof RiskLevel>;
+
+/**
+ * Per direct supplier. Computed from the supplier's own footprint AND its deeper tiers (their suppliers, ports,
+ * plants), which are researched in the background and NEVER returned or drawn. `reasons` are plain sentences.
+ */
+export const SupplierRisk = z.object({
+  score: z.number().int().min(0).max(100),
+  level: RiskLevel,
+  reasons: z.array(z.string()),
+  /** How many deeper-tier companies were looked at. 0 => coverage is limited and the score may be too low. */
+  deeperChecked: z.number().int().min(0),
+  coverage: z.enum(["GOOD", "LIMITED"]),
+});
+export type SupplierRisk = z.infer<typeof SupplierRisk>;
+
+export const MapSupplier = z.object({
+  edgeId: z.string().uuid(),
+  name: z.string(),
+  status: z.enum(["PENDING", "RESOLVED", "AMBIGUOUS", "UNRESOLVED", "MONITORED"]),
+  country: z.string().nullable(),
+  city: z.string().nullable(),
+  /** null when we cannot place it yet (no country or city given). */
+  lat: z.number().nullable(),
+  lng: z.number().nullable(),
+  /** CITY = found by city; COUNTRY = country centre only ("approximate location"). */
+  precision: z.enum(["CITY", "COUNTRY"]).nullable(),
+  category: z.string().nullable(),
+  /** What the user told us about it (all optional). */
+  supplies: z.string().nullable(),
+  criticality: Criticality.nullable(),
+  annualSpendEur: z.number().nullable(),
+  leadTimeDays: z.number().nullable(),
+  risk: SupplierRisk,
+  /** Latest open alert for this supplier, in plain words. */
+  alert: z.object({ alertId: z.string().uuid(), incidentId: z.string().uuid(), headline: z.string(), severity: z.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]) }).nullable(),
+});
+export type MapSupplier = z.infer<typeof MapSupplier>;
+
+export const MapIncident = z.object({
+  id: z.string().uuid(),
+  headline: z.string(),
+  type: z.string(),
+  severity: z.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]),
+  createdAt: z.string(),
+  affected: z.array(z.string()),
+  /** Where to pulse it on the map (port position), if known. */
+  point: z.object({ lat: z.number(), lng: z.number(), label: z.string() }).nullable(),
+  /** The page text the notice came from (a demo TEST notice is labelled as such). */
+  isTest: z.boolean(),
+  sourceUrl: z.string(),
+  quote: z.string(),
+  /** Seconds from the source change to the alert, if both stamps are known. */
+  noticedInSeconds: z.number().nullable(),
+});
+export type MapIncident = z.infer<typeof MapIncident>;
+
+/** GET /map */
+export const MapResponse = z.object({
+  hub: z.object({ name: z.string(), city: z.string().nullable(), country: z.string().nullable(), lat: z.number().nullable(), lng: z.number().nullable() }),
+  suppliers: z.array(MapSupplier),
+  incidents: z.array(MapIncident),
+});
+export type MapResponse = z.infer<typeof MapResponse>;
+
+/** PUT /profile: tell us who you are (your company name and where it is). */
+export const UpdateProfileRequest = z.object({ name: z.string().min(1).optional(), city: z.string().nullable().optional(), country: z.string().length(2).nullable().optional() });
+export type UpdateProfileRequest = z.infer<typeof UpdateProfileRequest>;

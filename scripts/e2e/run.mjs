@@ -124,7 +124,8 @@ try {
   const alert = await step('Wait for matching alert.created over SSE', async () => until('alert.created for the event and Nordpack', async () => {
     for (const message of messages) {
       const alert = message.type === 'alert.created' && message.data?.alert;
-      if (!alert || alert.edgeId !== rows.find((row) => row.input.name === 'Nordpack Packaging')?.edgeId) continue;
+      // the demo client already has Nordpack Packaging; alerts are created once per company, so match by supplier name, not by our pasted duplicate's edge id
+      if (!alert || !String(alert.supplierName).startsWith('Nordpack Packaging')) continue;
       const detail = await json(`/incidents/${encodeURIComponent(alert.incidentId)}`);
       if (detail.incident?.eventId === event.id) return alert;
     }

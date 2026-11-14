@@ -14,6 +14,8 @@ import type { SourceName } from "./scoring";
  * companies), 1 is unresolvable by name (needs a domain), 1 comes with a user-typed domain.
  */
 export interface CatalogEntry {
+  /** City in the seed world (used to place the supplier on the map). */
+  city?: string;
   name: string;
   domain: string;
   country: string;
@@ -23,32 +25,32 @@ export interface CatalogEntry {
 }
 
 export const CATALOG: CatalogEntry[] = [
-  { name: "Savonia Dairy Cartons Oy", domain: "savoniacartons.example", country: "FI", category: "packaging", sources: ["contextdev", "cala"],
+  { name: "Savonia Dairy Cartons Oy", domain: "savoniacartons.example", city: "Kuopio", country: "FI", category: "packaging", sources: ["contextdev", "cala"],
     keys: [["REGION", "FI-POS"], ["PORT", "FIHEL"], ["PLANT", "savoniacartons-kuopio-1"], ["PARENT", "seed:savonia-group"]] },
-  { name: "Kvarken Foils Ab", domain: "kvarkenfoils.example", country: "FI", category: "packaging", sources: ["contextdev", "cala"],
+  { name: "Kvarken Foils Ab", domain: "kvarkenfoils.example", city: "Vaasa", country: "FI", category: "packaging", sources: ["contextdev", "cala"],
     keys: [["REGION", "FI-POH"], ["PORT", "FIVAA"], ["PLANT", "kvarkenfoils-vaasa-1"], ["PARENT", "seed:kvarken-holding"]] },
-  { name: "Rhine Valley Closures GmbH", domain: "rhinevalleyclosures.example", country: "DE", category: "packaging", sources: ["contextdev", "cala"],
+  { name: "Rhine Valley Closures GmbH", domain: "rhinevalleyclosures.example", city: "Duisburg", country: "DE", category: "packaging", sources: ["contextdev", "cala"],
     // Rotterdam is INFERRED (the inland lane is assumed), the same pattern as the foundation seed's Antwerp Resins.
     keys: [["REGION", "DE-NW"], ["PORT", "DEDUI"], ["PORT", "NLRTM", "INFERRED"], ["PLANT", "rhinevalleyclosures-duisburg-1"], ["PARENT", "seed:rhine-closures-group"]] },
-  { name: "Porvoo Label Works Oy", domain: "porvoolabels.example", country: "FI", category: "labels", sources: ["contextdev", "cala"],
+  { name: "Porvoo Label Works Oy", domain: "porvoolabels.example", city: "Porvoo", country: "FI", category: "labels", sources: ["contextdev", "cala"],
     // Ownership unknown on purpose: stored as the UNKNOWN placeholder, never guessed.
     keys: [["REGION", "FI-UUS"], ["PORT", "FIHEL"], ["PLANT", "porvoolabels-porvoo-1"], ["PARENT", "?", "UNKNOWN"]] },
-  { name: "Aarhus Cultures A/S", domain: "aarhuscultures.example", country: "DK", category: "ingredients", sources: ["contextdev", "cala"],
+  { name: "Aarhus Cultures A/S", domain: "aarhuscultures.example", city: "Aarhus", country: "DK", category: "ingredients", sources: ["contextdev", "cala"],
     keys: [["REGION", "DK-82"], ["PORT", "DKAAR"], ["PLANT", "aarhuscultures-aarhus-1"], ["PARENT", "seed:aarhus-bio"]] },
   // Only Exa and Cala know this one in the seed world: Context.dev answers nothing, so Exa is used as the fallback.
-  { name: "Gdansk Pallet Systems Sp. z o.o.", domain: "gdanskpallets.example", country: "PL", category: "logistics", sources: ["exa", "cala"],
+  { name: "Gdansk Pallet Systems Sp. z o.o.", domain: "gdanskpallets.example", city: "Gdansk", country: "PL", category: "logistics", sources: ["exa", "cala"],
     keys: [["REGION", "PL-PM"], ["PORT", "PLGDN"], ["PLANT", "gdanskpallets-gdansk-1"], ["PARENT", "seed:pallet-holding"]] },
-  { name: "Riga Crate & Pallet SIA", domain: "rigacrates.example", country: "LV", category: "logistics", sources: ["contextdev", "cala"],
+  { name: "Riga Crate & Pallet SIA", domain: "rigacrates.example", city: "Riga", country: "LV", category: "logistics", sources: ["contextdev", "cala"],
     keys: [["REGION", "LV-RIX"], ["PORT", "LVRIX"], ["PLANT", "rigacrates-riga-1"], ["PARENT", "seed:baltic-crates"]] },
   // Ambiguous pair: both Finnish, both known only to Context.dev, names differ by one word.
-  { name: "Helsinki Steel Cans Oy", domain: "helsinkisteelcans.example", country: "FI", category: "packaging", sources: ["contextdev"],
+  { name: "Helsinki Steel Cans Oy", domain: "helsinkisteelcans.example", city: "Vantaa", country: "FI", category: "packaging", sources: ["contextdev"],
     keys: [["REGION", "FI-UUS"], ["PORT", "FIHEL"], ["PLANT", "helsinkisteelcans-vantaa-1"], ["PARENT", "seed:steel-cans-group"]] },
-  { name: "Helsinki Steel Can Works Oy", domain: "hsc-works.example", country: "FI", category: "packaging", sources: ["contextdev"],
+  { name: "Helsinki Steel Can Works Oy", domain: "hsc-works.example", city: "Helsinki", country: "FI", category: "packaging", sources: ["contextdev"],
     keys: [["REGION", "FI-UUS"], ["PORT", "FIKTK"], ["PLANT", "hsc-works-kotka-1"], ["PARENT", "?", "UNKNOWN"]] },
-  { name: "Oulu Barrier Films Oy", domain: "oulubarrier.example", country: "FI", category: "packaging", sources: ["contextdev", "cala"],
+  { name: "Oulu Barrier Films Oy", domain: "oulubarrier.example", city: "Oulu", country: "FI", category: "packaging", sources: ["contextdev", "cala"],
     keys: [["REGION", "FI-POS"], ["PORT", "FIOUL"], ["PLANT", "oulubarrier-oulu-1"], ["PARENT", "seed:oulu-barrier-group"]] },
   // Findable by DOMAIN only (its trading name is unrelated to what the user types): the "needs a domain" path.
-  { name: "Kaleva Trade Oy", domain: "kalevatrade.example", country: "FI", category: "ingredients", sources: ["contextdev"],
+  { name: "Kaleva Trade Oy", domain: "kalevatrade.example", city: "Kajaani", country: "FI", category: "ingredients", sources: ["contextdev"],
     keys: [["REGION", "FI-POH"], ["PORT", "FIOUL"], ["PLANT", "kalevatrade-oulu-1"], ["PARENT", "seed:kaleva-group"]] },
 ];
 

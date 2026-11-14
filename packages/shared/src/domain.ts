@@ -45,6 +45,10 @@ export const Company = z.object({
   seeded: z.boolean(),
   mode: SourceMode,
   sourceUrls: z.array(z.string().url()),
+  /** Where the company is (approximate). Optional: not every company has been placed. */
+  city: z.string().nullable().optional(),
+  lat: z.number().nullable().optional(),
+  lng: z.number().nullable().optional(),
 });
 export type Company = z.infer<typeof Company>;
 
@@ -68,10 +72,24 @@ export const ResolveOption = z.object({
 });
 export type ResolveOption = z.infer<typeof ResolveOption>;
 
+/**
+ * What a user can tell us about a supplier. Only `name` is required; everything else is optional and never forced.
+ * (Wording in the UI is plain: "what they supply", "how important", "yearly spend", "usual lead time".)
+ */
+export const Criticality = z.enum(["LOW", "MEDIUM", "HIGH"]);
+export type Criticality = z.infer<typeof Criticality>;
+
 export const SupplierInput = z.object({
   name: z.string().min(1),
   domain: z.string().nullable().default(null),
   country: z.string().nullable().default(null),
+  city: z.string().nullable().default(null),
+  supplies: z.string().nullable().default(null),
+  criticality: Criticality.nullable().default(null),
+  annualSpendEur: z.number().nonnegative().nullable().default(null),
+  leadTimeDays: z.number().int().nonnegative().nullable().default(null),
+  contact: z.string().nullable().default(null),
+  notes: z.string().nullable().default(null),
 });
 export type SupplierInput = z.infer<typeof SupplierInput>;
 

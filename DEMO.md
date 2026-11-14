@@ -1,72 +1,34 @@
 # Three-minute demo script
 
-Everything below runs today on `main`, with no API keys. What the audience sees is **SEED** (fictional companies, deterministic stand-ins) and **LOCAL** (our own TEST page, fetched by our own code). Nothing here is live Context.dev, Exa, Cala or Gemini data, and you should say so on stage. The top bar shows the provider badges (`contextdev SEED`, `exa SEED`, `cala SEED`, `gemini SEED`, `local LOCAL`).
+For a Head of Supply and a Head of Sales. Everything runs with no API keys, on fictional companies (`.example` websites) and our own demo notice page. Say so once at the start: "These companies are made up, and the disruption notice comes from a demo page we control." The screens never show technical labels; if someone asks what is real, the honest answer is in the last section.
 
-## Before the audience (2 minutes)
-
+## Before the audience
 ```bash
 pnpm install
 pnpm dev
 ```
-
-Open http://localhost:5173 (the web app) and keep http://localhost:3001/test-notice handy (the TEST page, also reachable from the web app's "TEST page" tab). If 5173 is taken Vite picks the next port, so read the terminal.
-
-Reset to a clean state before each rehearsal so the numbers below match: `pnpm db:reset` (local database only), then restart `pnpm dev`. Repeated pastes of the same names create duplicate rows in the grid (alerts are de-duplicated per company, the grid is not).
-
-The default poll interval in dev is 10 s (`INGEST_POLL_INTERVAL_MS`, 45 s with `NODE_ENV=production`). The UI says "30 to 60 s" on the TEST tab as the production figure.
+Open http://localhost:5173. For a clean state run `pnpm db:reset` first (it works while the stack runs), then refresh. The demo company is "Demo Dairy Oy" in Helsinki with 10 suppliers.
 
 ## Stage flow
-
 | Time | Action | Say |
 |---|---|---|
-| 0:00 | Open **Suppliers**. Point at the 10 pre-loaded rows (badges SEED and SEEDED). | "A demo client with ten fictional suppliers. Everything labelled SEEDED is made up and shown as such." |
-| 0:15 | Paste the **demo list** (block below) into the box and click **Resolve**. Rows go pending, resolved, monitored in about two seconds. ("Load sample names" loads a different short list that also shows one ambiguous and one unresolved row, but not the Rotterdam-exposed supplier.) | "Pasted names are resolved against seed data, not a live vendor. Every row shows its status and where its footprint came from." |
-| 0:35 | Expand a pasted row: region, port, plant and parent chips with ✓ confirmed, ~ inferred, ? unknown, S seeded. For **Helsinki Steel Cans** (shown as "needs your choice") click **This one** on one of the two options. For **Northwind Industrial Fasteners** type `kalevatrade.example` and click **Resolve with domain**. | "Ambiguous names ask a person; unresolvable ones ask for a domain. Unknown facts stay visible as unknown." |
-| 1:00 | Open the **TEST page** tab. Click **Load demo trigger text**, then **Publish to TEST page**. | "This is our own page, labelled TEST. It is not a real disruption and it is not a Context.dev monitor: a LOCAL poll scrapes it and diffs it." |
-| 1:15 | Switch to **Live feed**. Within one poll interval the alerts appear. Open the first: source link, the verbatim quote, `t_source`, `t_received`, `t_classified`, `t_alert` chips, the **poll**, **SEED** and **TEST** badges. | "The quote was checked against the fetched text in code. `t_source` is the page's own 'last updated' stamp, never invented. Classification here is a deterministic rule-based stand-in for Gemini, so the badge says SEED." |
-| 1:50 | Click **Open incident**: STRIKE, HIGH, footprint `PORT:NLRTM` (confirmed) and `REGION:NL-ZH` (inferred), and the affected suppliers. | "The footprint is matched against every supplier: Nordpack and Rhine Foils directly, Antwerp Resins through an inferred port, and Rhine Valley Closures if you pasted it." |
-| 2:10 | Click **Find alternatives** on the Nordpack alert. Show four candidates: Karlstad Pack VERIFIED; Tampere Board UNVERIFIED (C5 unknown parent); Lodz Pack FAILED (C5 same owner as Nordpack); Maasvlakte Wrap FAILED (C1 and C2, same region and port). | "Five checks per candidate, each with a reason. Unknown never passes, and an unverified candidate never ranks above a verified one. The live news check shows 'not run': there is no Context.dev key." |
-| 2:40 | Click **Approve this supplier** on Karlstad Pack. The other buttons are disabled. | "Only a fully passing candidate can be approved, and the server re-checks that. The decision is stored with a snapshot of all check results." |
-| 2:55 | Close: "This is the working core. Next step is switching the four providers to live, which is one key each." | |
+| 0:00 | **Map** screen. Point at the hub and the 10 dots. Zoom out with the minus button: suppliers merge into country bubbles. Zoom in on Germany: names and cities appear. | "This is who we buy from. Your company in the middle, one line to each direct supplier. Zoom out for the world, in for a city." |
+| 0:30 | Click **Rhine Foils** (green, score 22). Read the reason: "Most of its own suppliers (2 of 2) ship through Port of Rotterdam." | "We do not draw the suppliers' suppliers, but we look at them in the background. Rhine Foils is fine today, but everything behind it goes through one port. Remember that." |
+| 0:55 | Click **+ Add supplier**, type `Savonia Dairy Cartons`, tap **+ City** and **+ What they supply** (optional), **Add supplier**. A new dot appears. | "Only the name is needed. We look up the rest and tell you what we found and what we could not." |
+| 1:25 | Click **Test a disruption** (small grey link under the map), **Publish notice**. Within about 10 seconds the headline appears: "Strike at Port of Rotterdam. 3 of your suppliers are affected." Red area over Rotterdam, three red lines, dots pulse. | "A strike is announced at the Port of Rotterdam. It is a demo page, clearly marked TEST. We noticed within seconds." |
+| 1:55 | Point at the two amber dots (Baltic Carton, Hansa Labels): not hit directly, but one of their own suppliers ships through Rotterdam. Then **See what to do** opens Alerts: the five steps. Click **Find a replacement** on Nordpack Packaging. | "Two more suppliers turned amber without being named in the notice: that is the deeper tier at work. Here is what happened, how fast we noticed, who is affected." |
+| 2:15 | Replacement cards: Karlstad Pack **Safe to approve**; Tampere Board **Needs a check** (owner unknown); Lodz Pack and Maasvlakte Wrap **Ruled out** with a reason. Open **How we know** on one. | "Unknown never counts as safe. We only let you approve a candidate that passes every check." |
+| 2:40 | Click **Approve this replacement** on Karlstad. "Approved by you at 10:42. Recorded." | "A person decides, and the decision is recorded." |
+| 2:55 | Back on **Map**: Nordpack is still red until the supplier is switched; the timeline shows "You approved". | "That is the loop: notice, impact, safe alternative, approval." |
 
-Demo list (name, domain, country; fictional, resolved from seed data; this is `DEMO_PASTE_LIST` in `apps/api/src/onboarding/demoCatalog.ts`):
+To publish from a phone, open the demo page (`http://<your-computer>:3001/test-notice`) and use its editor.
 
-```text
-Savonia Dairy Cartons, , FI
-Kvarken Foils
-Rhine Valley Closures GmbH, , DE
-Porvoo Label Works, , FI
-Aarhus Cultures A/S, , DK
-Gdansk Pallet Systems, , PL
-Riga Crate and Pallet, , LV
-Helsinki Steel Cans
-Northwind Industrial Fasteners, , FI
-Oulu Barrier Films, oulubarrier.example, FI
-```
-
-Exact TEST text (the button loads it for you):
-
-```text
-NOTICE: Strike action at the Port of Rotterdam (NLRTM, region NL-ZH). All container terminals are closed until further notice. Inbound and outbound cargo is delayed.
-```
-
-To publish from a phone, open the TEST page URL on the phone (same network, use your machine's address instead of localhost) and use its own editor.
-
-## Measured on this machine (rehearsal numbers)
-
-- Pasting the demo list to all rows monitored: about 1 to 2 s (SEED).
-- TEST page edit to alert on screen: 1.5 to 3.3 s with a 5 s poll; with the 10 s default expect up to about 10 s. The latency chips show the real per-stage values; `t_classified` follows `t_received` by roughly 10 ms and `t_alert` by about 30 ms.
-- These are local, keyless numbers. No real vendor latency has been measured.
-
-## Check it without the UI
-
+## Checking it without the UI
 ```bash
-pnpm e2e        # needs pnpm dev running; paste, edit page, SSE, alert, quote, latency, alternatives, approve + audit row, rejected approval
+pnpm e2e    # needs pnpm dev running: add suppliers, publish notice, alert, replacements, approve, rejected approval
 ```
 
-## What not to claim
-
-- Not live: every vendor call is SEED or LOCAL. The live provider code exists but has never run against the real services (UNVERIFIED).
-- Not measured: Context.dev monitor or webhook latency, Gemini accuracy, Exa or Cala coverage.
-- Not built: live news re-check results, second-client privacy (row-level security), accuracy dashboard, downstream monitoring, Valio order.
-- The 10 pre-loaded rows stay RESOLVED, not MONITORED: nothing arms a watch for them. Only pasted rows reach MONITORED (the poll watches the TEST page for all of them).
+## What is real and what is not (say this if asked)
+- Real: the pipeline (watching the notice page, reading it, checking the quote against the page text, matching suppliers, scoring risk, running the checks, approval record, the map).
+- Not live: company facts, supplier locations, supplier-of-supplier data and the replacement pool are fictional demo data; the notice classifier is a simple rule-based reader, not an AI model. Connecting real company data and a real language model is a matter of adding keys (see README); that code exists but has not been run against the real services.
+- Not built: live news re-check, a second customer account, an accuracy dashboard.

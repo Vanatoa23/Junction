@@ -1,4 +1,4 @@
-import type { Company, FootprintKey, SupplierRow } from "@secondsource/shared";
+import type { Company, FootprintKey, SupplierInput, SupplierRow } from "@secondsource/shared";
 import { pool, type Queryable } from "./pool";
 
 /**
@@ -10,7 +10,7 @@ const iso = (d: Date | string) => new Date(d).toISOString();
 export function mapCompany(r: any): Company {
   return {
     id: r.id, name: r.name, legalName: r.legal_name, domain: r.domain, country: r.country?.trim() || null,
-    category: r.category, calaId: r.cala_id, parentCompanyId: r.parent_company_id,
+    category: r.category, calaId: r.cala_id, parentCompanyId: r.parent_company_id, city: r.city ?? null, lat: r.lat ?? null, lng: r.lng ?? null,
     inCandidatePool: r.in_candidate_pool, seeded: r.seeded, mode: r.mode, sourceUrls: r.source_urls ?? [],
   };
 }
@@ -31,6 +31,16 @@ export async function companyFootprint(companyIds: string[], db: Queryable = poo
   return out;
 }
 
+/** supplier_edge row -> SupplierInput (typed facts live in `details`). */
+export function edgeInput(e: any): SupplierInput {
+  const d = e.details ?? {};
+  return {
+    name: e.input_name, domain: e.input_domain, country: e.input_country, city: e.input_city ?? null,
+    supplies: d.supplies ?? null, criticality: d.criticality ?? null, annualSpendEur: d.annualSpendEur ?? null,
+    leadTimeDays: d.leadTimeDays ?? null, contact: d.contact ?? null, notes: d.notes ?? null,
+  };
+}
+
 /** Tier-1 supplier rows for a client (or one row by edgeId). */
 export async function loadSuppliers(clientId: string, edgeId?: string, db: Queryable = pool): Promise<SupplierRow[]> {
   const r = await db.query(
@@ -43,7 +53,7 @@ export async function loadSuppliers(clientId: string, edgeId?: string, db: Query
   const fps = await companyFootprint(r.rows.map((x) => x.company_id).filter(Boolean), db);
   return r.rows.map((e) => ({
     edgeId: e.id,
-    input: { name: e.input_name, domain: e.input_domain, country: e.input_country },
+    input: edgeInput(e),
     status: e.status,
     company: e.company ? mapCompany(e.company) : null,
     resolveScore: e.resolve_score === null ? null : Number(e.resolve_score),

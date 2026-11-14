@@ -1,3 +1,4 @@
+import { locate } from "@secondsource/shared";
 import type { FootprintKey, FootprintType, ResolveOption, SourceMode, SupplierInput, SupplierStatus } from "@secondsource/shared";
 import { UNKNOWN_VALUE } from "@secondsource/shared";
 import { publish } from "../bus";
@@ -36,10 +37,15 @@ export async function createPendingRows(clientId: string, inputs: SupplierInput[
     const key = `${name.toLowerCase()}|${domain ?? ""}`;
     if (!name || seen.has(key)) continue; // same name+domain twice in one paste: one row
     seen.add(key);
+    // optional facts the user typed (never required); kept as typed, shown back in the UI
+    const details = Object.fromEntries(
+      Object.entries({ supplies: raw.supplies, criticality: raw.criticality, annualSpendEur: raw.annualSpendEur, leadTimeDays: raw.leadTimeDays, contact: raw.contact, notes: raw.notes })
+        .filter(([, v]) => v !== null && v !== undefined && v !== ""),
+    );
     const r = await db.query(
-      `INSERT INTO supplier_edge (client_id, tier, input_name, input_domain, input_country, status, mode, seeded)
-       VALUES ($1, 1, $2, $3, $4, 'PENDING', 'SEED', false) RETURNING id`,
-      [clientId, name, domain, country],
+      `INSERT INTO supplier_edge (client_id, tier, input_name, input_domain, input_country, input_city, details, status, mode, seeded)
+       VALUES ($1, 1, $2, $3, $4, $5, $6, 'PENDING', 'SEED', false) RETURNING id`,
+      [clientId, name, domain, country, raw.city?.trim() || null, JSON.stringify(details)],
     );
     ids.push(r.rows[0].id as string);
   }
@@ -111,14 +117,17 @@ async function finalizeResolved(edgeId: string, c: Candidate, score: number | nu
   if (!domain) throw new Error("cannot resolve to a company without a domain");
   const seeded = c.mode === "SEED" || userTyped;
   const urls = c.sourceUrls.length ? c.sourceUrls : [`https://${domain}`];
-  const clientId = (await loadEdge(edgeId))!.client_id;
+  const edgeRow = (await loadEdge(edgeId))!;
+  const clientId = edgeRow.client_id;
+  // where the supplier is: catalog city (seed world) > city the user typed > country centre (approximate)
+  const place = locate(catalogByDomain(domain)?.city ?? (edgeRow as any).input_city, c.country ?? edgeRow.input_country);
   await tx(async (db) => {
     const co = await db.query(
-      `INSERT INTO company (name, legal_name, domain, country, cala_id, seeded, mode, source_urls, category)
-       VALUES ($1,$1,$2,$3,$4,$5,$6,$7,$8)
-       ON CONFLICT (domain) DO UPDATE SET updated_at = now()
+      `INSERT INTO company (name, legal_name, domain, country, cala_id, seeded, mode, source_urls, category, city, lat, lng)
+       VALUES ($1,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+       ON CONFLICT (domain) DO UPDATE SET updated_at = now(), city = COALESCE(company.city, EXCLUDED.city), lat = COALESCE(company.lat, EXCLUDED.lat), lng = COALESCE(company.lng, EXCLUDED.lng)
        RETURNING id`,
-      [c.name, domain, c.country, c.calaId, seeded, c.mode, urls, catalogByDomain(domain)?.category ?? null],
+      [c.name, domain, c.country, c.calaId, seeded, c.mode, urls, catalogByDomain(domain)?.category ?? null, place?.city ?? null, place?.lat ?? null, place?.lng ?? null],
     );
     const companyId = co.rows[0].id as string;
     await db.query(
