@@ -142,6 +142,12 @@ export function MapView({ data, selectedId, onSelect, fitKey }: Props) {
       ml?.on("error", (e: any) => { if (!e?.sourceId && !e?.tile) showFallback(); });
       // the vector layer needs one nudge after its style has loaded, otherwise it stays blank until the first zoom
       const nudge = () => { map.invalidateSize({ pan: false }); map.panBy([1, 0], { animate: false }); map.panBy([-1, 0], { animate: false }); };
+      // calmer map: keep country and region names, hide the rest of the basemap labels so our supplier names stay readable
+      ml?.on("load", () => {
+        for (const l of ml.getStyle().layers ?? []) {
+          if (l.type === "symbol" && !/country|continent|state|region/i.test(l.id)) ml.setLayoutProperty(l.id, "visibility", "none");
+        }
+      });
       ml?.once("load", nudge);
       ml?.once("idle", nudge);
       for (const ms of [400, 1500, 3000]) window.setTimeout(nudge, ms);

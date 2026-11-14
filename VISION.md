@@ -22,7 +22,7 @@ For every direct supplier we also look at **its** supply chain (its suppliers, t
 ## Where the data comes from
 Three sources, ideally all of them, because using all of them also competes for more of the prize tracks:
 - **Exa**: finds companies, products and news on the open web.
-- **Cala**: company identity and ownership. *Markus wrote "claude"; **(our reading)** he meant Cala, which is how the plan has always used it. Please confirm. If he meant Claude as an analysis tool, that is a different role and would be added next to these three.*
+- **Cala**: company identity and ownership. (Confirmed by Markus: the three sources are Exa, Cala and Context.dev.)
 - **Context.dev**: reads and monitors web pages (notices, news, company pages).
 
 Gemini is **not part of the product for now**. It may be used as a coding tool while building. The code still has an optional Gemini classifier path (off without a key, never shown to users); in the demo a simple rule-based reader does that job.
@@ -54,6 +54,6 @@ Privacy follows from this shape: public facts and the shared graph are shared; a
 - Claims shown to customers must stay explainable in one sentence, or we should not show them.
 
 ## Open questions for Markus
-1. "claude": Cala (our reading) or Claude as a tool?
+1. Risk model: Markus is brainstorming it (a discrete level plus a probability of disruption, possibly computed by an agent). Today's formula is a placeholder and is unchanged.
 2. Is "yellow starts at score 30, red at 60" the right line for early warning versus now? (A single constant today.)
 3. Do we show the user how a score was built beyond the reasons (a "how we know" for risk), or keep it to the sentences?
