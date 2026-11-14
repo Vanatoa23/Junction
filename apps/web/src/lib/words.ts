@@ -2,8 +2,11 @@ import type { CheckId, MapSupplier, RiskLevel, SupplierRow, Verdict } from "@sec
 
 /** Plain-language wording. No technical terms reach the screen. */
 
-export const RISK_COLOR: Record<RiskLevel, string> = { LOW: "#2f7d6d", MEDIUM: "#c97a12", HIGH: "#c2412d" };
-export const RISK_WORD: Record<RiskLevel, string> = { LOW: "Low risk", MEDIUM: "Medium risk", HIGH: "High risk" };
+/** green = no sign of trouble, yellow = early warning, red = needs attention now. FILL is for dots and lines; TEXT is darker so words stay readable. */
+export const RISK_COLOR: Record<RiskLevel, string> = { LOW: "#2f9e6f", MEDIUM: "#e8b400", HIGH: "#d6392b" };
+export const RISK_TEXT: Record<RiskLevel, string> = { LOW: "#23785a", MEDIUM: "#946b00", HIGH: "#b92d20" };
+export const RISK_WORD: Record<RiskLevel, string> = { LOW: "Low risk", MEDIUM: "Early warning", HIGH: "Needs attention now" };
+export const RISK_HELP: Record<RiskLevel, string> = { LOW: "No sign of trouble", MEDIUM: "Early warning: keep an eye on it", HIGH: "Needs attention now" };
 export const SEVERITY_WORD: Record<string, string> = { LOW: "Minor", MEDIUM: "Moderate", HIGH: "Serious", CRITICAL: "Severe" };
 
 export function statusWord(status: MapSupplier["status"]): string {

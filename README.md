@@ -1,5 +1,7 @@
 # SecondSource
 
+Live monitoring of supply-chain risk: your direct suppliers on a map, coloured green / yellow (early warning) / red (needs attention now), with the risk of their own suppliers worked out in the background. See `VISION.md` for the aim and `DEMO.md` for the 3-minute script.
+
 Live supply-chain risk monitor: it watches the sources your suppliers depend on, turns a change into a typed incident, and only offers replacement suppliers that the same incident cannot touch. See `PLAN.md` (plan and contract), `STATUS.md` (what works, what is mocked), `docs/api-findings.md`.
 
 ## Run it
@@ -36,7 +38,7 @@ No keys are needed. Each provider answers from deterministic seed data (mode SEE
 | `CONTEXT_DEV_API_KEY` | `contextdev`: company search, scrape, news, monitors | SEED company lookup; TEST page is watched by the `local` provider instead | LIVE |
 | `EXA_API_KEY` | `exa`: search / candidate discovery | SEED candidate pool | LIVE |
 | `CALA_API_KEY` | `cala`: entity search, ownership | SEED ownership | LIVE |
-| `GEMINI_API_KEY` (+ `GEMINI_MODEL`) | `gemini`: incident classification | Deterministic rule-based classifier (`rule-based-v1`, not an LLM), SEED | LIVE |
+| `GEMINI_API_KEY` (+ `GEMINI_MODEL`) | `gemini`: incident classification. Optional and off: Gemini is not part of the product for now (see `VISION.md`) | Deterministic rule-based classifier (`rule-based-v1`, not an LLM), SEED | LIVE |
 
 **The LIVE code paths are UNVERIFIED**: they are written from `docs/api-findings.md` and have never run against the real services. Expect to fix field names on the first live call. `SOURCE_RECORD=1` saves each live response as a REC fixture in `apps/api/fixtures/rec`; `SOURCE_MODE=rec|seed` forces offline modes even when keys exist.
 

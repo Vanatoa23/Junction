@@ -5,7 +5,7 @@ import { MapView } from "./components/MapView";
 import { SupplierPanel } from "./components/SupplierPanel";
 import { TestControl } from "./components/TestControl";
 import { useData } from "./lib/data";
-import { RISK_COLOR, RISK_WORD } from "./lib/words";
+import { RISK_COLOR, RISK_HELP } from "./lib/words";
 import { AlertsView } from "./views/AlertsView";
 import { SuppliersView } from "./views/SuppliersView";
 
@@ -80,8 +80,8 @@ export function App() {
           )}
 
           <div className="legend">
-            {(["LOW", "MEDIUM", "HIGH"] as const).map((l) => <span key={l}><i style={{ background: RISK_COLOR[l] }} /> {RISK_WORD[l]}</span>)}
-            <div className="muted small">Lines go to your direct suppliers. Their own suppliers are checked in the background and counted in the score.</div>
+            {(["LOW", "MEDIUM", "HIGH"] as const).map((l) => <span key={l}><i style={{ background: RISK_COLOR[l] }} /> {RISK_HELP[l]}</span>)}
+            <div className="muted small">Lines go to your direct suppliers. Their own suppliers are checked in the background and counted in the colour.</div>
           </div>
           <button className="resetview small" onClick={() => setFitKey((k) => k + 1)}>Show all</button>
           <TestControl />

@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import type { RiskLevel, SupplierRisk } from "@secondsource/shared";
-import { RISK_COLOR, RISK_WORD } from "../lib/words";
+import { RISK_COLOR, RISK_TEXT, RISK_WORD } from "../lib/words";
 
 export function RiskPill({ level, score }: { level: RiskLevel; score?: number }) {
   return (
-    <span className="pill" style={{ "--c": RISK_COLOR[level] } as React.CSSProperties}>
+    <span className="pill" style={{ "--c": RISK_COLOR[level], "--t": RISK_TEXT[level] } as React.CSSProperties}>
       <i /> {RISK_WORD[level]}
       {score !== undefined && <span className="muted"> {score}</span>}
     </span>
@@ -13,7 +13,7 @@ export function RiskPill({ level, score }: { level: RiskLevel; score?: number })
 
 export function Score({ risk }: { risk: SupplierRisk }) {
   return (
-    <div className="score" style={{ "--c": RISK_COLOR[risk.level] } as React.CSSProperties}>
+    <div className="score" style={{ "--c": RISK_COLOR[risk.level], "--t": RISK_TEXT[risk.level] } as React.CSSProperties}>
       <div className="score-num">{risk.score}</div>
       <div>
         <div className="score-word">{RISK_WORD[risk.level]}</div>

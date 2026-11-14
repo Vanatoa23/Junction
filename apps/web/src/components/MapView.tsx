@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "maplibre-gl/dist/maplibre-gl.css";
+import "@maplibre/maplibre-gl-leaflet";
 import { feature } from "topojson-client";
 import worldTopo from "world-atlas/countries-110m.json";
 import type { MapResponse, MapSupplier, RiskLevel } from "@secondsource/shared";
@@ -67,12 +69,12 @@ export function MapView({ data, selectedId, onSelect, fitKey }: Props) {
       for (const s of placed) items.push({ pos: L.latLng(s.lat!, s.lng!), members: [s] });
     }
 
-    // lines first so dots sit on top
+    // lines first so dots sit on top; coloured by the worst risk behind them (green / yellow / red)
     for (const it of items) {
       if (!hub) continue;
       const worst = it.members.reduce<RiskLevel>((w, m) => (RANK[m.risk.level] > RANK[w] ? m.risk.level : w), "LOW");
-      const hot = worst === "HIGH";
-      L.polyline([hub, it.pos], { color: hot ? RISK_COLOR.HIGH : "#aeb8c2", weight: hot ? 2.2 : 1.2, opacity: hot ? 0.85 : 0.9, interactive: false }).addTo(group);
+      const weight = worst === "HIGH" ? 3 : worst === "MEDIUM" ? 2.4 : 1.8;
+      L.polyline([hub, it.pos], { color: RISK_COLOR[worst], weight, opacity: worst === "LOW" ? 0.55 : 0.85, interactive: false }).addTo(group);
     }
 
     for (const it of items) {
@@ -126,12 +128,29 @@ export function MapView({ data, selectedId, onSelect, fitKey }: Props) {
     if (!el.current || mapRef.current) return;
     const map = L.map(el.current, { minZoom: 2, maxZoom: 13, zoomControl: false, worldCopyJump: true, attributionControl: true, zoomSnap: 0.5 });
     L.control.zoom({ position: "bottomleft" }).addTo(map);
-    // offline-capable base: country outlines
-    L.geoJSON(world, { style: { color: "#d8d3c6", weight: 0.8, fillColor: "#f4f1ea", fillOpacity: 1 }, interactive: false }).addTo(map);
-    // muted street tiles on top when online (CSS desaturates them); offline they simply do not appear
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "&copy; OpenStreetMap contributors", maxZoom: 13, opacity: 0.85,
-    }).addTo(map);
+    // Base: a light vector style (OpenFreeMap "positron") that fills the whole view at every zoom and pan.
+    // If it cannot load (offline), fall back to the bundled world outline so the dots and lines still make sense.
+    let fallback: L.GeoJSON | null = null;
+    const showFallback = () => {
+      if (fallback) return;
+      fallback = L.geoJSON(world, { style: { color: "#cfd5db", weight: 0.8, fillColor: "#f3f4f1", fillOpacity: 1 }, interactive: false }).addTo(map);
+      fallback.bringToBack();
+    };
+    try {
+      const gl = (L as any).maplibreGL({ style: "https://tiles.openfreemap.org/styles/positron", attribution: "&copy; OpenFreeMap &copy; OpenMapTiles, data from OpenStreetMap" }).addTo(map);
+      const ml = gl.getMaplibreMap?.();
+      ml?.on("error", (e: any) => { if (!e?.sourceId && !e?.tile) showFallback(); });
+      // the vector layer needs one nudge after its style has loaded, otherwise it stays blank until the first zoom
+      const nudge = () => { map.invalidateSize({ pan: false }); map.panBy([1, 0], { animate: false }); map.panBy([-1, 0], { animate: false }); };
+      ml?.once("load", nudge);
+      ml?.once("idle", nudge);
+      for (const ms of [400, 1500, 3000]) window.setTimeout(nudge, ms);
+      document.addEventListener("visibilitychange", nudge);
+      window.addEventListener("focus", nudge);
+      window.setTimeout(() => { if (!navigator.onLine) showFallback(); }, 0);
+    } catch {
+      showFallback();
+    }
     overlay.current = L.layerGroup().addTo(map);
     map.on("zoomend", draw);
     map.on("click", () => latest.current.onSelect(null));
