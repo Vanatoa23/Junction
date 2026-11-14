@@ -138,22 +138,35 @@ export function MapView({ data, selectedId, onSelect, fitKey }: Props) {
     };
     try {
       const gl = (L as any).maplibreGL({ style: "https://tiles.openfreemap.org/styles/positron", attribution: "&copy; OpenFreeMap &copy; OpenMapTiles, data from OpenStreetMap" }).addTo(map);
-      const ml = gl.getMaplibreMap?.();
-      ml?.on("error", (e: any) => { if (!e?.sourceId && !e?.tile) showFallback(); });
-      // the vector layer needs one nudge after its style has loaded, otherwise it stays blank until the first zoom
-      const nudge = () => { map.invalidateSize({ pan: false }); map.panBy([1, 0], { animate: false }); map.panBy([-1, 0], { animate: false }); };
-      // calmer map: keep country and region names, hide the rest of the basemap labels so our supplier names stay readable
-      ml?.on("load", () => {
-        for (const l of ml.getStyle().layers ?? []) {
-          if (l.type === "symbol" && !/country|continent|state|region/i.test(l.id)) ml.setLayoutProperty(l.id, "visibility", "none");
+      let tweaked = false;
+      let jiggled = false;
+      // The plugin builds its MapLibre map a moment after addTo; tweak and nudge it once it exists and its style has loaded.
+      const tweak = () => {
+        const ml = gl.getMaplibreMap?.();
+        if (!ml) return;
+        let hasStyle = false;
+        try { hasStyle = (ml.getStyle()?.layers?.length ?? 0) > 0; } catch { /* style not ready */ }
+        if (!tweaked && hasStyle) {
+          tweaked = true;
+          // calmer map: keep country and region names, hide the other basemap labels so our supplier names stay readable
+          for (const l of ml.getStyle().layers ?? []) {
+            if (l.type === "symbol" && !/country|continent|state|region/i.test(l.id)) ml.setLayoutProperty(l.id, "visibility", "none");
+          }
         }
-      });
-      ml?.once("load", nudge);
-      ml?.once("idle", nudge);
-      for (const ms of [400, 1500, 3000]) window.setTimeout(nudge, ms);
-      document.addEventListener("visibilitychange", nudge);
-      window.addEventListener("focus", nudge);
+        // one tiny zoom out-and-back makes the vector layer paint its first frame (it stays blank until the map "moves" in zoom)
+        if (tweaked && !jiggled) {
+          jiggled = true;
+          const z = map.getZoom();
+          map.invalidateSize({ pan: false });
+          map.setZoom(z + 0.5, { animate: false });
+          map.setZoom(z, { animate: false });
+        }
+      };
+      for (const ms of [300, 900, 1800, 3000, 5000]) window.setTimeout(tweak, ms);
+      document.addEventListener("visibilitychange", tweak);
+      window.addEventListener("focus", tweak);
       window.setTimeout(() => { if (!navigator.onLine) showFallback(); }, 0);
+      gl.getMaplibreMap?.()?.on?.("error", (e: any) => { if (!e?.sourceId && !e?.tile) showFallback(); });
     } catch {
       showFallback();
     }
