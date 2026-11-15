@@ -64,6 +64,9 @@ textarea { resize: vertical; }
 .globe-map .maplibregl-ctrl-bottom-left { left: 6px; bottom: 10px; }
 .globe-map .maplibregl-ctrl-group button:focus-visible { outline: 2px solid #17304a; outline-offset: -3px; }
 .globe-map .maplibregl-marker[style*="opacity: 0;"] { visibility: hidden; }
+.maplayers { position: absolute; z-index: 1000; left: 14px; top: 90px; display: flex; flex-direction: column; gap: 5px; padding: 9px 11px; background: rgba(255, 255, 255, 0.94); border-radius: 10px; box-shadow: var(--shadow); font-size: 12px; }
+.maplayers label { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+.maplayers input { width: auto; margin: 0; accent-color: #315d7b; }
 .testctl { position: absolute; z-index: 1000; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .testbox { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px; width: 340px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
 .tag { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; border: 1px solid #b58100; color: #8a6100; border-radius: 6px; padding: 1px 6px; background: #fff7dc; }
@@ -165,6 +168,10 @@ details summary { cursor: pointer; margin-top: 8px; font-size: 13px; color: var(
 .sup.limited::after, .bubble.limited::after { content: ""; position: absolute; inset: -4px; width: auto; height: auto; color: #fff; pointer-events: none; }
 
 /* ports (anchors) and facility counts */
+.facility-pin { position: relative; width: 12px; height: 12px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.facility-pin i { position: absolute; inset: 0; border: 1.5px solid #132d43; background: #b6e7ef; border-radius: 50%; box-shadow: 0 1px 4px #0b1424; }
+.facility-pin.logistics-pin i { border-radius: 2px; transform: rotate(45deg); background: #f4cb8f; }
+.facility-pin span { position: absolute; left: 16px; top: -4px; white-space: nowrap; font-size: 11px; color: #eef7f9; text-shadow: 0 1px 3px #0b1424, 0 0 4px #0b1424; pointer-events: none; }
 .port { position: relative; width: 9px; height: 9px; pointer-events: none; }
 .port i { position: absolute; inset: 0; transform: rotate(45deg); background: #e9eef2; border: 1.5px solid #4a6b82; border-radius: 2px; }
 .port span { position: absolute; left: 13px; top: -4px; white-space: nowrap; font-size: 11px; color: #dbe6ee; text-shadow: 0 1px 3px #0b1424, 0 0 4px #0b1424; }

@@ -13,6 +13,8 @@ interface Props {
   data: MapResponse;
   selectedId: string | null;
   onSelect: (edgeId: string | null) => void;
+  showFacilities: boolean;
+  showMovements: boolean;
 }
 
 type LngLatTuple = [longitude: number, latitude: number];
@@ -55,6 +57,7 @@ const style: StyleSpecification = {
   sources: {
     world: { type: "geojson", data: world, tolerance: 0.125, attribution: "Natural Earth" },
     routes: { type: "geojson", data: collection([]) },
+    movements: { type: "geojson", data: collection([]) },
     disruptions: { type: "geojson", data: collection([]) },
   },
   layers: [
@@ -67,6 +70,11 @@ const style: StyleSpecification = {
     {
       id: "disruption-area", type: "fill", source: "disruptions",
       paint: { "fill-color": "#f95c4e", "fill-opacity": 0.25, "fill-outline-color": "#ff8b7e" },
+    },
+    {
+      id: "movement-lines", type: "line", source: "movements",
+      layout: { "line-cap": "round", "line-join": "round" },
+      paint: { "line-color": "#b6e7ef", "line-width": 2.5, "line-opacity": 0.9, "line-dasharray": [1.2, 2.2] },
     },
     {
       id: "route-outline", type: "line", source: "routes",
@@ -119,12 +127,12 @@ function mapLabel(tag: "b" | "span" | "div", text: string, className = "") {
   return el;
 }
 
-export function MapView({ data, selectedId, onSelect }: Props) {
+export function MapView({ data, selectedId, onSelect, showFacilities, showMovements }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const markers = useRef<maplibregl.Marker[]>([]);
-  const latest = useRef({ data, selectedId, onSelect });
-  latest.current = { data, selectedId, onSelect };
+  const latest = useRef({ data, selectedId, onSelect, showFacilities, showMovements });
+  latest.current = { data, selectedId, onSelect, showFacilities, showMovements };
   const [unavailable, setUnavailable] = useState(false);
 
   function showGlobe(duration = 650) {
@@ -157,16 +165,18 @@ export function MapView({ data, selectedId, onSelect }: Props) {
   function draw() {
     const map = mapRef.current;
     const routes = map?.getSource<GeoJSONSource>("routes");
+    const movements = map?.getSource<GeoJSONSource>("movements");
     const disruptions = map?.getSource<GeoJSONSource>("disruptions");
-    if (!map || !routes || !disruptions) return;
+    if (!map || !routes || !movements || !disruptions) return;
     for (const marker of markers.current) marker.remove();
     markers.current = [];
 
-    const { data, selectedId, onSelect } = latest.current;
+    const { data, selectedId, onSelect, showFacilities, showMovements } = latest.current;
     const zoom = map.getZoom();
     const hub = hubPosition(data);
     const items = supplierItems(data.suppliers.filter(isPlaced), zoom < 4);
     const routeFeatures: Feature<Geometry>[] = [];
+    const movementFeatures: Feature<Geometry>[] = [];
     const areas: Feature<Geometry>[] = [];
 
     function addMarker(center: LngLatTuple, element: HTMLElement) {
@@ -246,13 +256,61 @@ export function MapView({ data, selectedId, onSelect }: Props) {
       addMarker(center, anchor);
     }
 
-    // ports that matter now: small anchors (not suppliers)
-    for (const port of data.ports) {
-      const anchor = mapLabel("div", "", "port");
-      anchor.title = port.label;
-      anchor.append(document.createElement("i"));
-      if (zoom >= 3.4) anchor.append(mapLabel("span", port.label.replace(/^Port of /, "")));
-      addMarker([port.lng, port.lat], anchor);
+    const facilityById = new Map(data.facilities.map((facility) => [facility.id, facility]));
+    if (showMovements) {
+      const supplierById = new Map(data.suppliers.filter(isPlaced).map((supplier) => [supplier.edgeId, supplier]));
+      for (const movement of data.movements) {
+        const points = movement.steps.map((step): LngLatTuple | null => {
+          if (step.kind === "HUB") return hub;
+          if (step.kind === "FACILITY") {
+            const site = facilityById.get(step.facilityId);
+            return site ? [site.lng, site.lat] : null;
+          }
+          const supplier = supplierById.get(step.edgeId);
+          return supplier ? [supplier.lng, supplier.lat] : null;
+        });
+        if (points.some((point) => point === null)) continue;
+        for (let i = 1; i < points.length; i++) {
+          const from = points[i - 1]!;
+          const to = points[i]!;
+          if (!from || !to || (from[0] === to[0] && from[1] === to[1])) continue;
+          movementFeatures.push(greatCircle(from, to, { properties: { product: movement.product, basis: movement.basis } }));
+        }
+      }
+    }
+
+    if (showFacilities) {
+      for (const facility of data.facilities) {
+        const anchor = document.createElement("button");
+        anchor.type = "button";
+        anchor.className = `facility-pin ${facility.kind === "PORT" ? "port-pin" : "logistics-pin"}`;
+        anchor.title = `${facility.name} · approximate map point`;
+        anchor.setAttribute("aria-label", anchor.title);
+        anchor.append(document.createElement("i"));
+        if (zoom >= 4.6) anchor.append(mapLabel("span", facility.name.replace(/^Port of /, "")));
+        anchor.onclick = (event) => {
+          event.stopPropagation();
+          const popup = document.createElement("div");
+          popup.append(mapLabel("b", facility.name), document.createElement("br"), document.createTextNode("Approximate map point · "));
+          const link = document.createElement("a");
+          link.href = facility.sourceUrl;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "Facility reference";
+          popup.append(link);
+          new maplibregl.Popup().setLngLat([facility.lng, facility.lat]).setDOMContent(popup).addTo(map);
+        };
+        addMarker([facility.lng, facility.lat], anchor);
+      }
+      // Keep incident/dependency ports outside the curated catalog visible too.
+      for (const port of data.ports) {
+        if (facilityById.has(port.id)) continue;
+        const anchor = mapLabel("div", "", "port");
+        anchor.title = port.label;
+        anchor.append(document.createElement("i"));
+        if (zoom >= 3.4) anchor.append(mapLabel("span", port.label.replace(/^Port of /, "")));
+        addMarker([port.lng, port.lat], anchor);
+      }
     }
 
     // facilities of the selected supplier (data pack): country-level points with a count
@@ -265,6 +323,7 @@ export function MapView({ data, selectedId, onSelect }: Props) {
     }
 
     routes.setData(collection(routeFeatures));
+    movements.setData(collection(movementFeatures));
     disruptions.setData(collection(areas));
   }
 
@@ -290,6 +349,11 @@ export function MapView({ data, selectedId, onSelect }: Props) {
     map.on("load", draw);
     map.on("zoomend", draw);
     map.on("click", () => latest.current.onSelect(null));
+    map.on("click", "movement-lines", (event) => {
+      const props = event.features?.[0]?.properties;
+      if (!props) return;
+      new maplibregl.Popup().setLngLat(event.lngLat).setText(`${props.product} · ${props.basis === "ILLUSTRATIVE" ? "Illustrative journey" : `${props.basis} journey`}`).addTo(map);
+    });
     map.once("style.load", () => {
       map.setProjection({ type: "globe" });
       showGlobe(0);
@@ -306,7 +370,7 @@ export function MapView({ data, selectedId, onSelect }: Props) {
     };
   }, []);
 
-  useEffect(() => draw(), [data, selectedId]);
+  useEffect(() => draw(), [data, selectedId, showFacilities, showMovements]);
 
   useEffect(() => {
     const map = mapRef.current;

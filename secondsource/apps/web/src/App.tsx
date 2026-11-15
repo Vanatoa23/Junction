@@ -22,6 +22,8 @@ export function App() {
   const [view, setView] = useState<View>(viewFromHash);
   const [panel, setPanel] = useState<Panel>(null);
   const [incident, setIncident] = useState<string | null>(null);
+  const [showFacilities, setShowFacilities] = useState(true);
+  const [showMovements, setShowMovements] = useState(true);
 
   useEffect(() => {
     const on = () => setView(viewFromHash());
@@ -72,7 +74,7 @@ export function App() {
             </div>
           )}
           {map ? (
-            <MapView data={map} selectedId={panel?.kind === "supplier" ? merged[panel.edgeId] ?? panel.edgeId : null} onSelect={(id) => setPanel(id ? { kind: "supplier", edgeId: id } : null)} />
+            <MapView data={map} selectedId={panel?.kind === "supplier" ? merged[panel.edgeId] ?? panel.edgeId : null} onSelect={(id) => setPanel(id ? { kind: "supplier", edgeId: id } : null)} showFacilities={showFacilities} showMovements={showMovements} />
           ) : <div className="map loading">Loading your map…</div>}
 
           {map && map.suppliers.length === 0 && (
@@ -84,7 +86,11 @@ export function App() {
           )}
           <div className="legend">
             {(["LOW", "MEDIUM", "HIGH"] as const).map((l) => <span key={l}><i style={{ background: RISK_COLOR[l] }} /> {RISK_HELP[l]}</span>)}
-            <div className="muted small">Lines go to your direct suppliers. Their own suppliers are checked in the background and counted in the colour.</div>
+            <div className="muted small">Solid lines show supplier risk. Dotted lines show illustrative product journeys, not tracked shipments. Their own suppliers are checked in the background.</div>
+          </div>
+          <div className="maplayers" aria-label="Map layers">
+            <label><input type="checkbox" checked={showFacilities} onChange={(e) => setShowFacilities(e.target.checked)} /> Ports and logistics sites</label>
+            <label><input type="checkbox" checked={showMovements} onChange={(e) => setShowMovements(e.target.checked)} /> Illustrative journeys</label>
           </div>
           <TestControl />
           {panelNode}

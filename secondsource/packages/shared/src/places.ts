@@ -88,6 +88,15 @@ export const PORTS: Record<string, { name: string } & LatLng> = {
   FIHAM: { name: "Hamina-Kotka", lat: 60.5, lng: 27.0 }, SEGOT: { name: "Gothenburg", lat: 57.69, lng: 11.9 }, DKCPH: { name: "Copenhagen", lat: 55.7, lng: 12.6 },
   DKAAR: { name: "Aarhus", lat: 56.15, lng: 10.22 }, PLGDN: { name: "Gdansk", lat: 54.4, lng: 18.67 }, EETLL: { name: "Tallinn", lat: 59.45, lng: 24.77 },
   LVRIX: { name: "Riga", lat: 57.0, lng: 24.07 }, DEDUI: { name: "Duisburg", lat: 51.45, lng: 6.74 }, BEZEE: { name: "Zeebrugge", lat: 51.33, lng: 3.2 },
+  LTKLJ: { name: "Klaipeda", lat: 55.7, lng: 21.13 }, FRLEH: { name: "Le Havre", lat: 49.5, lng: 0.1 }, GBFXT: { name: "Felixstowe", lat: 51.95, lng: 1.32 },
+  ESVLC: { name: "Valencia", lat: 39.45, lng: -0.32 }, ITGOA: { name: "Genoa", lat: 44.41, lng: 8.92 }, NOOSL: { name: "Oslo", lat: 59.91, lng: 10.75 },
+  IEDUB: { name: "Dublin", lat: 53.35, lng: -6.2 }, PTSIE: { name: "Sines", lat: 37.95, lng: -8.86 }, GRPIR: { name: "Piraeus", lat: 37.94, lng: 23.64 },
+  TRMER: { name: "Mersin", lat: 36.8, lng: 34.65 }, ROCND: { name: "Constanta", lat: 44.17, lng: 28.65 }, SIKOP: { name: "Koper", lat: 45.55, lng: 13.73 },
+  HRRJK: { name: "Rijeka", lat: 45.32, lng: 14.45 }, CNSHA: { name: "Shanghai", lat: 31.23, lng: 121.5 }, CNNGB: { name: "Ningbo", lat: 29.87, lng: 121.55 },
+  SGSIN: { name: "Singapore", lat: 1.28, lng: 103.85 }, KRPUS: { name: "Busan", lat: 35.1, lng: 129.04 }, JPYOK: { name: "Yokohama", lat: 35.45, lng: 139.64 },
+  INNSA: { name: "Nhava Sheva", lat: 18.95, lng: 72.95 }, AEJEA: { name: "Jebel Ali", lat: 24.99, lng: 55.06 }, USLAX: { name: "Los Angeles", lat: 33.74, lng: -118.26 },
+  USNYC: { name: "New York", lat: 40.67, lng: -74.05 }, CAVAN: { name: "Vancouver", lat: 49.29, lng: -123.1 }, BRSSZ: { name: "Santos", lat: -23.95, lng: -46.33 },
+  ZADUR: { name: "Durban", lat: -29.88, lng: 31.04 }, AUMEL: { name: "Melbourne", lat: -37.82, lng: 144.92 },
 };
 
 export const REGION_NAMES: Record<string, string> = {

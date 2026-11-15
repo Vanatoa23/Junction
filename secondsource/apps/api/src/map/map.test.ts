@@ -85,6 +85,10 @@ describe("GET /map data (integration)", () => {
     expect(seeded.length).toBeGreaterThanOrEqual(10);
     expect(m.suppliers.every((s) => s.risk.level !== "HIGH")).toBe(true);
     expect(JSON.stringify(m)).not.toMatch(/Rhenish Pulp|Delta Polymers|Kymi Board/); // deeper tiers never leave the backend
+    expect(m.facilities.filter((f) => f.kind === "PORT")).toHaveLength(35);
+    expect(m.facilities.filter((f) => f.kind === "LOGISTICS")).toHaveLength(3);
+    expect(m.movements).toHaveLength(3);
+    expect(m.movements.every((route) => route.basis === "ILLUSTRATIVE")).toBe(true);
   });
 
   it("after the Rotterdam strike: direct suppliers high, suppliers exposed only through deeper tiers medium", async () => {

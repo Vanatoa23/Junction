@@ -197,6 +197,39 @@ export const MapIncident = z.object({
 });
 export type MapIncident = z.infer<typeof MapIncident>;
 
+/** Reference points are independent of supplier risk and can be reused by many journeys. */
+export const MapFacility = z.object({
+  id: z.string(), // UN/LOCODE for ports; stable slug for logistics sites
+  kind: z.enum(["PORT", "LOGISTICS"]),
+  name: z.string(),
+  country: z.string().length(2),
+  lat: z.number().min(-90).max(90),
+  lng: z.number().min(-180).max(180),
+  positionPrecision: z.literal("APPROXIMATE"),
+  sourceUrl: z.string().url(),
+});
+export type MapFacility = z.infer<typeof MapFacility>;
+
+export const MapMovementStep = z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("HUB") }),
+  z.object({ kind: z.literal("SUPPLIER"), edgeId: z.string().uuid() }),
+  z.object({ kind: z.literal("FACILITY"), facilityId: z.string() }),
+]);
+export type MapMovementStep = z.infer<typeof MapMovementStep>;
+
+/** Ordered stops in a product journey. No actual shipment is implied by an illustrative route. */
+export const MapMovement = z.object({
+  id: z.string(),
+  product: z.string(),
+  basis: z.enum(["ILLUSTRATIVE", "REPORTED", "VERIFIED"]),
+  steps: z.array(MapMovementStep).min(2),
+  sourceUrl: z.string().url().nullable(),
+}).refine((movement) => movement.basis === "ILLUSTRATIVE" || movement.sourceUrl !== null, {
+  message: "Reported or verified movements require a source URL",
+  path: ["sourceUrl"],
+});
+export type MapMovement = z.infer<typeof MapMovement>;
+
 /** GET /map */
 export const MapResponse = z.object({
   hub: z.object({ name: z.string(), city: z.string().nullable(), country: z.string().nullable(), lat: z.number().nullable(), lng: z.number().nullable() }),
@@ -208,6 +241,8 @@ export const MapResponse = z.object({
   demo: z.object({ noticeText: z.string(), noticeLabel: z.string() }),
   /** "fictional" (built-in seed) or "cala" (real public data pack). */
   scenario: z.string(),
+  facilities: z.array(MapFacility),
+  movements: z.array(MapMovement),
 });
 export type MapResponse = z.infer<typeof MapResponse>;
 

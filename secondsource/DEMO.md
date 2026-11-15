@@ -14,7 +14,7 @@ Open http://localhost:5173. For a clean state run `pnpm db:reset` first (it work
 ## Stage flow
 | Time | Action | Say |
 |---|---|---|
-| 0:00 | **Map** screen. Point at the hub and the 10 dots. Zoom out with the minus button: suppliers merge into country bubbles. Zoom in on Germany: names and cities appear. | "This is who we buy from. Your company in the middle, one line to each direct supplier. Zoom out for the world, in for a city." |
+| 0:00 | **Map** screen. Point at the hub, supplier dots, small port and logistics pins, and dotted example journeys. Zoom out with the minus button: suppliers merge into country bubbles. Zoom in on Germany: names and cities appear. | "Solid lines show who we buy from and their risk. Dotted lines are illustrative product journeys through real locations, not tracked shipments." |
 | 0:30 | Click **Rhine Foils** (green, "Low risk", score 22). Read the reason: "Most of its own suppliers (2 of 2) ship through Port of Rotterdam." | "We do not draw the suppliers' suppliers, but we look at them in the background. Rhine Foils is fine today, but everything behind it goes through one port. Remember that." |
 | 0:55 | Click **+ Add supplier**, type `Savonia Dairy Cartons`, tap **+ City** and **+ What they supply** (optional), **Add supplier**. A new dot appears. | "Only the name is needed. We look up the rest and tell you what we found and what we could not." |
 | 1:25 | Click **Test a disruption** (small grey link under the map), **Publish notice**. Within about 10 seconds the headline appears: "Strike at Port of Rotterdam. 3 of your suppliers are affected." Red area over Rotterdam, three red lines and dots (the lines and dots take the supplier's colour), the two early-warning suppliers turn yellow. | "A strike is announced at the Port of Rotterdam. It is a demo page, clearly marked TEST. We noticed within seconds." |
@@ -32,6 +32,6 @@ pnpm e2e    # needs pnpm dev running: add suppliers, publish notice, alert, repl
 
 ## What is real and what is not (say this if asked)
 - Aim: pre-scraped company data and a growing connection graph, fed by Exa, Cala and Context.dev (see `VISION.md`). The demo uses fictional stand-in data for that.
-- Real: the pipeline (watching the notice page, reading it, checking the quote against the page text, matching suppliers, scoring risk, running the checks, approval record, the map).
-- Not live: company facts, supplier locations, supplier-of-supplier data and the replacement pool are fictional demo data; the notice classifier is a simple rule-based reader, not an AI model. Connecting real company data and a real language model is a matter of adding keys (see README); that code exists but has not been run against the real services.
+- Real: the pipeline (watching the notice page, reading it, checking the quote against the page text, matching suppliers, scoring risk, running the checks, approval record, the map). The reference ports and logistics areas are real places with approximate map pins.
+- Not live: company facts, supplier locations, supplier-of-supplier data, product journeys and the replacement pool are fictional demo data; the notice classifier is a simple rule-based reader, not an AI model. Connecting real company data and a real language model is a matter of adding keys (see README); that code exists but has not been run against the real services.
 - Not built: live news re-check, a second customer account, an accuracy dashboard.
