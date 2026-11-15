@@ -5,12 +5,13 @@ import { companyFootprint, loadSuppliers } from "../db/mappers";
 import { pool } from "../db/pool";
 import { loadAlerts, loadIncidents } from "../engine/mappers";
 import type { ModuleDef } from "../module";
+import { availableMovements, demoFacilities } from "./catalog";
 import { scoreSupplier, type DeeperNode } from "./risk";
 import { dependencyEvidence, loadDependencies } from "./dependencies";
 
 /**
  * OWNER: Foundation / integrator. Read-only view for the web app's map and dashboard.
- *  GET /map      hub + DIRECT suppliers (position, plain-language risk with reasons, latest alert) + open incidents
+ *  GET /map      hub + DIRECT suppliers + open incidents + reference facilities and illustrative movements
  *  PUT /profile  our own company name and city (the hub on the map)
  *  PUT /suppliers/:edgeId/details  add or change the optional facts about a supplier (null/empty clears one)
  * Seeded deeper tiers feed risk. Matching buyer-confirmed paths explain exposure on the supplier card.
@@ -136,9 +137,12 @@ export async function buildMap(clientId: string): Promise<MapResponse> {
   }
 
   const hub = client ?? { name: "Your company", city: null, country: null, lat: null, lng: null };
+  const placedSupplierIds = new Set(out.filter((s) => s.lat != null && s.lng != null).map((s) => s.edgeId));
   return {
     hub: { name: hub.name, city: hub.city, country: hub.country?.trim() || null, lat: hub.lat, lng: hub.lng },
     suppliers: out, incidents: mapIncidents, ports,
+    facilities: demoFacilities,
+    movements: availableMovements(placedSupplierIds, hub.lat != null && hub.lng != null),
     demo: { noticeText: client?.demo_notice ?? DEMO_NOTICE_FICTIONAL, noticeLabel: client?.demo_label ?? "Strike at the Port of Rotterdam" },
     scenario: client?.scenario ?? "fictional",
   };

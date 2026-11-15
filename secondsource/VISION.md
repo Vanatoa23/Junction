@@ -8,7 +8,7 @@ Written from Markus's own description (2026-11-14). Where something is our readi
 One sentence: *"SecondSource watches your suppliers, and their suppliers, so you hear about a problem before it reaches your deliveries."*
 
 ## What the user sees
-- Their own **direct suppliers only**, on a zoomable map, with lines from their company.
+- Their own **direct supplier companies only**, on a zoomable map, with risk lines from their company. Reference ports and logistics areas may also be shown as locations, with explicitly illustrative product journeys.
 - One risk colour per supplier, the same on the dot and the line:
   - **Green**: no sign of trouble.
   - **Yellow**: **early warning**. Something is building up; keep an eye on it.
@@ -41,7 +41,7 @@ Privacy follows from this shape: public facts and the shared graph are shared; a
 |---|---|
 | Live monitoring | A real poll of a notice page we host (clearly a demo), classified, matched to suppliers, scored, alerted in seconds |
 | Risk colours (yellow = early warning, red = attention now) | Implemented: score under 30 green, 30 to 59 yellow, 60 and up red; same colour on dots and lines; small legend on the map |
-| Deeper tiers feed the score | Implemented on fictional seeded tiers 2 and 3 (18 companies); never drawn |
+| Deeper tiers feed the score | Implemented on fictional seeded tiers 2 and 3 (18 companies); those companies are never drawn. Reference ports and logistics areas are separate map points. |
 | Exa + Cala + Context.dev | Adapters exist for each (one env var turns each on); **unverified**, never run against the real services; the demo runs on fictional seed data |
 | Pre-scraped global database and inferred graph | **Not built.** The seeded candidate pool and seeded tiers are a tiny stand-in |
 | Network grows as users add suppliers | **Not built.** Adding a supplier resolves it and gives it a footprint; it does not yet add links to a shared graph |
