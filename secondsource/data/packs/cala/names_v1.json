@@ -1,0 +1,3158 @@
+{
+  "Company-006d7d3b4fd369": {
+    "name": "LEUKOS SARL",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500Q1Z3Y1MT3WBY96"
+  },
+  "Company-0086ca9a97250d": {
+    "name": "EVONIK OXENO ANTWERPEN NV",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900IWK9ICB8WXKW34"
+  },
+  "Company-00a82de3765ed6": {
+    "name": "VÍTKOVICE HEAVY MACHINERY a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000001356"
+  },
+  "Company-00c2a5160ee4f5": {
+    "name": "TEXAS INSTRUMENTS INCORPORATED",
+    "source_url": "https://api.gleif.org/api/v1/lei/WDJNR2L6D8RWOEB8T652"
+  },
+  "Company-00f7de0592c9d4": {
+    "name": "MANKIND PHARMA LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/33580067G8AZ7S8NYA02"
+  },
+  "Company-02e0c9d3c00d75": {
+    "name": "Symrise AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900D82I6R9601CF26"
+  },
+  "Company-02e7c9eeb6c4fa": {
+    "name": "LEM HOLDING SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5067008AF2B2C5O7TJ43"
+  },
+  "Company-02fb6cc8787172": {
+    "name": "DANONE",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500KMUQ2B6CBAF162"
+  },
+  "Company-0347d2d19f37e8": {
+    "name": "EXOSENS",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500R3AKTPEDO9EG76"
+  },
+  "Company-036b467e86f5b9": {
+    "name": "STALPRODUKT SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400G3VZSFRY2L7050"
+  },
+  "Company-03b5c1d9d5dd18": {
+    "name": "HINOJOSA PACKAGING FRANCE",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695001EM97WNF4NNG50"
+  },
+  "Company-04a0a4cb1f95a9": {
+    "name": "DIVI'S LABORATORIES LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800C1DHFG1C9T1M03"
+  },
+  "Company-0520fa6f5c7574": {
+    "name": "Gebr. Knauf KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900S5ASCVJ2FE1R29"
+  },
+  "Company-055435cb7ee062": {
+    "name": "BRIDGESTONE CORPORATION",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300DHPOF90OYYD780"
+  },
+  "Company-063809c3045330": {
+    "name": "PENTİ GİYİM TİCARET ANONİM ŞİRKETİ",
+    "source_url": "https://api.gleif.org/api/v1/lei/789000DTF5SGL3WFXP75"
+  },
+  "Company-07b780075ef626": {
+    "name": "SiCrystal GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/391200SDDR3ICZAMG712"
+  },
+  "Company-0864a00ec58817": {
+    "name": "FERRING INTERNATIONAL CENTER SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493007B5MM5NYBK2C93"
+  },
+  "Company-089423215376dc": {
+    "name": "Carl Turck GmbH & Co. KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/391200NZWK1KE6S02509"
+  },
+  "Company-08b72fe462b0b1": {
+    "name": "LORO PIANA S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600BDA624CF627833"
+  },
+  "Company-096ada62f325cd": {
+    "name": "GLENMARK PHARMACEUTICALS LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800WKECZXIIT9GK20"
+  },
+  "Company-09b0f8c159cac9": {
+    "name": "K. A. Schmersal GmbH & Co. KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990007X8NVDTGDKD32"
+  },
+  "Company-09d0cfd074bb75": {
+    "name": "Villares Metals S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299003XG8Q1ZPLOGP18"
+  },
+  "Company-0ad081759c6345": {
+    "name": "KNAPP AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900BJ826IHIJ3R755"
+  },
+  "Company-0b0cdf92f38d57": {
+    "name": "Wacker Neuson Linz GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900KIZ0UON7VDIK54"
+  },
+  "Company-0ba68854765000": {
+    "name": "ASTRAZENECA PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/PY6ZZQWO2IZFZC3IOL08"
+  },
+  "Company-0ba7c5ee36bbf3": {
+    "name": "DELTA ELECTRONICS INT'L (SINGAPORE) PTE. LTD.",
+    "source_url": "https://api.gleif.org/api/v1/lei/984500E11FE8B66AAF43"
+  },
+  "Company-0bf407f0985f92": {
+    "name": "Epiroc Aktiebolag",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493004Q73OEYW1SPE91"
+  },
+  "Company-0c8e16b5af96ab": {
+    "name": "Indutrade Aktiebolag",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300FISLQ6CEFP1867"
+  },
+  "Company-0ccf5d6c0142a4": {
+    "name": "FICOSA INTERNATIONAL S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/95980020140005448764"
+  },
+  "Company-0dffc22af44ad3": {
+    "name": "Solteq Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700HXWTM31ZHBXW13"
+  },
+  "Company-0e101f1d959c97": {
+    "name": "ACCUMETAL MANUFACTURING INC.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493001I3CJGIEZLBT95"
+  },
+  "Company-0e58d2d3d141a3": {
+    "name": "Den Hartogh Holding B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/7245003WIYCKD9F99R04"
+  },
+  "Company-0e684a2a458573": {
+    "name": "BONDUELLE",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500QVHHN3NNVYRE94"
+  },
+  "Company-0ea98e997d005e": {
+    "name": "HEMA B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500Y2C2W9YWLRDC69"
+  },
+  "Company-0ebdbb0dab7100": {
+    "name": "Koch Pac-Systeme GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299007CJOUOOE2UFU31"
+  },
+  "Company-0f596be4bc33a3": {
+    "name": "GLAND PHARMA LTD",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800JJVDY5R6KF5K34"
+  },
+  "Company-0f70024d4100e7": {
+    "name": "MONCLER S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600EBD7FB00525B20"
+  },
+  "Company-10bb462ff0e707": {
+    "name": "ELEMASTER S.P.A. TECNOLOGIE ELETTRONICHE",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600C95A4921230504"
+  },
+  "Company-112e5eee6ab1b7": {
+    "name": "TOS VARNSDORF a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000097095"
+  },
+  "Company-11436ee349ae4b": {
+    "name": "FENDI - SOCIETA' A RESPONSABILITA' LIMITATA CHE POTRA' ESSERE ABBREVIATA IN FENDI S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900BTE39QE2QI8V73"
+  },
+  "Company-11460ff359abe1": {
+    "name": "LIEBHERR-WERK BISCHOFSHOFEN GMBH",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990001NDMT99FPVL67"
+  },
+  "Company-1249e6aa95a946": {
+    "name": "Continental Automotive Products SRL",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900MOJ3HFNIYLAN75"
+  },
+  "Company-12744d3f2eff92": {
+    "name": "FORD OTOSAN ROMANIA S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300115TJK3VX2EW32"
+  },
+  "Company-133460757f54e2": {
+    "name": "MINERACAO USIMINAS S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/984500DFE61DC4S45137"
+  },
+  "Company-13e0d611cfbf76": {
+    "name": "Gutor Electronic GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300NUQFRYG1EWVZ88"
+  },
+  "Company-14602c36da6c1e": {
+    "name": "Niam VII Finland Logistics 1 Oy",
+    "source_url": "https://api.gleif.org/api/v1/lei/8945001ZLLZRT2WRRH22"
+  },
+  "Company-1482c5f6921be4": {
+    "name": "INDIE SEMICONDUCTOR, INC.",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900L1MFXFYGB1PV53"
+  },
+  "Company-14860c45f02261": {
+    "name": "OMER - DECUGIS & CIE",
+    "source_url": "https://api.gleif.org/api/v1/lei/96950099K67303OLR406"
+  },
+  "Company-14a20730a12d63": {
+    "name": "PONTEGADEA UK LTD",
+    "source_url": "https://api.gleif.org/api/v1/lei/95980020140005733847"
+  },
+  "Company-150ca5fd3e1a27": {
+    "name": "ADIENT SOUTH AFRICA",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138004QQAQT6S9KOB30"
+  },
+  "Company-159e139832e3b6": {
+    "name": "ROQUETTE FRERES",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500FO141C5967KC72"
+  },
+  "Company-15f523c0d22513": {
+    "name": "CIDAN Machinery Sweden AB",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299009HK73KL69KA425"
+  },
+  "Company-16269877499273": {
+    "name": "BREMNES SEASHORE AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300QQS70XE0YWGY03"
+  },
+  "Company-165aa135e8e120": {
+    "name": "MASERATI S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300SS011RI430KA43"
+  },
+  "Company-169b636a26524c": {
+    "name": "GRUPA KĘTY SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/2594007JKYYF3WGI0129"
+  },
+  "Company-169f99a170f1ab": {
+    "name": "HESTEGO a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000016779"
+  },
+  "Company-1756c086a5adc0": {
+    "name": "GROUPE SODIAAL",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300HXJ1AT1KPDWE81"
+  },
+  "Company-179d4fa43bae20": {
+    "name": "NOVA SEA AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/636700G5SH7E7H08MZ73"
+  },
+  "Company-185e56109201ed": {
+    "name": "DEFACTO PERAKENDE TİCARET ANONİM ŞİRKETİ",
+    "source_url": "https://api.gleif.org/api/v1/lei/789000BXRA5X9NB48R62"
+  },
+  "Company-188056f83da3d0": {
+    "name": "GEOPOST",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500BRDRBPU2R89V61"
+  },
+  "Company-18a6712ac82545": {
+    "name": "NKT A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900197LKWCEQ0NL18"
+  },
+  "Company-18c8b381ee4e4c": {
+    "name": "SYNGENTA CHEMICALS B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300XKCX4Q4V4G4C36"
+  },
+  "Company-192d5ee183ceea": {
+    "name": "Jazz Pharmaceuticals Public Limited Company",
+    "source_url": "https://api.gleif.org/api/v1/lei/635400GAUMJCLEZRRV50"
+  },
+  "Company-192f1049d5a380": {
+    "name": "WINTERSTEIGER Holding AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900BQHPM7JJTPQO50"
+  },
+  "Company-193049bfc25f6f": {
+    "name": "CSN MINERACAO S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/984500897TB590SBEF81"
+  },
+  "Company-19d7852af30b9f": {
+    "name": "CELSA \"HUTA OSTROWIEC\" SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+    "source_url": "https://api.gleif.org/api/v1/lei/2594001K3X7LF90SW648"
+  },
+  "Company-1a0ff55b5df92c": {
+    "name": "INDUSTRIAS DOLZ SOCIEDAD ANONIMA",
+    "source_url": "https://api.gleif.org/api/v1/lei/95980020140006006902"
+  },
+  "Company-1a4c7dab887aed": {
+    "name": "EBV ELEKTRONIK GMBH",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800DI3RZCUH7YUN32"
+  },
+  "Company-1ba53ea82b703d": {
+    "name": "NORTURA SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5967007LIEEXZXJH7C64"
+  },
+  "Company-1bc26ab299be24": {
+    "name": "ORKLA ASA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300PZS8G8RG6RVZ52"
+  },
+  "Company-1c7da15f6a4fec": {
+    "name": "EMERSON ELECTRIC CO.",
+    "source_url": "https://api.gleif.org/api/v1/lei/FGLT0EWZSUIRRITFOA30"
+  },
+  "Company-1cb54a22d7f419": {
+    "name": "GLAXOSMITHKLINE PHARMACEUTICALS LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/3358002TNSC1U2DWNY52"
+  },
+  "Company-1cc95f01b9642a": {
+    "name": "MODULIGHT OYJ",
+    "source_url": "https://api.gleif.org/api/v1/lei/894500VG5SWCZEVHPV11"
+  },
+  "Company-1ccf37a82595da": {
+    "name": "INNIO Jenbacher GmbH & Co OG",
+    "source_url": "https://api.gleif.org/api/v1/lei/ZYD50HD5BLUKX115L075"
+  },
+  "Company-1cfa3119ca9035": {
+    "name": "STMICROELECTRONICS N.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800Z8NOHIKRI42W10"
+  },
+  "Company-1d1bea75e96201": {
+    "name": "Salcomp Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/7437009JKC05O9X6SR12"
+  },
+  "Company-1d42f49bfa6f20": {
+    "name": "LUMIBIRD",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500MLJC3ZSZP4L019"
+  },
+  "Company-1d93b25f0f619f": {
+    "name": "VESTAS WIND SYSTEMS A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300DYMC8BGZZC8844"
+  },
+  "Company-1dc783a1c4c6e9": {
+    "name": "BACHEM HOLDING AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/506700S81111XI7TG884"
+  },
+  "Company-1dfec782dca563": {
+    "name": "BAHIA STEEL",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695008PVUMOCEBEP085"
+  },
+  "Company-1e2c9c22d672bd": {
+    "name": "HMD",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500X4Q98V6LVBHE23"
+  },
+  "Company-1e57ab7d73c30e": {
+    "name": "Teleste Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700CJRQRU0007GN59"
+  },
+  "Company-1f30508b974f6a": {
+    "name": "\"STALPROFIL\" SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/2594001SXSZ4ZPO6I014"
+  },
+  "Company-1fb8b627b0521d": {
+    "name": "BOLLORÉ LOGISTICS BELGIUM",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493003M7LLFQRKQFR83"
+  },
+  "Company-20202ff6fb2907": {
+    "name": "Munters Group AB",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300KYCB37YAVUV523"
+  },
+  "Company-2092bf18e733a3": {
+    "name": "BASF Antwerpen",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900ZOZKTORO2SY444"
+  },
+  "Company-2107e3937a40f8": {
+    "name": "ŠKODA SLOVAKIA, a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/097900BGHZ0000050442"
+  },
+  "Company-217eb50072231d": {
+    "name": "GEODIS",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500U66QCQ1YD35O02"
+  },
+  "Company-222880707cb007": {
+    "name": "PostNL N.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500Q41FHN0P1GPC53"
+  },
+  "Company-2323f0f2e7b652": {
+    "name": "KOVOSVIT MAS Machine Tools, a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/315700CS1FLU5AVN6T69"
+  },
+  "Company-233f486a985c0c": {
+    "name": "SPÓŁKA AKCYJNA ODLEWNIE POLSKIE",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400IK3GKB31IGV561"
+  },
+  "Company-2347a15523f2f7": {
+    "name": "Samarco Mineração S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900U8HKV15GJC4O60"
+  },
+  "Company-23e3d769b079e2": {
+    "name": "BAMA GRUPPEN AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300JVYK9QD1URTE24"
+  },
+  "Company-240cca3baedb56": {
+    "name": "Koninklijke Vopak N.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500UL634GFV1KYF10"
+  },
+  "Company-25f849a0513a80": {
+    "name": "Andritz AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300VZKC61IR5U8G96"
+  },
+  "Company-26ca276cd3d3e1": {
+    "name": "Mercedes-Benz AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299000W0HB7SX4P4882"
+  },
+  "Company-27da5068663b65": {
+    "name": "Tyco Electronics Singapore Pte Ltd",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300UTUQHLMFZ0BD66"
+  },
+  "Company-2a034d150c4b58": {
+    "name": "LANSON-BCC",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695002M26EY0PEN7S80"
+  },
+  "Company-2a2dfc319323f0": {
+    "name": "GENERAL LOGISTICS SYSTEMS BELGIUM",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900YQIRVAI9B8P280"
+  },
+  "Company-2a4ffc6aa16fa9": {
+    "name": "TS Plzeň a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000119405"
+  },
+  "Company-2a710c524254e0": {
+    "name": "FORD-WERKE GMBH",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300HWVO0FB3HTXX50"
+  },
+  "Company-2c127be88fabc8": {
+    "name": "Delta Electronics (Netherlands) B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500M99UE75CAI2R95"
+  },
+  "Company-2c5c63477f6675": {
+    "name": "BRIGHT FOOD GROUP SPAIN SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/959800L207VHM5ZDQ855"
+  },
+  "Company-2c7d95ac190378": {
+    "name": "ASHLAND SPECIALTIES BELGIUM BVBA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493002PLSXRJV12X622"
+  },
+  "Company-2ca2879282a45b": {
+    "name": "PÖTTINGER LANDTECHNIK GMBH",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300T4DKTF4TPRIK64"
+  },
+  "Company-2cdf1edd0bc780": {
+    "name": "Boreo Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700OD4QRWKZ4ODC98"
+  },
+  "Company-2d1aa41562e99e": {
+    "name": "SINGAPORE TECHNOLOGIES ELECTRONICS LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900V0VNEZ44O7PH97"
+  },
+  "Company-2e3f4af238b623": {
+    "name": "CALZEDONIA FINANZIARIA S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990082TJHDQ858D387"
+  },
+  "Company-2eb416d7e8c2cf": {
+    "name": "Duisburger Hafen Aktiengesellschaft",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900NVCL7BYH1DBZ59"
+  },
+  "Company-2f5da11e7a1def": {
+    "name": "Ensto Invest Oy",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700RMIUTIFY09UN91"
+  },
+  "Company-2f874ad923745d": {
+    "name": "DP World Logistics Europe B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/9845003E92DA60F66C27"
+  },
+  "Company-300a35957dd595": {
+    "name": "Komptech GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900VO3AZU1EGOXH90"
+  },
+  "Company-301a7a2f08949c": {
+    "name": "Schur Flexibles GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900V9PPNU0K6W7871"
+  },
+  "Company-30b215459b8d76": {
+    "name": "EREMA Engineering Recycling Maschinen und Anlagen Gesellschaft m.b.H.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299001AECJHG62RWQ75"
+  },
+  "Company-31629ff48d7e29": {
+    "name": "FIAT S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493004C1SL445NFDR90"
+  },
+  "Company-316e4976c51b68": {
+    "name": "Siegwerk Druckfarben AG & Co. KGaA",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900EPEK9U3XVP2671"
+  },
+  "Company-318ec700a34e9a": {
+    "name": "COGNOR HOLDING SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/2594005SR5W00MCTG921"
+  },
+  "Company-3192991389d8b6": {
+    "name": "ZVVZ MACHINERY, a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000037343"
+  },
+  "Company-346e5e601c97b7": {
+    "name": "SEG Automotive Spain SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990089VK38T9KVWC18"
+  },
+  "Company-34826947f360d0": {
+    "name": "K+S Aktiengesellschaft",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900YURAYD4IJX2J91"
+  },
+  "Company-34f00d92e90295": {
+    "name": "Neuschäfer Elektronik GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299006P6E0LN85T0E85"
+  },
+  "Company-35aa8b3f4948d9": {
+    "name": "URSA Manufacturing ULC",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900GLUIGXRSKZT610"
+  },
+  "Company-377679cbc53419": {
+    "name": "HENNIG-OLSEN IS AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900U2H94JLOYBZG74"
+  },
+  "Company-37b881224e2b49": {
+    "name": "DOLCE & GABBANA S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600C11A6B69A59F45"
+  },
+  "Company-37baf854738a92": {
+    "name": "ZANINI AUTO GRUP S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/959800CR6W16ZU71E921"
+  },
+  "Company-37c9c063aca1d7": {
+    "name": "Detection Technology Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700IXKYKNXJ6BFL39"
+  },
+  "Company-38c381a74b7601": {
+    "name": "Schaeffler Romania S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900C9RL4UFVYEW332"
+  },
+  "Company-3925d1516c7c3a": {
+    "name": "Pankl Automotive Slovakia s.r.o.",
+    "source_url": "https://api.gleif.org/api/v1/lei/097900CAKA0000213472"
+  },
+  "Company-39c61fe5cf553f": {
+    "name": "YUSEN LOGISTICS (FRANCE)",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695009SFSNK7RQHPH77"
+  },
+  "Company-3a65708fd20ca2": {
+    "name": "CARLSBERG BREWERIES A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493008YL42784DMWN61"
+  },
+  "Company-3a7bd3e2360a3d": {
+    "name": "Apple Inc.",
+    "source_url": "https://api.gleif.org/api/v1/lei/HWUPKR0MPOU8FGXBT394"
+  },
+  "Company-3a9aec62b66a54": {
+    "name": "Braun Maschinenfabrik GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299005B5FHM0SRDYG77"
+  },
+  "Company-3aa18045b244bd": {
+    "name": "PRADA S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/8156000FE0A2DC5B7852"
+  },
+  "Company-3ae3b4ea4bf336": {
+    "name": "Gerdau S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900YDV6SEQQPZVG24"
+  },
+  "Company-3b04837881bb07": {
+    "name": "SICK AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900WUW2F9GQU7NB98"
+  },
+  "Company-3b82b4505aba4c": {
+    "name": "SAMSUNG ELECTRONICS EUROPE LOGISTICS B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300TR42D0H3OOUR55"
+  },
+  "Company-3c86db03fdf309": {
+    "name": "Dachser Netherlands Air & Sea Logistics B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500UDPK84X86IGZ42"
+  },
+  "Company-3c95c3e011f1c7": {
+    "name": "GIANNI VERSACE S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600B71B502C1D2488"
+  },
+  "Company-3cc327a9a71eef": {
+    "name": "JASTRZĘBSKA SPÓŁKA WĘGLOWA SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400D4E0H5BGXNIK97"
+  },
+  "Company-3cde29253e17ac": {
+    "name": "Glaston Oyj Abp",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700V3I7CLI3DJ8L62"
+  },
+  "Company-3d13c24f48fddc": {
+    "name": "LINHARDT Viechtach GmbH & Co. KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900ZRWY62UWRUET47"
+  },
+  "Company-3d1b7fb2eec335": {
+    "name": "Sensirion Holding AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/894500ANJ9YNE8YCTT04"
+  },
+  "Company-3dba2d2e96e3a3": {
+    "name": "THALES",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900FNDVTQJOVVPZ19"
+  },
+  "Company-3dd182b7fdf795": {
+    "name": "VIIV HEALTHCARE LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800PCGWGORUQKMI06"
+  },
+  "Company-3e295e17e65f12": {
+    "name": "Gerresheimer AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299006GD4UWSYZOKC28"
+  },
+  "Company-3e676106605078": {
+    "name": "GRIEG SEAFOOD ASA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5967007LIEEXZXH5VC37"
+  },
+  "Company-402c8a6d5fdbba": {
+    "name": "Nabaltec AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900PV3Y1FXFBWXO56"
+  },
+  "Company-4060190dadd74f": {
+    "name": "Lindab International AB",
+    "source_url": "https://api.gleif.org/api/v1/lei/54930085MH6IRQ1JP227"
+  },
+  "Company-40fc6718a81fe7": {
+    "name": "SUBARU CORPORATION",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300N244BVAEE6HH86"
+  },
+  "Company-414f1086ab1990": {
+    "name": "Basilea Pharmaceutica AG, Allschwil",
+    "source_url": "https://api.gleif.org/api/v1/lei/391200TTZP8EIPSJ5J20"
+  },
+  "Company-41b9d12c7eb6d3": {
+    "name": "FERMAT CZ s.r.o.",
+    "source_url": "https://api.gleif.org/api/v1/lei/3157006N1IR4K3ZD5F24"
+  },
+  "Company-4243a0533b9d0c": {
+    "name": "microsonic GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/391200UEOQABDNBFDJ71"
+  },
+  "Company-4278155f2fcdc8": {
+    "name": "ENGEL AUSTRIA GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900AX23U7610M0T80"
+  },
+  "Company-42a99297350785": {
+    "name": "Evonik Antwerpen",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900T3V512W5JEJF78"
+  },
+  "Company-42f7261c7dce15": {
+    "name": "BIOCON LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800NK3L7QCHLOC198"
+  },
+  "Company-431934d435dcf4": {
+    "name": "LAURUS LABS LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800S8HO8QRYP3VQ26"
+  },
+  "Company-43272f1b96cef3": {
+    "name": "ATLANTIC NICKEL MINERAÇÃO LTDA",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138009O8RU6GRODXV93"
+  },
+  "Company-434ab6a93d5831": {
+    "name": "Casimir Kast Verpackung und Display GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/9845000A97801CZBS058"
+  },
+  "Company-438f0584a28fed": {
+    "name": "Röhm GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900WMWXPLQ616YI58"
+  },
+  "Company-43b0cd3ed89c62": {
+    "name": "GUCCIO GUCCI S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493005M8G26W9LE2608"
+  },
+  "Company-446b16fa9a8591": {
+    "name": "CIPLA LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800KMJJYEDDK82Q34"
+  },
+  "Company-452de3e48d5e8b": {
+    "name": "Roche Holding AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300U41AUUVOAAOB37"
+  },
+  "Company-458cc5fb804561": {
+    "name": "Elecster Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700PEMBIJ4GPCYX48"
+  },
+  "Company-45a3af60d88764": {
+    "name": "SYENSQO",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300060XNJ90PLNS10"
+  },
+  "Company-46363315f53950": {
+    "name": "KIMBALL ELECTRONICS, INC.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300COBYN2GZCBIU87"
+  },
+  "Company-474ea94c0657dd": {
+    "name": "ALLIANCE PHARMA PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800RYIWZA4Q5WPZ13"
+  },
+  "Company-47688a35172d7d": {
+    "name": "VYNOVA INTERNATIONAL",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300LRUTJAM5IMFI97"
+  },
+  "Company-492da4c5ee086a": {
+    "name": "CO-RO A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/894500D75W6ZZASDQK04"
+  },
+  "Company-49bdad7acd2b17": {
+    "name": "FIDELTRONIK POLAND SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+    "source_url": "https://api.gleif.org/api/v1/lei/2594003S0WHSAK5V0U31"
+  },
+  "Company-49c9984e519974": {
+    "name": "AUSTEVOLL SEAFOOD ASA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5967007LIEEXZXFFDC03"
+  },
+  "Company-4a42a9484a8cff": {
+    "name": "NORDIC SEMICONDUCTOR ASA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5967007LIEEXZXJGFK95"
+  },
+  "Company-4b88adcdafb011": {
+    "name": "OSTROJ a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/315700KR4MNM99YPF734"
+  },
+  "Company-4bf5e6d5795a72": {
+    "name": "AMCOR FLEXIBLES SINGEN GMBH",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300FIFMOF59WP7G64"
+  },
+  "Company-4ce48b57d0d358": {
+    "name": "AKEBONO BRAKE CORPORATION",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300U1SXTBNNXXUM88"
+  },
+  "Company-4d43403dca53aa": {
+    "name": "Bystronic AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900OG85OX10GRW920"
+  },
+  "Company-4e23a27ddfc7f5": {
+    "name": "BOLLORE SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500LEKCHH6VV86P94"
+  },
+  "Company-4f735cb31fc185": {
+    "name": "CARREFOUR IMPORT",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300NI4LEIS769DQ72"
+  },
+  "Company-50fb305d6cc9fd": {
+    "name": "IDIADA AUTOMOTIVE TECHNOLOGY SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/9598009TQS6Y267T2228"
+  },
+  "Company-5121839e0f4d62": {
+    "name": "DANISH AGRO A.M.B.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299004SF5LN10PLR080"
+  },
+  "Company-52e912ea1bbdfa": {
+    "name": "\"IZOSTAL\" SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400NFU8A8SBP6VC21"
+  },
+  "Company-52f390d8ced116": {
+    "name": "LC WAİKİKİ MAĞAZACILIK HİZMETLERİ TİCARET ANONİM ŞİRKETİ",
+    "source_url": "https://api.gleif.org/api/v1/lei/789000XOCKTJCVLD8Z70"
+  },
+  "Company-532f18cba2ed32": {
+    "name": "PATENTUS SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400GJ4C1P8NPG8G15"
+  },
+  "Company-533b114f916aec": {
+    "name": "MAISON POMMERY & ASSOCIES",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500M5EQJVDASURW53"
+  },
+  "Company-541eaf1047fb59": {
+    "name": "Synthomer Speciality Additives AB",
+    "source_url": "https://api.gleif.org/api/v1/lei/967600VRGKN4FMYP7144"
+  },
+  "Company-54483bb2fee772": {
+    "name": "MOJ SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400DHZZJSQ4P23715"
+  },
+  "Company-5451c91c075d38": {
+    "name": "PALSGAARD A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300U5NUB5UAWAYN63"
+  },
+  "Company-56c3cd9abae5c9": {
+    "name": "INFICON HOLDING AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/5067008UT6890I0YM937"
+  },
+  "Company-57cb4dfa326ec3": {
+    "name": "SAGE AUTOMOTIVE INTERIORS, SPAIN SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800EHJQGVPIKVYY13"
+  },
+  "Company-58032718d857e3": {
+    "name": "PRIMETECH Spółka Akcyjna w likwidacji",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400EUBZIKJFDHSZ93"
+  },
+  "Company-587ad309c5d8bf": {
+    "name": "SOLVAY CHEMICALS INTERNATIONAL",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300HNS7FMVARBWZ51"
+  },
+  "Company-58efe8bf76040e": {
+    "name": "Husqvarna AB",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300GYQIIJ3UXB7655"
+  },
+  "Company-590c3a510227d4": {
+    "name": "PIRAMAL PHARMA LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/3358006D6AL7PZ4U9T51"
+  },
+  "Company-597b4308c51628": {
+    "name": "SOVENA PORTUGAL - CONSUMER GOODS, S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300KFJPELBPMQH079"
+  },
+  "Company-59823ff9aac271": {
+    "name": "LONZA GROUP AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300EFW4H2TCZ71055"
+  },
+  "Company-5a5d4dacec8cc0": {
+    "name": "Vaisala Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700RNDD7KU11HW873"
+  },
+  "Company-5ad1715fba29a8": {
+    "name": "CHR. HANSEN HOLDING A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300MKPW8ZF3E8MW37"
+  },
+  "Company-5ba9d1fa85b1ec": {
+    "name": "Yusen Logistics (Europe) B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500M4O3WT5XNI7030"
+  },
+  "Company-5cc9b43b7a441a": {
+    "name": "First Sensor AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990036Z3X91Z60TZ27"
+  },
+  "Company-5d6b15ce60291e": {
+    "name": "\"BOWIM\" SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400FOXC7GHTOUR230"
+  },
+  "Company-5dbe9f757a1919": {
+    "name": "OTS LOGISTICS BELGIUM",
+    "source_url": "https://api.gleif.org/api/v1/lei/635400PBAWEOIKPNCF66"
+  },
+  "Company-5df29822d7bfc7": {
+    "name": "BASF SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900PM64WH8AF1E917"
+  },
+  "Company-5e2a72a7aac096": {
+    "name": "SUN PHARMACEUTICAL INDUSTRIES LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800KJ7GE29LB4SS73"
+  },
+  "Company-5e41133f00a54d": {
+    "name": "CARREFOUR",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300B8P6MUJ1YWTS08"
+  },
+  "Company-5ec0e060666c31": {
+    "name": "BRIDGESTONE EUROPE NV/SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900TGOR32R1PIAV74"
+  },
+  "Company-5f753e6977e0f1": {
+    "name": "PERNOD RICARD",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990097YFPX9J0H5D87"
+  },
+  "Company-5f9d0cfaa4ddfd": {
+    "name": "Wärtsilä Oyj Abp",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700G7A9J1PHM3X223"
+  },
+  "Company-5fa769c59df427": {
+    "name": "Nxera Pharma UK Ltd",
+    "source_url": "https://api.gleif.org/api/v1/lei/894500BZ9XDN44SZ8Y70"
+  },
+  "Company-6008dd8acae718": {
+    "name": "TAJMAC-ZPS, a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/3157003KXAH3IP4NLW58"
+  },
+  "Company-6027d51143a74a": {
+    "name": "TOSHULIN, a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000011444"
+  },
+  "Company-608f1eb4b1f914": {
+    "name": "MAVİ GİYİM SANAYİ VE TİCARET ANONİM ŞİRKETİ",
+    "source_url": "https://api.gleif.org/api/v1/lei/7890004V7753Z4N1L403"
+  },
+  "Company-6095425a907790": {
+    "name": "GRUNDFOS HOLDING A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990007PTGDTY54X103"
+  },
+  "Company-60a4d4fb671066": {
+    "name": "CISCO SYSTEMS, INC.",
+    "source_url": "https://api.gleif.org/api/v1/lei/8E6NF1YAL0WT6CWXXV93"
+  },
+  "Company-60d179e3d521e2": {
+    "name": "SCANDINAVIAN TOBACCO GROUP A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299003KG4JS99TRML67"
+  },
+  "Company-60ee7747c9fd23": {
+    "name": "COOP DANMARK A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800AWZ8U3FVALIO26"
+  },
+  "Company-6159592e45c635": {
+    "name": "SALVATORE FERRAGAMO S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493005GRP0FEE3NRI35"
+  },
+  "Company-616ee6bba840c6": {
+    "name": "METSO OYJ",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300R0VN9C371W0E07"
+  },
+  "Company-61e416c5d86114": {
+    "name": "ROCKWOOL A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800QRC7LNX935OZ09"
+  },
+  "Company-6309b03a99f2b8": {
+    "name": "FRANCISCO ALBERO S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/959800NYSBRW6HT3ZA72"
+  },
+  "Company-63b203995a5b08": {
+    "name": "Vos Distri Logistics Oss B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500BWOZFE5QW1JI81"
+  },
+  "Company-64441d93229a38": {
+    "name": "Tamtron Group Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700562I44VAGL2104"
+  },
+  "Company-64ffce6567a2ca": {
+    "name": "Landis+Gyr Group AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900PZYVAKCYSLFL19"
+  },
+  "Company-6603c519a2faa1": {
+    "name": "OTB S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493003WJ89QZBXREG50"
+  },
+  "Company-6774021d89fd4f": {
+    "name": "BTG PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800DCVRNVRVINH968"
+  },
+  "Company-6857e51ea093ab": {
+    "name": "SEAT SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900C2P7V7P1UGVX95"
+  },
+  "Company-68fa35259f2e4b": {
+    "name": "SOVENA OILSEEDS PORTUGAL, S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300EZYIURQ5RGSE56"
+  },
+  "Company-69180e4467c820": {
+    "name": "REMY COINTREAU",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493004V6A3Z027YT216"
+  },
+  "Company-695c5d02199aa0": {
+    "name": "Alfa Laval AB",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300UCKT2UK88AG251"
+  },
+  "Company-699f325817c4d3": {
+    "name": "Vifor Pharma AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900KO6CN2D9OE1F19"
+  },
+  "Company-69e65c79318e16": {
+    "name": "FUCHS SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900SNF9E1P5ZO4P98"
+  },
+  "Company-6ae56133d0c666": {
+    "name": "AUDI Aktiengesellschaft",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900J1PXYSZJVZ3Z09"
+  },
+  "Company-6afd97bde70031": {
+    "name": "Outokumpu Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493009YRUJJDCFF0R80"
+  },
+  "Company-6b1ecb70cfc81b": {
+    "name": "CEREALIS - PRODUTOS ALIMENTARES, S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300UJZOGS6W8MIA53"
+  },
+  "Company-6b3fd60785734c": {
+    "name": "VALMET OYJ",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800D9O7FUQDH83V62"
+  },
+  "Company-6b648625107a71": {
+    "name": "TAMINCO",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300650GC51ZCQVX48"
+  },
+  "Company-6ccbe141d063d2": {
+    "name": "IXICO PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138005M1F59O6HWSA97"
+  },
+  "Company-6d0981cd853bd2": {
+    "name": "Sto SE & Co. KGaA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299006NYTD89XM31K74"
+  },
+  "Company-6d406f4e9c3e0f": {
+    "name": "SMRC AUTOMOTIVE INTERIORS SPAIN S.L",
+    "source_url": "https://api.gleif.org/api/v1/lei/9845001FFBS04B9FC472"
+  },
+  "Company-6e29e86b908638": {
+    "name": "BHJ A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300V49XMIIZL4RS41"
+  },
+  "Company-6e7a216935c385": {
+    "name": "Bekum Maschinenfabrik Traismauer Gesmbh",
+    "source_url": "https://api.gleif.org/api/v1/lei/391200CS9I45WB8L3K66"
+  },
+  "Company-6fb414b3fff906": {
+    "name": "PIRELLI TYRES ROMANIA S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800PAN8HK443ZXZ04"
+  },
+  "Company-70131b0d149d8d": {
+    "name": "GEOX S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600AA4525479C8138"
+  },
+  "Company-702e3a12a21c75": {
+    "name": "TERMO-REX SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/2594003XN1YW7FMB5Z63"
+  },
+  "Company-70849896823704": {
+    "name": "ifm electronic gmbh",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900PS14UIV1T87B19"
+  },
+  "Company-70edeec44172a1": {
+    "name": "Samskip Holding B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500Q9U3RK6XHTKZ23"
+  },
+  "Company-7230e113c2350f": {
+    "name": "Murata Electronics (Netherlands) B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500JATX48RHIAXN15"
+  },
+  "Company-72b769c561abfb": {
+    "name": "AJANTA PHARMA LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/3358008XLYJJZBFBCK12"
+  },
+  "Company-73af3874aac0ee": {
+    "name": "PHILIPS ELECTRONICS NEDERLAND B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300VGHFJJ58HE2B54"
+  },
+  "Company-73ea182ccc5e09": {
+    "name": "Logistics Platform Partners B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/72450039BVACP20KIS84"
+  },
+  "Company-743e1940fa0b3c": {
+    "name": "Nexa Resources S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300QRMRHM7GAU7L47"
+  },
+  "Company-7648123d2ac4f5": {
+    "name": "FATLAND HOLDING AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900FI7UV3SYR6U430"
+  },
+  "Company-76d9dd960c114d": {
+    "name": "VOSS AUTOMOTIVE MEXICO S DE RL DE CV",
+    "source_url": "https://api.gleif.org/api/v1/lei/4469000001BRL1WXAM19"
+  },
+  "Company-76fca13ea1fa12": {
+    "name": "JTEKT AUTOMOTIVE MEXICO SA DE CV",
+    "source_url": "https://api.gleif.org/api/v1/lei/4469000001BS4OZMHB67"
+  },
+  "Company-7715223607f3a5": {
+    "name": "Debiopharm International SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300QUEVN1K7UE4K44"
+  },
+  "Company-7717f12b29409b": {
+    "name": "AUROBINDO PHARMA LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800G4T2A353RDGM23"
+  },
+  "Company-7884857ba05ea5": {
+    "name": "Knauf Gips KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990028B02LJMWKO452"
+  },
+  "Company-79c85720db4d95": {
+    "name": "OSI FOOD SOLUTIONS SPAIN S.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/9598008H2NM7CHBEST07"
+  },
+  "Company-7a3da76fb7c052": {
+    "name": "Bittium Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700NFG5W5I59OVX65"
+  },
+  "Company-7aacb6d011d8d9": {
+    "name": "STEF",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500KO336ISZU3EK17"
+  },
+  "Company-7b0a7167f02510": {
+    "name": "MERCK Kommanditgesellschaft auf Aktien",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900OAREIS0MOPTW25"
+  },
+  "Company-7b32d9b87cd6e5": {
+    "name": "GXO LOGISTICS BELGIUM",
+    "source_url": "https://api.gleif.org/api/v1/lei/54930010NQOE80WR4A67"
+  },
+  "Company-7baaef2239f38d": {
+    "name": "ALTANA Aktiengesellschaft",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299000MBWJGADFIRW11"
+  },
+  "Company-7ca102b04a3750": {
+    "name": "Platinum Industrial Plant & Machinery Switzerland AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/5067007Z7K857180U421"
+  },
+  "Company-7de754d35a3f71": {
+    "name": "u-blox AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/50670037FL12SV65P141"
+  },
+  "Company-7e087c349fa8fa": {
+    "name": "NIBE Industrier AB",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300ZQH0FIF1P0MX67"
+  },
+  "Company-7e417ab9a735b4": {
+    "name": "ROYAL UNIBREW A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900D69KFL8IAP8Q63"
+  },
+  "Company-7ea0cfb19c6e2d": {
+    "name": "Beijer Ref AB (publ)",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300PZZEUVH08H4G75"
+  },
+  "Company-7ec5a2eb967ad9": {
+    "name": "WIM FOOD A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/984500C1015B48F61336"
+  },
+  "Company-7f19e0d05ed620": {
+    "name": "SANTHERA PHARMACEUTICALS HOLDING AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/54930035HAOFTTQH0U85"
+  },
+  "Company-7f8e3bfce5c1ed": {
+    "name": "Norsk Hydro ASA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300N1SDN71ZZ8BO45"
+  },
+  "Company-7fc7dc58bf3651": {
+    "name": "Primetals Technologies Austria GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900PT6AZRN58FZC34"
+  },
+  "Company-800991a1cb61bc": {
+    "name": "KRONES Aktiengesellschaft",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900NY2GSZWWUBW049"
+  },
+  "Company-807efab8eeea48": {
+    "name": "ZYDUS LIFESCIENCES LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800R9O14ORBXLPN13"
+  },
+  "Company-8171d562df8deb": {
+    "name": "PFIZER IRELAND PHARMACEUTICALS UNLIMITED COMPANY",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900916EI8NU0SVV60"
+  },
+  "Company-821935df9218f5": {
+    "name": "Bühler AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900FWCO3A8V31KT12"
+  },
+  "Company-82803a501f321f": {
+    "name": "BEYÇELİK GESTAMP OTOMOTİV SANAYİ ANONİM ŞİRKETİ",
+    "source_url": "https://api.gleif.org/api/v1/lei/789000OEIQKRI91G9805"
+  },
+  "Company-829ac17e386b63": {
+    "name": "SIGMA PHARMACEUTICALS PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300QSDOOY04YQ0O18"
+  },
+  "Company-843f07bb86b529": {
+    "name": "SAPMER",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500E7HW1ANN0U4O13"
+  },
+  "Company-8526c6f1527149": {
+    "name": "Kuehne + Nagel Investments B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500C09AMQTD0QGE71"
+  },
+  "Company-8742413738a7b9": {
+    "name": "Pepperl+Fuchs SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900ZRDWV9V3RJ9J91"
+  },
+  "Company-87b415be613074": {
+    "name": "Henkel AG & Co. KGaA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300VZCL1HTH4O4Y49"
+  },
+  "Company-88affae7a8fda2": {
+    "name": "MORNINGSIDE PHARMACEUTICALS LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138007GSEACX76ZGB24"
+  },
+  "Company-88f3a974cd44af": {
+    "name": "FERRARI S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493002AZWJSSO4XME42"
+  },
+  "Company-88fd05bd2b4d2b": {
+    "name": "FLORA FOOD SPAIN S.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/2549004VVF0YWGK4X481"
+  },
+  "Company-8904abff67e010": {
+    "name": "KIMBALL ELECTRONICS NETHERLANDS B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/54930008D2H64CE56W47"
+  },
+  "Company-893da70e285f42": {
+    "name": "Concentric AB",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493002G9GMTKIP3PW19"
+  },
+  "Company-896333af3dba15": {
+    "name": "Samskip Multimodal B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500UUMIH8U4296B41"
+  },
+  "Company-8a5455de9db44b": {
+    "name": "Cicor Technologies Ltd.",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900PIIUEUGLYD8P70"
+  },
+  "Company-8a7f005db31363": {
+    "name": "TINE SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5967007LIEEXZXJVV495"
+  },
+  "Company-8a9244eb2f5f91": {
+    "name": "ALD Automotive Slovakia s. r. o.",
+    "source_url": "https://api.gleif.org/api/v1/lei/097900BGFM0000046135"
+  },
+  "Company-8ac99810d15672": {
+    "name": "CEVA Air & Ocean Netherlands B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500JN9TKUOSFBF280"
+  },
+  "Company-8b5873055b7ea5": {
+    "name": "Leuze electronic GmbH + Co. KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900SHI9I0HBW42235"
+  },
+  "Company-8b89d232e5ac27": {
+    "name": "OLAM FOOD INGREDIENTS SPAIN SOCIEDAD LIMITADA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300B335UU8MH03E72"
+  },
+  "Company-8b97808642fedf": {
+    "name": "Covestro AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/3912005AWHKLQ1CPLV11"
+  },
+  "Company-8c8ff4a7550a0a": {
+    "name": "Wacker Chemie AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/0NURKC5Q3CJYZPPK5046"
+  },
+  "Company-8cc6634f84bb94": {
+    "name": "NATURLI´ FOODS A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/894500CTWVRZ98UPVY94"
+  },
+  "Company-8d0e9f796cddc8": {
+    "name": "PAPCEL, a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000143170"
+  },
+  "Company-8d2d74d721b2c1": {
+    "name": "GROUPE BIGARD",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500KD789VR9495B53"
+  },
+  "Company-8e2964f8b4e293": {
+    "name": "Wittmann Battenfeld GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299008QS583KOMV2S36"
+  },
+  "Company-8eae259f146089": {
+    "name": "GIORGIO ARMANI S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/81560063BF9718867E90"
+  },
+  "Company-8eee63334b5527": {
+    "name": "Alzchem Group AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/8945004EL7WZK3ERG181"
+  },
+  "Company-8f551bfbc3c0fa": {
+    "name": "LAURENT-PERRIER",
+    "source_url": "https://api.gleif.org/api/v1/lei/96950036OIHAEGNGJ871"
+  },
+  "Company-8ffc61769f1a94": {
+    "name": "ZETOR TRACTORS a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000040350"
+  },
+  "Company-903ff3b0557743": {
+    "name": "SOMACIS HOLDING S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/8156001CE4D142A54E46"
+  },
+  "Company-91042827cac69c": {
+    "name": "OPEL AUTOMOBILE GMBH",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300B4EI8CRQ4SCL24"
+  },
+  "Company-91522d7b086c7e": {
+    "name": "EXAIL",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500VI6A2W781V4U82"
+  },
+  "Company-9193ca4339acaa": {
+    "name": "HOFF SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300J592LR8HUABX12"
+  },
+  "Company-91a728300940e3": {
+    "name": "Elma Electronic AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/5067005GN286J87M7194"
+  },
+  "Company-925cf03e6b7642": {
+    "name": "COMPANHIA BRASILEIRA DE ALUMINIO",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493001QYTIDILBVYO18"
+  },
+  "Company-92894413fde251": {
+    "name": "Transfennica Logistics Belgium",
+    "source_url": "https://api.gleif.org/api/v1/lei/875500BNFBAD2S5PYO94"
+  },
+  "Company-9328b082a7756e": {
+    "name": "NOVARTIS AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493007HIVTX6SY6XD66"
+  },
+  "Company-933169f2d8ab1e": {
+    "name": "UNTHA shredding technology GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299008OTZ98POQ7B172"
+  },
+  "Company-9386acbeff4acf": {
+    "name": "Etteplan Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/7437006I5533R06JU690"
+  },
+  "Company-9393ffe2902f02": {
+    "name": "Simon Loos B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500MHXRC559NTP235"
+  },
+  "Company-939baac9dd9bf2": {
+    "name": "Kautex Maschinenbau GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900U3OR7K8374Q013"
+  },
+  "Company-93b70fcc64acac": {
+    "name": "GXO Logistics Holdings B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/2549002UUKWJ0UJTLS65"
+  },
+  "Company-948a1be655dcf1": {
+    "name": "Continental Automotive Systems SRL",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990041LRZQ8NAG8A71"
+  },
+  "Company-94941dfa081495": {
+    "name": "Jörg Elektronik GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/967600OLMY6J8BK1WL95"
+  },
+  "Company-951f207303cdab": {
+    "name": "HONEYWELL INTERNATIONAL INC.",
+    "source_url": "https://api.gleif.org/api/v1/lei/ISRPG12PN4EIEOEMW547"
+  },
+  "Company-95aa82fe2c76ca": {
+    "name": "ATLAS COPCO AKTIEBOLAG",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800T8PC8Q4FYJZR07"
+  },
+  "Company-95c1d1ae48d16f": {
+    "name": "BERLIN PACKAGING FRANCE",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500TC4PK9CMXAHJ59"
+  },
+  "Company-964041f861abd2": {
+    "name": "PLESSEY SEMICONDUCTORS LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/9845007445867593AD05"
+  },
+  "Company-9659ad8b44803a": {
+    "name": "UMICORE",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900F3AIQECS8ZSV61"
+  },
+  "Company-966c1527a1cd1f": {
+    "name": "SALMAR ASA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5967007LIEEXZXGDBK67"
+  },
+  "Company-98074d7ffb1d70": {
+    "name": "Aktiebolaget Volvo",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300HGV012CNC8JD22"
+  },
+  "Company-98a2072a975aa6": {
+    "name": "SUMITOMO CHEMICAL EUROPE S.A./N.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493002PN6FFRSDTO250"
+  },
+  "Company-98d58efa0784b2": {
+    "name": "CARREFOUR FINANCE",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493007ZLRNTTT9B6384"
+  },
+  "Company-990afafbd1497d": {
+    "name": "UNEX a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000032784"
+  },
+  "Company-993879039de62d": {
+    "name": "FLSMIDTH A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800G7EG4156NNPG91"
+  },
+  "Company-996a4a2238c568": {
+    "name": "FERRIT s.r.o.",
+    "source_url": "https://api.gleif.org/api/v1/lei/3157000X2KBHU3MFQP65"
+  },
+  "Company-99d713551c0a4b": {
+    "name": "Neste Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493009GY1X8GQ66AM14"
+  },
+  "Company-9a6719feb2bd39": {
+    "name": "PROLOGIS, INC.",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900DFH19P073LZ636"
+  },
+  "Company-9b1fe4b2cee311": {
+    "name": "FLEURY MICHON",
+    "source_url": "https://api.gleif.org/api/v1/lei/96950009EM1D72NGCV27"
+  },
+  "Company-9b555faee8128a": {
+    "name": "MFO SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400B4LDPWHBRPSN19"
+  },
+  "Company-9b58d1af35a6e6": {
+    "name": "BEL GROUP HOLDING",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500225I8A1CWK9S67"
+  },
+  "Company-9b776716b40a6b": {
+    "name": "ADIENT AUTOMOTIVE ROMANIA S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138008U4Y7P7569CR25"
+  },
+  "Company-9bd6d8601d9073": {
+    "name": "VALEO ILUMINACION SOCIEDAD ANONIMA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300JG2UQO0CP91B14"
+  },
+  "Company-9bdc59947c2d6a": {
+    "name": "Rieter Holding AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900SNR4JQCSACBN29"
+  },
+  "Company-9ce84466c0fa48": {
+    "name": "DANFOSS A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493007I2KABJNYPD639"
+  },
+  "Company-9d9d2c4314bf13": {
+    "name": "TOS KUŘIM - OS, a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/315700MV8LUFM6KKHI62"
+  },
+  "Company-9e71ece531f057": {
+    "name": "QPR Software Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/7437003V4S76KM56UW70"
+  },
+  "Company-9ef9b676eb5af0": {
+    "name": "WOCKHARDT LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/3358001OC2OX7OZAHZ33"
+  },
+  "Company-9f88ea00cad5a8": {
+    "name": "KOTON MAĞAZACILIK TEKSTİL SANAYİ VE TİCARET ANONİM ŞİRKETİ",
+    "source_url": "https://api.gleif.org/api/v1/lei/789000ZA6H6OAIB8O689"
+  },
+  "Company-9f955a0544ad84": {
+    "name": "LUPIN LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800HHXTESDEE2FC65"
+  },
+  "Company-a011d023d5a90a": {
+    "name": "OXFORD BIOMEDICA PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800S1GVQNXQ15K851"
+  },
+  "Company-a09e39022b1150": {
+    "name": "THE HEALTH FOOD COMPANY SPAIN SL",
+    "source_url": "https://api.gleif.org/api/v1/lei/959800G0P8VYP3JMRM55"
+  },
+  "Company-a0b263ccc13ed6": {
+    "name": "ABBOTT INDIA LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493008KZ9E3HFRN6T46"
+  },
+  "Company-a0bac514902b71": {
+    "name": "ARM HOLDINGS PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138001E66EELTE7Y904"
+  },
+  "Company-a0d79f0d2ca6a9": {
+    "name": "DAIRY FOOD DENMARK ApS",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900AJO4WSUA3FRJ89"
+  },
+  "Company-a0deccefc007c5": {
+    "name": "H&R GmbH & Co. KGaA",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900NCRGGS5E0MGL93"
+  },
+  "Company-a1045ad1907766": {
+    "name": "Lactogal - Produtos Alimentares S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/2549008UJDO405PB5205"
+  },
+  "Company-a109e2000f1744": {
+    "name": "BEYMEN MAĞAZACILIK A.Ş.",
+    "source_url": "https://api.gleif.org/api/v1/lei/7890009B1GI5PD6JEY57"
+  },
+  "Company-a161a75eb4aba6": {
+    "name": "MALTERIES FRANCO BELGES",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695002H313Z060LIP33"
+  },
+  "Company-a169762483319d": {
+    "name": "VALENTINO S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600195185E5E98791"
+  },
+  "Company-a1a342f8c185a9": {
+    "name": "DEA ELECTRON S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600EE43F3AD49E610"
+  },
+  "Company-a219b5824880ef": {
+    "name": "Companhia Siderurgica Nacional",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900K40TEND42S0T46"
+  },
+  "Company-a2cc2230a3db30": {
+    "name": "Kalmar Finland Oy",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300DC44NFBM1KCD97"
+  },
+  "Company-a2f1ba5064f62c": {
+    "name": "APERAM INOX AMERICA DO SUL S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900BDFLE9RNBEOH87"
+  },
+  "Company-a334018f817941": {
+    "name": "MANGATA HOLDING SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/2594008KNDCPLHVHMX88"
+  },
+  "Company-a35acbebcbbff5": {
+    "name": "Messer SE & Co. KGaA",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900E7R1KC4OPSZR48"
+  },
+  "Company-a389a1f3a745a0": {
+    "name": "HUTA BANKOWA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400F2RK984NBJ9621"
+  },
+  "Company-a4b622f90a3c2b": {
+    "name": "METSO SOUTH AFRICA",
+    "source_url": "https://api.gleif.org/api/v1/lei/9845007D98781D5FC682"
+  },
+  "Company-a59c2a21f880f6": {
+    "name": "ARCELORMITTAL POLAND SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/54930046ZZ9BNG355K46"
+  },
+  "Company-a5a5f69958c66b": {
+    "name": "DOW SILICONES BELGIUM",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300WG5HZ99V6YEE63"
+  },
+  "Company-a634330fbbec22": {
+    "name": "Zalando SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900YRFFGH5AXU4S86"
+  },
+  "Company-a6610feec8f482": {
+    "name": "BRENNTAG SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/NNROIXVWJ7CPSR27SV97"
+  },
+  "Company-a6a81b270c721e": {
+    "name": "3M Belgium BVBA",
+    "source_url": "https://api.gleif.org/api/v1/lei/894500OBN43BGF4LMA79"
+  },
+  "Company-a70ad4b5b6b3b4": {
+    "name": "INSULA AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300ZRZTBEIX68O190"
+  },
+  "Company-a75a06a53b4124": {
+    "name": "SAMSUNG ELECTRONICS SINGAPORE PTE. LTD.",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900G5U610OHNJ8U98"
+  },
+  "Company-a76a1ce7a99fc5": {
+    "name": "Südpack Verpackungen SE & Co. KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900K7WVM1TDW9PZ19"
+  },
+  "Company-a76c2570567fef": {
+    "name": "CEVA Logistics Belgium",
+    "source_url": "https://api.gleif.org/api/v1/lei/894500RG17QRN6GFOX72"
+  },
+  "Company-a79e72074ab0b6": {
+    "name": "TORRENT PHARMACEUTICALS LTD",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800NA6HK275RIJE13"
+  },
+  "Company-a884bd783dc686": {
+    "name": "LANTMÄNNEN UNIBAKE DENMARK A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299006VPMKR5NIP5O79"
+  },
+  "Company-a8af66fd2b33bf": {
+    "name": "\"CIRO PAONE S.P.A.\"",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600AD89C9A4CA2B10"
+  },
+  "Company-a8bef9c004a5a5": {
+    "name": "PolyPeptide Group AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/5067007JCKTPOX4G9758"
+  },
+  "Company-a8c5f6c7e9946c": {
+    "name": "AUMOVIO Technologies Romania S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299008NM8UK9JX5U845"
+  },
+  "Company-a8d8a4b7a66666": {
+    "name": "Hirschmann Automotive Mexico S. de R.L.de C.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900TIP0A31QJK3W54"
+  },
+  "Company-a8fb21bf149dc8": {
+    "name": "Šmeral Brno a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/315700A53J7AIX233850"
+  },
+  "Company-a92ee1afa8d977": {
+    "name": "SILENCE THERAPEUTICS PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800SSURRJBX85SQ91"
+  },
+  "Company-ab14d3faa25e91": {
+    "name": "HELM AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990027B9ARY5AC8476"
+  },
+  "Company-ab514499552685": {
+    "name": "Koninklijke FrieslandCampina N.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500CDWM1CHYS8AP31"
+  },
+  "Company-ab6823b6fdd485": {
+    "name": "PHILIPS ELECTRONICS SINGAPORE PTE LTD",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300TNG2OGA9DN5G47"
+  },
+  "Company-ab8f6561f2cd33": {
+    "name": "Galderma Group AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/89450001OK6O8ELQ4584"
+  },
+  "Company-ac3f8b530d04a2": {
+    "name": "AIR LIQUIDE INDUSTRIES BELGIUM",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900JU8RVKB2B23K19"
+  },
+  "Company-ac5bbd9de651c0": {
+    "name": "Bayer Agriculture",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299007II506VDP1BU28"
+  },
+  "Company-accbc635223809": {
+    "name": "OXXIUS",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500CAOQUYGNYTUI59"
+  },
+  "Company-acd778aa9eb335": {
+    "name": "Kaneka Belgium",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493001ZPX3RZ8T14O97"
+  },
+  "Company-ad79f0a3889701": {
+    "name": "KONE OYJ",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138001CNF45JP5XZK38"
+  },
+  "Company-ae3ee0545b627a": {
+    "name": "LESAFFRE ET COMPAGNIE",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500DR23AGFT3MK016"
+  },
+  "Company-ae5e5db2a6a59e": {
+    "name": "ČKD Blansko Holding, a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000107086"
+  },
+  "Company-ae647d33c2484c": {
+    "name": "ELRING KLINGER, S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/95980020140005533542"
+  },
+  "Company-b00d373ff23425": {
+    "name": "LANXESS Aktiengesellschaft",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900PTLRE72EMYIJ77"
+  },
+  "Company-b0bea3bfe319e8": {
+    "name": "Tecnotree Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700MRPVYI7ASHCX38"
+  },
+  "Company-b1bfd20d80ce11": {
+    "name": "Pöppelmann GmbH & Co. KG Kunststoffwerk-Werkzeugbau",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299006I6L2053INCQ43"
+  },
+  "Company-b1cf2873e23a90": {
+    "name": "Incap Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/7437004GENTTQHMNQ407"
+  },
+  "Company-b246ef5634b3ed": {
+    "name": "TKMS ATLAS ELEKTRONIK GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900W080ZUNJJI6P76"
+  },
+  "Company-b27b9f4a8eaeb3": {
+    "name": "GENUS PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/54930022EOITNKSIGH56"
+  },
+  "Company-b2cde750f24a81": {
+    "name": "\"DROZAPOL-PROFIL\" SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400IOOIKYL8YGCN30"
+  },
+  "Company-b3c6de27644ebf": {
+    "name": "DIXON TECHNOLOGIES (INDIA) LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800D7XO7AVXXJ8575"
+  },
+  "Company-b3fb51ac266e08": {
+    "name": "ALUMETAL SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/2594004BZJVEE3TFD078"
+  },
+  "Company-b4b99976cb2282": {
+    "name": "Lindner-Recyclingtech GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900RD04L206CIP791"
+  },
+  "Company-b538f40f4aca56": {
+    "name": "HELLA ROMÂNIA SRL",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900JD0L49U2QNE363"
+  },
+  "Company-b5944ed1c36b41": {
+    "name": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900IHWUM8T7MXKU89"
+  },
+  "Company-b5a7ca63b76d46": {
+    "name": "EXOTEC",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500QWRGJ6XFFKTF22"
+  },
+  "Company-b5d2b3006604b5": {
+    "name": "DACIA SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900KC1993KD457P30"
+  },
+  "Company-b5d2bc58de2e2c": {
+    "name": "CRUZBER S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/9598006KFCC63E61AX25"
+  },
+  "Company-b603124c51e37b": {
+    "name": "FONDATION D'ENTREPRISE CARREFOUR",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695002T16LLSN6ZI889"
+  },
+  "Company-b61451062e98ba": {
+    "name": "VALE S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900SMTWBX7RU2SR20"
+  },
+  "Company-b6193bfc31ae13": {
+    "name": "CIKAUTXO, SOCIEDAD COOPERATIVA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300ERPWM64O3B0775"
+  },
+  "Company-b646b9ce29bd7e": {
+    "name": "GESTAMP AUTOMOCION SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/95980020140005484363"
+  },
+  "Company-b679b8bb511f53": {
+    "name": "TEREOS",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695006DTI17C4AP5761"
+  },
+  "Company-b728575d2ff208": {
+    "name": "SSH Communications Security Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/7437007N96FK4N3WHT09"
+  },
+  "Company-b7c4895ff0234e": {
+    "name": "Slovácké strojírny, akciová společnost",
+    "source_url": "https://api.gleif.org/api/v1/lei/315700TVIDUREN3HRV74"
+  },
+  "Company-b7cbd3b475ec63": {
+    "name": "KAVLI HOLDING AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900YKE989XPSPE979"
+  },
+  "Company-b7e37c17dbb10a": {
+    "name": "IMAGINATION TECHNOLOGIES GROUP PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800RM5FC14H6MR295"
+  },
+  "Company-b82d4cf7f61ce6": {
+    "name": "IPCA LABORATORIES LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/33580069PZ8ZQVCDBC38"
+  },
+  "Company-b8f864b04cb9be": {
+    "name": "Sandoz Group AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493000JWK6XWFEUD320"
+  },
+  "Company-b96a0417814a71": {
+    "name": "Raute Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700G00629V99PE435"
+  },
+  "Company-b9adc8fdbe066f": {
+    "name": "AUTOLIV ROMANIA SRL",
+    "source_url": "https://api.gleif.org/api/v1/lei/984500643DE1F7850830"
+  },
+  "Company-b9bd2a54813a07": {
+    "name": "PCA SLOVAKIA, S.R.O.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300ZWJO84JL32RD62"
+  },
+  "Company-b9c3d88f54e20f": {
+    "name": "ROECHLING AUTOMOTIVE MEXICO S DE RL DE CV",
+    "source_url": "https://api.gleif.org/api/v1/lei/4469000001BRPQGGH316"
+  },
+  "Company-ba569ee612b66e": {
+    "name": "AMPLITUDE LASER GROUP",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500B6ZVJZ3OZVXQ70"
+  },
+  "Company-bac18aa932ab81": {
+    "name": "AbbVie Logistics B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300OZEMSC2H7JBQ56"
+  },
+  "Company-bb2d585a916488": {
+    "name": "SA/NV VANDEPUTTE HUILERIE - OLIEFABRIEK",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300X2J2U722BKMI38"
+  },
+  "Company-bb3d526ebf60de": {
+    "name": "KGHM Polska Miedź Spółka Akcyjna",
+    "source_url": "https://api.gleif.org/api/v1/lei/G30CO71KTT9JDYJESN22"
+  },
+  "Company-bb4da9fea35039": {
+    "name": "ASTER ELETTRONICA S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/894500AH2O7YII18CS26"
+  },
+  "Company-bcd36dc2a9ef34": {
+    "name": "Aisin Europe",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300QYYWDBWHPS2D18"
+  },
+  "Company-bcd6a23260c965": {
+    "name": "DOGA SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900FSDBL41R851V91"
+  },
+  "Company-be1988962f76b4": {
+    "name": "NOVARTIS HOLDING AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300PEK0AU35HVR544"
+  },
+  "Company-beb5fa1121f54e": {
+    "name": "OVS SPA",
+    "source_url": "https://api.gleif.org/api/v1/lei/8156001A772766DCAA71"
+  },
+  "Company-bedfec6c7c5609": {
+    "name": "CMC POLAND SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400Y5Q662Z8HLZ086"
+  },
+  "Company-bfcef615e7a889": {
+    "name": "TGW Logistics GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900PRGRLXSA0QMJ38"
+  },
+  "Company-bff64d73b29e85": {
+    "name": "FINIFAC",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500NRB5EZJ7LIQ136"
+  },
+  "Company-c023b54acfcefd": {
+    "name": "NOVOZYMES A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900T6WNZXD2R3JW38"
+  },
+  "Company-c0f85c80f4dc39": {
+    "name": "Idorsia Ltd",
+    "source_url": "https://api.gleif.org/api/v1/lei/506700XOVZUB107S5720"
+  },
+  "Company-c1304e241b17ff": {
+    "name": "X-Fab Silicon Foundries",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493003UDPENPUQBJH65"
+  },
+  "Company-c14b519d48453c": {
+    "name": "Cyclacel Pharmaceuticals, Inc.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300IE74IVYY7IL203"
+  },
+  "Company-c1b28475889a5d": {
+    "name": "SEG Automotive Mexico Manufacturing, S.A. de C.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299004323PWTKPDMW33"
+  },
+  "Company-c25825a1239e67": {
+    "name": "Garmin Ltd.",
+    "source_url": "https://api.gleif.org/api/v1/lei/2549001E0HIPIJQ0W046"
+  },
+  "Company-c32024a8d548a2": {
+    "name": "\"MISSONI S.P.A.\"",
+    "source_url": "https://api.gleif.org/api/v1/lei/81560009BD3A9E927073"
+  },
+  "Company-c3bb6baefe53f2": {
+    "name": "SKRETTING AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900TK1ZO0X2AOY033"
+  },
+  "Company-c4797a838d338b": {
+    "name": "Klöckner Pentaplast GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900XJNR9VFZXAOS85"
+  },
+  "Company-c5688bfcc75c97": {
+    "name": "MOWI ASA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300W1OGQF5LZIH349"
+  },
+  "Company-c58168bc37c7f4": {
+    "name": "CEVA LOGISTICS HOLDINGS B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800HEYZIO95WAE595"
+  },
+  "Company-c5c15b12f878f0": {
+    "name": "MAN Truck & Bus SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299005BRTA0PYBLTW33"
+  },
+  "Company-c6a3a753f0be1c": {
+    "name": "TEKNIA MANUFACTURING GROUP SL",
+    "source_url": "https://api.gleif.org/api/v1/lei/9598001382GF2BG2PP33"
+  },
+  "Company-c6e00542e931c0": {
+    "name": "ANDROS",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695006ARZU1PBC9M649"
+  },
+  "Company-c6e0ea3d62d20d": {
+    "name": "TOD'S S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600DA4FA5A5D4CD58"
+  },
+  "Company-c6e626cb777eff": {
+    "name": "CRFP 20",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900AGOG1NKIA59375"
+  },
+  "Company-c7038aa5236362": {
+    "name": "WÄRTSILÄ SERVICES SWITZERLAND AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800IGY1K4GKW84M17"
+  },
+  "Company-c919c9558dcba4": {
+    "name": "INDIVIOR PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800V3NCQTY7IED471"
+  },
+  "Company-c91b255042f89e": {
+    "name": "FM LOGISTIC CORPORATE",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695008KB31X6V588194"
+  },
+  "Company-ca7de033e4ab8f": {
+    "name": "FRULACT - INDÚSTRIA AGRO-ALIMENTAR, S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800O5KOBENZOQD712"
+  },
+  "Company-cab78108e744d5": {
+    "name": "Evonik Industries AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/41GUOJQTALQHLF39XJ34"
+  },
+  "Company-cb0ef2c27b8a1c": {
+    "name": "Rosenbauer International AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900DS2PAVS3K9RV51"
+  },
+  "Company-cb2198aa631b6e": {
+    "name": "CARLSBERG A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299001O0WJQYB5GYZ19"
+  },
+  "Company-cc572a22901593": {
+    "name": "DANISH CROWN A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/21380063C9WS18D6WJ21"
+  },
+  "Company-cc720684ef8486": {
+    "name": "MARIE BRIZARD WINE AND SPIRITS",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500XQM2JOWHKWI437"
+  },
+  "Company-cc8b56ba82b158": {
+    "name": "Savox Communications Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700NC1E63WPG0DX61"
+  },
+  "Company-ccb64e5de73ac1": {
+    "name": "ARLA FOODS AMBA",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900IJ6T4P1O10R377"
+  },
+  "Company-cd0f415072cb25": {
+    "name": "NORDLAKS HOLDING AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493003TUAP0HCBOJN58"
+  },
+  "Company-cd16aff45702d7": {
+    "name": "SAVENCIA FROMAGE & DAIRY INTERNATIONAL",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990048H5CO4CL78I28"
+  },
+  "Company-cdb4f66863e20b": {
+    "name": "Motherson SAS Automotive Systems and Technologies Slovakia s.r.o.",
+    "source_url": "https://api.gleif.org/api/v1/lei/315700MG3Z27R67DRZ52"
+  },
+  "Company-cdd7b3b5412520": {
+    "name": "DACHSER FRANCE",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500BK0RBVLATXU683"
+  },
+  "Company-cdffcbc8825ee7": {
+    "name": "AIXTRON SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299004UJ4D51M25LD67"
+  },
+  "Company-ce06869a2cd0ee": {
+    "name": "MICHELIN ROMANIA S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493000KHE08FTDZVG04"
+  },
+  "Company-cf2a7aacdbbc54": {
+    "name": "CAILABS",
+    "source_url": "https://api.gleif.org/api/v1/lei/969500QFJAP7FEF8M984"
+  },
+  "Company-cf398872999ea9": {
+    "name": "Bischof + Klein SE & Co. KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900XJYQIUH3T1IS41"
+  },
+  "Company-cf58dd17b2a24d": {
+    "name": "Joysonquin Automotive Systems Romania S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299009Z0FU6GGGHHW62"
+  },
+  "Company-cfa0b0ac51175f": {
+    "name": "KIMBALL ELECTRONICS POLAND SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300Q0YARBW2R6Z852"
+  },
+  "Company-cfc702a9e5a44d": {
+    "name": "OEM International Aktiebolag",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300Z7DLN54J8M4J79"
+  },
+  "Company-cfd3ea62f1ad94": {
+    "name": "GRUPO ANTOLIN IRAUSA S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800OILC5Q9AR63B63"
+  },
+  "Company-d06141b474bf94": {
+    "name": "NNR Global Logistics Netherlands B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500PW9DG0S0EESL61"
+  },
+  "Company-d061d70dbb57fb": {
+    "name": "Trelleborg AB",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800XY16PAWG2PAD14"
+  },
+  "Company-d17c6f3d6c49ce": {
+    "name": "OXEA GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900C0LO7CUQR1O651"
+  },
+  "Company-d19f2b4558b565": {
+    "name": "DAIRY FOOD SPAIN SL",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900MZ9UXHSHYQEE87"
+  },
+  "Company-d1a57bef2f6f4c": {
+    "name": "B.V. ARROW ELECTRONICS DLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300N4QFV5P3U42103"
+  },
+  "Company-d24a2c060e3080": {
+    "name": "Jazz Pharmaceuticals Ireland Limited",
+    "source_url": "https://api.gleif.org/api/v1/lei/635400NGEZB6UXOTAN28"
+  },
+  "Company-d2c468dfc13f79": {
+    "name": "PALFINGER AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900IFAV83BX8O1O91"
+  },
+  "Company-d3575af4a0f568": {
+    "name": "Doosan Škoda Power a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/31570010000000024442"
+  },
+  "Company-d3c9ebdf1616f2": {
+    "name": "STIWA Automation GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900ILWG8YUJVAAC03"
+  },
+  "Company-d42422dbd6625c": {
+    "name": "ELHURT EMS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400W5A5SBG2KSP789"
+  },
+  "Company-d43f822b72fdf7": {
+    "name": "Nederman Holding Aktiebolag",
+    "source_url": "https://api.gleif.org/api/v1/lei/54930030A8V6LH0G1Z92"
+  },
+  "Company-d4e59089e25bfb": {
+    "name": "Molecular Partners AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/875500AXMLDAZ4D21744"
+  },
+  "Company-d51f791051c2e5": {
+    "name": "COMET AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/5067000801B14E36Q410"
+  },
+  "Company-d5a29cb6487806": {
+    "name": "EROĞLU GİYİM SANAYİ VE TİCARET A.Ş.",
+    "source_url": "https://api.gleif.org/api/v1/lei/789000LT57K6MBOYMX37"
+  },
+  "Company-d637e44b8d8390": {
+    "name": "Beijer Alma AB",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300HJX9BNG5055Z38"
+  },
+  "Company-d6efdcb938163c": {
+    "name": "Boryszew Spółka Akcyjna",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400TQVZIBDY41DT16"
+  },
+  "Company-d726c3246b58af": {
+    "name": "ASSOCIATED BRITISH FOODS PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/GBQKSY6W7G0OHCQ8OQ72"
+  },
+  "Company-d758484388de0f": {
+    "name": "Kuros Biosciences AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299006U5POB2AVTT709"
+  },
+  "Company-d80f92ffec0df5": {
+    "name": "Broekman Logistics Rotterdam B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/7245002PBEHVF49M2V52"
+  },
+  "Company-d8286635f32659": {
+    "name": "VECTURA GROUP LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800SR8BL1K6EPX533"
+  },
+  "Company-d862f6d3ab5a39": {
+    "name": "SUMOL+COMPAL, S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/959800A6B1W16XBMUS96"
+  },
+  "Company-d8d2039c40519e": {
+    "name": "MAX MARA FASHION GROUP- S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600D23934C40C7754"
+  },
+  "Company-d94444cfbbc74d": {
+    "name": "GROUPE LACTALIS",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695001K2B8Q8CDK6H67"
+  },
+  "Company-d975b9f50e86b4": {
+    "name": "BITRON S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/815600A0A4C84BA45866"
+  },
+  "Company-da9a19fdf7ffec": {
+    "name": "Mineracao Taboca SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/254900XJVQL02CSNOU98"
+  },
+  "Company-daf97c7cacf771": {
+    "name": "Alimak Group AB (publ)",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300LC2ER06GDV6565"
+  },
+  "Company-db3ec8939397e5": {
+    "name": "BATZ SCOOP",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300L1H8940PRP4I85"
+  },
+  "Company-db94c767f6df99": {
+    "name": "DRAGSBÆK A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800DOPM1948DKFW26"
+  },
+  "Company-dc38bf78ca6115": {
+    "name": "AAK DENMARK HOLDING A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300DPP5IB3SD47N86"
+  },
+  "Company-dc601a59ede3da": {
+    "name": "Ewals Cargo Care Logistics B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500KZG0RL4PMYQT79"
+  },
+  "Company-de48e9def452a5": {
+    "name": "PRIMARK LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/21380028ZBNXSR21LL96"
+  },
+  "Company-df47f687ab269f": {
+    "name": "MINERACAO VALE VERDE DO BRASIL LTDA",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138009BBNYRB2SIB184"
+  },
+  "Company-df98f25f4a633a": {
+    "name": "KAWASAKI MOTORS PTY LTD",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493008GETSI8JN56W14"
+  },
+  "Company-e0558073485bb3": {
+    "name": "BENETTON GROUP S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/8156008449B96AF1FE15"
+  },
+  "Company-e1361b08388aa5": {
+    "name": "AAH PHARMACEUTICALS LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299006HKISQMUC3ZT50"
+  },
+  "Company-e170b016857e46": {
+    "name": "4D PHARMA PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800O49VYSXWE2ZD52"
+  },
+  "Company-e29665b597a4bc": {
+    "name": "LIEBHERR-WERK NENZING GMBH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900V1O8HLJYIQXO07"
+  },
+  "Company-e2a5899396694d": {
+    "name": "Plasser & Theurer, Export von Bahnbaumaschinen, Gesellschaft m.b.H.",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900QF6F5IB9WQCL03"
+  },
+  "Company-e385d96d072883": {
+    "name": "ORION ENGINEERED CARBONS GMBH",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300OYUPKC8M68U288"
+  },
+  "Company-e3a249e6a2ccb7": {
+    "name": "TOMS GRUPPEN A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900W85IK9LWR61159"
+  },
+  "Company-e461a8c4480e84": {
+    "name": "METHODE ELECTRONICS, INC.",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900VM413LGLUS3F07"
+  },
+  "Company-e49fc469547f91": {
+    "name": "IMAGINE OPTIC",
+    "source_url": "https://api.gleif.org/api/v1/lei/96950061O489YT9BB048"
+  },
+  "Company-e543c11f0fa266": {
+    "name": "BRUNELLO CUCINELLI S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493003CX2RZ0FOBH256"
+  },
+  "Company-e5b6b74494783b": {
+    "name": "Auto Wiesmann GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900HTSVKRUYV4FJ63"
+  },
+  "Company-e5e17bd26eb54d": {
+    "name": "ESS-FOOD A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138007DGHTIB3973138"
+  },
+  "Company-e648494f84a7f8": {
+    "name": "AKER BIOMARINE ASA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300V34T6VWDSYWE64"
+  },
+  "Company-e79afbc118f62c": {
+    "name": "GSK PLC",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493000HZTVUYLO1D793"
+  },
+  "Company-e7a229b38d0646": {
+    "name": "Hella Automotive Mexico, S.A. de C.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299002XTYOSELIA8N22"
+  },
+  "Company-e89039feca4e66": {
+    "name": "FOSS A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900ER3GY618XIUJ54"
+  },
+  "Company-e906a11e6ccfc6": {
+    "name": "Siegfried Holding AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/506700J9QD6IF3937W06"
+  },
+  "Company-eb07e883268a72": {
+    "name": "CANALI S.P.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493005OC5DHELZYA702"
+  },
+  "Company-eb3e6b1a6dae15": {
+    "name": "Best Global Logistics B.V.",
+    "source_url": "https://api.gleif.org/api/v1/lei/724500RAAXESBWWFBA20"
+  },
+  "Company-eb5926059e8a51": {
+    "name": "Nokia Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300A0JPRWG1KI7U06"
+  },
+  "Company-ebb9f47939a7eb": {
+    "name": "SGL Carbon SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990038IB31TYK07X63"
+  },
+  "Company-ec34b083c8bd5a": {
+    "name": "CIE AUTOMOTIVE SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/95980020140005381252"
+  },
+  "Company-ec72dc5482f9a0": {
+    "name": "BOS Automotive Products Romania SCS",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900TGBSSNUG1SUL24"
+  },
+  "Company-ec74a0638604c5": {
+    "name": "AGROSTROJ Pelhřimov, a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/315700454VOYAAE81Q76"
+  },
+  "Company-ee38a5dab136c9": {
+    "name": "ASTRAZENECA PHARMA INDIA LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800N8M7W5JDTAHR68"
+  },
+  "Company-ee74cad564f309": {
+    "name": "COATS SOUTH AFRICA",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800SOR8NAPDOLZW61"
+  },
+  "Company-eea478114412d5": {
+    "name": "Tessenderlo Group",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300ZKLIF7RP6EH823"
+  },
+  "Company-ef05d96047517f": {
+    "name": "POULAILLON",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695006UURLX13H3IV87"
+  },
+  "Company-ef57b6ea99dc94": {
+    "name": "Scheuch GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900LVZAVC4X25BJ95"
+  },
+  "Company-efaacdb8bea296": {
+    "name": "Aktiebolaget SKF",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300B6HWYEE57O8J84"
+  },
+  "Company-f019a2e17bb00f": {
+    "name": "Vakko Tekstil Ve Hazir Giyim Sanayi Isletmeleri Anonim Sirketi",
+    "source_url": "https://api.gleif.org/api/v1/lei/7890007H7QW42I8TT393"
+  },
+  "Company-f0b19031dc0fc1": {
+    "name": "MACFARLAN SMITH LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138004QGV8F2HK4W512"
+  },
+  "Company-f1425799f0a975": {
+    "name": "CALDIC FOOD DENMARK A/S",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300K3B8QVP4DWLS60"
+  },
+  "Company-f185fa6cbbbc44": {
+    "name": "Doppelmayr Holding SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900SB73J7QI8EZG57"
+  },
+  "Company-f1aa9eddbff33d": {
+    "name": "BITRON INDUSTRIE ESPAÑA S.A.",
+    "source_url": "https://api.gleif.org/api/v1/lei/95980024L9PRPN99TH51"
+  },
+  "Company-f1cbde2d0b3911": {
+    "name": "HIKMA PHARMACEUTICALS PUBLIC LIMITED COMPANY",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300BNS685UXH4JI75"
+  },
+  "Company-f252449dcc62dc": {
+    "name": "BOBST GROUP SA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5067009NFH4S4F9KA938"
+  },
+  "Company-f25b9a08029c16": {
+    "name": "Porsche Automobil Holding SE",
+    "source_url": "https://api.gleif.org/api/v1/lei/52990053Z17ZYM1KFV27"
+  },
+  "Company-f283ac592977b3": {
+    "name": "GALVO SPÓŁKA AKCYJNA",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400PSDMAIGMAB1697"
+  },
+  "Company-f2ad5db0696104": {
+    "name": "PUREM ORADEA S.R.L.",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900TJT5I46APS5P26"
+  },
+  "Company-f32ab29ee4b6ba": {
+    "name": "SMARTWAY PHARMACEUTICALS LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800HXMFYM9HZWJ816"
+  },
+  "Company-f437cc19d2088f": {
+    "name": "SARAR BATTANİYE TEKSTİL SANAYİ VE TİCARET ANONİM ŞİRKETİ",
+    "source_url": "https://api.gleif.org/api/v1/lei/789000XYZCNBVDIIES27"
+  },
+  "Company-f5026d745a26c1": {
+    "name": "ADVINI",
+    "source_url": "https://api.gleif.org/api/v1/lei/9695006S6L6YQECK2015"
+  },
+  "Company-f57b504bd14142": {
+    "name": "NORGESMØLLENE AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300J86WNLHKQ77N40"
+  },
+  "Company-f5d4b964c33027": {
+    "name": "Farmet a.s.",
+    "source_url": "https://api.gleif.org/api/v1/lei/315700Z1291759OQZO11"
+  },
+  "Company-f6222438918a52": {
+    "name": "Windmöller & Hölscher SE & Co. KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900VAUXMKBBDVK763"
+  },
+  "Company-f683b5cea2165c": {
+    "name": "HUHTAMAKI FLEXIBLE PACKAGING GERMANY GMBH & CO. KG",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300YOWLPDSJ48C826"
+  },
+  "Company-f6c5cff6dcc425": {
+    "name": "Etimex Primary Packaging GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900B6N0H70B8PC067"
+  },
+  "Company-f7dc9eb68f4486": {
+    "name": "EGE-Elektronik GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/8755002JSH8ZYMN52469"
+  },
+  "Company-f7e7bbc388976a": {
+    "name": "Mennica Polska Spółka Akcyjna",
+    "source_url": "https://api.gleif.org/api/v1/lei/259400P5AL5W5HAYKT78"
+  },
+  "Company-f7f27b2593d4ea": {
+    "name": "CERMAQ GROUP AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493006DQWZ7M1K68B08"
+  },
+  "Company-f800f03c0ad261": {
+    "name": "Reifenhäuser GmbH & Co. KG Maschinenfabrik",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900Q6VRJJR3QRXA38"
+  },
+  "Company-f87d3d91ff7553": {
+    "name": "CLINIGEN HEALTHCARE LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/2138009XBKQQ9GLCJE53"
+  },
+  "Company-f88833bc698573": {
+    "name": "Galenica AG",
+    "source_url": "https://api.gleif.org/api/v1/lei/506700W4772BD8016Z20"
+  },
+  "Company-f8c28638fd6523": {
+    "name": "Universal Electronics Inc.",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300ZW9EULAR7T6F89"
+  },
+  "Company-f8ccc2903541d9": {
+    "name": "Aspocomp Group Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700W8ZIJAMXWWWD26"
+  },
+  "Company-f90dd2e65e0a16": {
+    "name": "PRIMARK STORES LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/213800FFQ6FYDFYJVN88"
+  },
+  "Company-f93882da46723b": {
+    "name": "KAYNES TECHNOLOGY INDIA LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800BMPIF3PQ2IPI37"
+  },
+  "Company-f947787a8737e4": {
+    "name": "PROVIRON INDUSTRIES",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300Z0WSM014X52S29"
+  },
+  "Company-f98158a3563cc9": {
+    "name": "MÅSØVAL AS",
+    "source_url": "https://api.gleif.org/api/v1/lei/894500ODN68AR6F14J34"
+  },
+  "Company-fa98c8cd6c12ab": {
+    "name": "Würth Electronics Singapore Pte. Ltd",
+    "source_url": "https://api.gleif.org/api/v1/lei/5299008DIZNPPSEKYN34"
+  },
+  "Company-fc2d0f0b5e7cbc": {
+    "name": "BALLUFF GmbH",
+    "source_url": "https://api.gleif.org/api/v1/lei/529900CYN1SDJUN2UB14"
+  },
+  "Company-fc41b2ab4f3c71": {
+    "name": "Scanfil Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/7437004XD6U0FFDCT507"
+  },
+  "Company-fd1bdb52780cbe": {
+    "name": "LERØY SEAFOOD GROUP ASA",
+    "source_url": "https://api.gleif.org/api/v1/lei/5967007LIEEXZXJ2JK50"
+  },
+  "Company-fd6d042d7d7d1d": {
+    "name": "Getinge AB (publ)",
+    "source_url": "https://api.gleif.org/api/v1/lei/5493003PZ4F570G3W735"
+  },
+  "Company-fd70d0947ac146": {
+    "name": "Elisa Oyj",
+    "source_url": "https://api.gleif.org/api/v1/lei/743700TU2S3DXWGU7H32"
+  },
+  "Company-fe622ea97b2d94": {
+    "name": "GOODYEAR SOUTH AFRICA",
+    "source_url": "https://api.gleif.org/api/v1/lei/549300JLMP7SE86V9V18"
+  },
+  "Company-ff0d0cf4ce21f7": {
+    "name": "ALKEM LABORATORIES LIMITED",
+    "source_url": "https://api.gleif.org/api/v1/lei/335800GCAE5WIF4PSG69"
+  },
+  "Supplier-0001": {
+    "name": "3M",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0002": {
+    "name": "AAC Technologies Holdings",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0003": {
+    "name": "Advanced International Multitech",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0004": {
+    "name": "Advanced Semiconductor Engineering",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0005": {
+    "name": "Alps Electric",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0006": {
+    "name": "Amkor Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0007": {
+    "name": "Amphenol",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0008": {
+    "name": "ams",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0009": {
+    "name": "ANALOG DEVICES, INC.",
+    "source_url": "https://api.gleif.org/api/v1/lei/GYVOE5EZ4GDAVTU4CQ61"
+  },
+  "Supplier-0010": {
+    "name": "Apollo Global Management LLC",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0011": {
+    "name": "Artesyn Embedded Technologies",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0012": {
+    "name": "Asahi Glass",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0013": {
+    "name": "Asia Vital Components",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0014": {
+    "name": "AT & S Austria Technologie & Systemtechnik AG",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0015": {
+    "name": "Biel Crystal Manufactory",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0016": {
+    "name": "BOE Technology Group",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0017": {
+    "name": "Boyd Die Cut",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0018": {
+    "name": "Brilliant International Group",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0019": {
+    "name": "Broadcom",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0020": {
+    "name": "BYD",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0021": {
+    "name": "Career Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0022": {
+    "name": "Catcher Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0023": {
+    "name": "Compal Electronics",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0024": {
+    "name": "Compeq Manufacturing",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0025": {
+    "name": "Corning",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0026": {
+    "name": "Cosmosupplylab",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0027": {
+    "name": "Cowell E Holdings",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0028": {
+    "name": "Coxon Precise Industrial",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0029": {
+    "name": "CymMetrik Enterprise",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0030": {
+    "name": "Dai-Ichi Seiko",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0031": {
+    "name": "Daikin Industries",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0032": {
+    "name": "Garuda International",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0033": {
+    "name": "Genius Electronic Optical",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0034": {
+    "name": "GoerTek",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0035": {
+    "name": "Hama Naka Shoukin Industry",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0036": {
+    "name": "HengMingDa Wrapper",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0037": {
+    "name": "Henkel",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0038": {
+    "name": "HI-P International",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0039": {
+    "name": "Hirose Electric",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0040": {
+    "name": "Hon Hai Precision Industry",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0041": {
+    "name": "INB Electronics",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0042": {
+    "name": "Infineon Technologies",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0043": {
+    "name": "INTEL CORPORATION",
+    "source_url": "https://api.gleif.org/api/v1/lei/KNX4USFCNGPY45LOCE31"
+  },
+  "Supplier-0044": {
+    "name": "Interflex",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0045": {
+    "name": "Intramedia",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0046": {
+    "name": "Inventec",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0047": {
+    "name": "Jabil Circuit",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0048": {
+    "name": "Japan Aviation Electronics Industry",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0049": {
+    "name": "Japan Display",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0050": {
+    "name": "Jarllytec",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0051": {
+    "name": "Jeou Uei",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0052": {
+    "name": "Jiangsu Changjiang Electronics Technology Co., Ltd.",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0053": {
+    "name": "Jinlong Holding Group",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0054": {
+    "name": "JX Nippon Mining & Metals",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0055": {
+    "name": "Kantatsu",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0056": {
+    "name": "Kemet",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0057": {
+    "name": "Kunshan Kersen Science & Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0058": {
+    "name": "Kinsus Interconnect Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0059": {
+    "name": "Knowles",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0060": {
+    "name": "Koch Industries",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0061": {
+    "name": "Kyocera Group",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0062": {
+    "name": "Laird Technologies",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0063": {
+    "name": "Largan Precision",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0064": {
+    "name": "Lens One Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0065": {
+    "name": "LG Chem",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0066": {
+    "name": "LG Display",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0067": {
+    "name": "LG Innotek",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0068": {
+    "name": "Lite-On Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0069": {
+    "name": "Longwell",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0070": {
+    "name": "Luen Fung Group",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0071": {
+    "name": "LUXSHARE-ICT",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0072": {
+    "name": "Marian",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0073": {
+    "name": "Maxim Integrated Products, Inc.",
+    "source_url": "https://api.gleif.org/api/v1/lei/SO0H5YEO14Y4PVKQH532"
+  },
+  "Supplier-0074": {
+    "name": "Merry Electronics",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0075": {
+    "name": "Microchip Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0076": {
+    "name": "MICRON TECHNOLOGY, INC.",
+    "source_url": "https://api.gleif.org/api/v1/lei/B3DXGBC8GAIYWI2Z0172"
+  },
+  "Supplier-0077": {
+    "name": "Minebea Mitsumi",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0078": {
+    "name": "Murata Manufacturing",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0079": {
+    "name": "MYS Group",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0080": {
+    "name": "Nan Ya Plastics",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0081": {
+    "name": "Nichia",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0082": {
+    "name": "Nidec",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0083": {
+    "name": "Nishoku Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0084": {
+    "name": "Nissha",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0085": {
+    "name": "Nisshin Steel",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0086": {
+    "name": "Nitto Denko",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0087": {
+    "name": "NOK",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0088": {
+    "name": "NXP Semiconductors N.V.",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0089": {
+    "name": "ON SEMICONDUCTOR CORPORATION",
+    "source_url": "https://api.gleif.org/api/v1/lei/ZV20P4CNJVT8V1ZGJ064"
+  },
+  "Supplier-0090": {
+    "name": "Pai Shing International",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0091": {
+    "name": "Panasonic",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0092": {
+    "name": "Pegatron",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0093": {
+    "name": "Phone In Mag-Electronics",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0094": {
+    "name": "Pioneer Material Precision Tech",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0095": {
+    "name": "Platinum Optics Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0096": {
+    "name": "POSCO",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0097": {
+    "name": "Prent",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0098": {
+    "name": "Primax Electronics",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0099": {
+    "name": "Qorvo",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0100": {
+    "name": "Quadrant Solutions",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0101": {
+    "name": "QUALCOMM INCORPORATED",
+    "source_url": "https://api.gleif.org/api/v1/lei/H1J8DDZKZP6H7RWC0H53"
+  },
+  "Supplier-0102": {
+    "name": "Quanta Computer",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0103": {
+    "name": "Radiant Opto Electronics",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0104": {
+    "name": "Renesas Electronics",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0105": {
+    "name": "Robert Bosch",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0106": {
+    "name": "Rohm",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0107": {
+    "name": "Samsung SDI.",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0108": {
+    "name": "Seagate Technology LLC",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0109": {
+    "name": "Seiko Advance",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0110": {
+    "name": "Sekisui Chemical",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0111": {
+    "name": "Seoul Semiconductor",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0112": {
+    "name": "Shandong Innovation Group",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0113": {
+    "name": "Shanghai Industrial Holdings",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0114": {
+    "name": "Sharp",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0115": {
+    "name": "Shenzhen Desay Battery Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0116": {
+    "name": "Shenzhen Fortunta Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0117": {
+    "name": "Shenzhen O-Film Tech",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0118": {
+    "name": "Shenzhen Sunway Communication",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0119": {
+    "name": "Shenzhen YUTO Packaging Technology Co., Ltd.",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0120": {
+    "name": "Shin Zu Shing",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0121": {
+    "name": "Simplo Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0122": {
+    "name": "SK Hynix",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0123": {
+    "name": "Skyworks Solutions",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0124": {
+    "name": "SMK",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0125": {
+    "name": "Solvay Specialty Polymers USA, LLC",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0126": {
+    "name": "Suzhou Dongshan Precision Manufacturing Co., Ltd.",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0127": {
+    "name": "Suzhou Zhongjiemai Panel Industry Technology Co., Ltd.",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0128": {
+    "name": "Swiftronic Holding Pte.",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0129": {
+    "name": "Taishan City Kam Kiu Aluminium Extrusion Co., Ltd.",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0130": {
+    "name": "Taiwan Hodaka Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0131": {
+    "name": "Taiwan Semiconductor Manufacturing Co., Ltd. (TSMC)",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0132": {
+    "name": "Taiyo Yuden",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0133": {
+    "name": "TLG Investment",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0134": {
+    "name": "Toda Kogyo",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0135": {
+    "name": "Toray International",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0136": {
+    "name": "Toshiba",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0137": {
+    "name": "Toyo Rikagaku Kenkyusho",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0138": {
+    "name": "Toyoda Gosei",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0139": {
+    "name": "TPK Holding",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0140": {
+    "name": "Trinseo LLC",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0141": {
+    "name": "Triotek Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0142": {
+    "name": "Tripod Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0143": {
+    "name": "Tsujiden",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0144": {
+    "name": "TTM Technologies",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0145": {
+    "name": "UACJ",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0146": {
+    "name": "Unimicron Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0147": {
+    "name": "Unisteel Technology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0148": {
+    "name": "Unitech Printed Circuit Board",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0149": {
+    "name": "Vishay Intertechnology",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0150": {
+    "name": "Volex",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0151": {
+    "name": "Western Digital",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0152": {
+    "name": "Wickeder Group",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0153": {
+    "name": "Wistron",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0154": {
+    "name": "Yageo",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0155": {
+    "name": "Ying Shing Enterprises",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0156": {
+    "name": "Zeniya Aluminum Engineering",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0157": {
+    "name": "Advanced Micro Devices",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0158": {
+    "name": "Cirrus Logic",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0159": {
+    "name": "Dialog Semiconductor",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0160": {
+    "name": "OmniVision Technologies",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0161": {
+    "name": "Parade Technologies",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0162": {
+    "name": "SiTime",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0163": {
+    "name": "Synaptics",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0164": {
+    "name": "Silicon Works",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0165": {
+    "name": "ADVANTEST CORPORATION",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0166": {
+    "name": "All RING TECH Co.,Ltd.",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0167": {
+    "name": "Applied Materials, Inc.",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0168": {
+    "name": "ASAHI KASEI CORPORATION",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0169": {
+    "name": "ASML",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0170": {
+    "name": "Canon Inc.",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0171": {
+    "name": "Chang Chun Petrochemical Co., Ltd.",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0172": {
+    "name": "CSUN / G2C+ Alliance",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0173": {
+    "name": "DISCO Corporation",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0174": {
+    "name": "EBARA CORPORATION",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0175": {
+    "name": "JENTECH PRECISION INDUSTRIAL CO., LTD",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0176": {
+    "name": "JSR Corporation",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0177": {
+    "name": "KLA Corporation",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0178": {
+    "name": "KOKUSAI ELECTRIC",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0179": {
+    "name": "Lam Research Corporation",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0180": {
+    "name": "Marketech International Corp.",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0181": {
+    "name": "Merck",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0182": {
+    "name": "Onto Innovation Inc.",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0183": {
+    "name": "Resonac Corporation",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0184": {
+    "name": "SCREEN Semiconductor Solutions Co., Ltd.",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0185": {
+    "name": "Shin-Etsu Handotai Co., Ltd.",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0186": {
+    "name": "SUMCO CORPORATION",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0187": {
+    "name": "Sunlit",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0188": {
+    "name": "TASA Construction Corporation",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0189": {
+    "name": "ULVAC, Inc.",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0190": {
+    "name": "ASM International N.V.",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0191": {
+    "name": "DACIN CONSTRUCTION CO.,LTD",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0192": {
+    "name": "HSINGMIEN INDUSTRY CO.,LTD.",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0193": {
+    "name": "JX Advanced Metals Corporation",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0194": {
+    "name": "LCY Group",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0195": {
+    "name": "MURATA MACHINERY, LTD.",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0196": {
+    "name": "NAMICS CORPORATION",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0197": {
+    "name": "Organo Technology Co., Ltd.",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0198": {
+    "name": "Scientech Corporation",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0199": {
+    "name": "SHIBAURA MECHATRONICS CORPORATION",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0200": {
+    "name": "Shin-Etsu Chemical Co. LTD",
+    "source_url": "https://pr.tsmc.com/english/news/3086"
+  },
+  "Supplier-0201": {
+    "name": "Technoprobe S.p.A",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0202": {
+    "name": "TOKYO ELECTRON LIMITED",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0203": {
+    "name": "TOPCO QUARTZ PRODUCTS CO., LTD.",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0204": {
+    "name": "TUNG KANG STEEL STRUCTURE CORP",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0205": {
+    "name": "United Integrated Services Co., Ltd.",
+    "source_url": "https://pr.tsmc.com/japanese/news/3192"
+  },
+  "Supplier-0206": {
+    "name": "ASM International",
+    "source_url": "https://pr.tsmc.com/english/news/3086"
+  },
+  "Supplier-0207": {
+    "name": "C SUN MFG., LTD",
+    "source_url": "https://pr.tsmc.com/english/news/3086"
+  },
+  "Supplier-0208": {
+    "name": "Gold Stone Development Co., Ltd.",
+    "source_url": "https://pr.tsmc.com/english/news/3086"
+  },
+  "Supplier-0209": {
+    "name": "KAJIMA CORPORATION",
+    "source_url": "https://pr.tsmc.com/english/news/3086"
+  },
+  "Supplier-0210": {
+    "name": "SHINY CHEMICAL INDUSTRIAL CO., LTD",
+    "source_url": "https://pr.tsmc.com/english/news/3086"
+  },
+  "Supplier-0211": {
+    "name": "Taiwan Puritic Corp.",
+    "source_url": "https://pr.tsmc.com/english/news/3274"
+  },
+  "Supplier-0212": {
+    "name": "Uangyih Tech Industrial Co., Ltd.",
+    "source_url": "https://pr.tsmc.com/english/news/3086"
+  },
+  "Supplier-0213": {
+    "name": "GLOBALFOUNDRIES Inc.",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm"
+  },
+  "Supplier-0214": {
+    "name": "United Microelectronics Corporation",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm"
+  },
+  "Supplier-0215": {
+    "name": "Samsung Electronics",
+    "source_url": "https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf"
+  },
+  "Supplier-0216": {
+    "name": "Siliconware Precision Industries Ltd.",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm"
+  },
+  "Supplier-0217": {
+    "name": "King Yuan Electronics Company",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm"
+  }
+}

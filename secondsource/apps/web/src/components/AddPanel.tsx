@@ -45,7 +45,7 @@ function parseSupplierList(text: string) {
 
 /**
  * Known companies from the data pack that match what was typed. Picking one adds the supplier straight away
- * (no lookup), with its real location and facilities. Names in the public dataset are anonymised aliases.
+ * (no lookup), with its recorded location and facilities. Known-company names have public source links in the name overlay.
  */
 function KnownPicker({ q, country, city, busy, onPick }: { q: string; country: string; city: string; busy: boolean; onPick: (c: KnownCompany) => void }) {
   const [list, setList] = useState<KnownCompany[]>([]);
