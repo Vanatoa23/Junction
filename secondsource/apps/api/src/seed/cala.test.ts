@@ -4,7 +4,8 @@ import { pool } from "../db/pool";
 import { runInline } from "../engine/pipeline";
 import { buildMap } from "../map";
 import { buildServer } from "../server";
-import { packsAvailable, REAL_CLIENT_ID } from "./cala";
+import { namesFile, packsAvailable, REAL_CLIENT_ID } from "./cala";
+import { readFileSync } from "node:fs";
 
 const eventIds: string[] = [];
 const edgeIds: string[] = [];
@@ -34,11 +35,13 @@ describe.skipIf(!packsAvailable())("real-data scenario (public Cala packs)", () 
     expect((await pool.query(`SELECT count(*)::int n FROM site`)).rows[0].n).toBe(607);
   });
 
-  it("keeps the pack anonymous: aliases only, no domains, no per-company source URLs on headquarters", async () => {
+  it("uses source-linked names for all recorded companies without inventing domains", async () => {
+    const namesByAlias = JSON.parse(readFileSync(namesFile(), "utf8")) as Record<string, { name: string; source_url: string }>;
+    expect(Object.keys(namesByAlias)).toHaveLength(789);
+    expect(Object.values(namesByAlias).every((n) => n.name.length > 0 && n.source_url.startsWith("https://"))).toBe(true);
     const names = (await pool.query(`SELECT name, domain, source_urls FROM company WHERE mode = 'REC'`)).rows;
     expect(names.length).toBeGreaterThan(700);
-    expect(names.every((r) => /^(Supplier|Company|Buyer)-/.test(r.name) && r.domain === null)).toBe(true);
-    expect(names.filter((r) => r.name.startsWith("Company-")).every((r) => r.source_urls.length === 0)).toBe(true);
+    expect(names.every((r) => !/^(Supplier|Company|Buyer)-/.test(r.name) && r.domain === null)).toBe(true);
   });
 
   it("every imported footprint key satisfies the contract; assumed ports are labelled as assumptions, never confirmed", async () => {
@@ -57,8 +60,8 @@ describe.skipIf(!packsAvailable())("real-data scenario (public Cala packs)", () 
     const m = MapResponse.parse(await buildMap(REAL_CLIENT_ID));
     expect(m.scenario).toBe("cala");
     expect(m.suppliers).toHaveLength(12);
-    expect(m.suppliers.every((s) => s.lat !== null && s.anonymised && s.sites.length > 0)).toBe(true);
-    const hubSupplier = m.suppliers.find((s) => s.name === "Supplier-0131")!;
+    expect(m.suppliers.every((s) => s.lat !== null && !s.anonymised && s.sites.length > 0)).toBe(true);
+    const hubSupplier = m.suppliers.find((s) => s.name === "Taiwan Semiconductor Manufacturing Co., Ltd. (TSMC)")!;
     expect(hubSupplier.risk.deeperChecked).toBe(48);
     expect(JSON.stringify(m)).not.toMatch(/Supplier-0002\b/); // a hidden tier-2 alias is never returned
     expect(m.demo.noticeText).toMatch(/Strike action at the Port of /);
@@ -84,7 +87,7 @@ describe.skipIf(!packsAvailable())("real-data scenario (public Cala packs)", () 
     const cands = (await pool.query(`SELECT verdict FROM candidate WHERE incident_id = $1 AND for_edge_id = (SELECT edge_id FROM alert WHERE incident_id = $1 LIMIT 1)`, [(await pool.query(`SELECT id FROM incident WHERE event_id = $1`, [ev.rows[0].id])).rows[0].id])).rows;
     expect(cands.length).toBeGreaterThan(0);
     expect(cands.length).toBeLessThanOrEqual(12);
-    expect(cands.every((c) => c.verdict !== "VERIFIED")).toBe(true); // ownership is anonymised, so nothing can be fully verified
+    expect(cands.every((c) => c.verdict !== "VERIFIED")).toBe(true); // ownership is unknown, so nothing can be fully verified
   });
 
   it("a new supplier can snap to a known company; duplicates are refused", async () => {

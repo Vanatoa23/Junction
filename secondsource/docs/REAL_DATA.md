@@ -7,10 +7,11 @@
 |---|---|---|
 | `world_v0` (Crucible PR 17, public snapshot) | 218 supplier-to-buyer links, 607 facility records (24 countries), 16 freight routes, 8 cited public documents | vendored in `data/packs/cala/world_v0/` |
 | `starting_grid_v0` (Junction repo) | 43 ports with coordinates, 578 headquarters records (alias, city, country) | `../data/packs/cala/starting_grid_v0/` (repo root) |
+| `names_v1` | Source-linked display names for the 217 suppliers and 578 headquarters (789 unique aliases; six occur in both sets) | `data/packs/cala/names_v1.json` |
 
-Override the locations with `CALA_WORLD_DIR` and `CALA_GRID_DIR`. If the world pack is missing, `seed:cala` says so and does nothing.
+Override the locations with `CALA_WORLD_DIR`, `CALA_GRID_DIR` and `CALA_NAMES_FILE`. If the world pack or name overlay is missing, `seed:cala` says so and does nothing.
 
-**Names stay anonymous.** Both packs use aliases (`Supplier-0131`, `Site-0008`, `Company-2c5c...`). We never try to undo that, we store no domains for them, and for headquarters records we do **not** copy the pack's per-company source URLs (they point at real company pages). Real names exist only in the Crucible repo's private archive, which this project never reads. A test (`cala.test.ts`) fails if a recorded company name or domain stops being an alias.
+**Company names are restored for display.** The frozen packs still use aliases (`Supplier-0131`, `Company-2c5c...`) as stable graph keys. `names_v1.json` connects each published supplier or headquarters alias to a name and public source URL. Headquarters names are checked against GLEIF LEI records; supplier names come from the [2018 Apple supplier disclosure](https://manuals.plus/m/9b958fa7982079df737e27beae7f62f666c4e01f9d0de3aaffaa11f112f8f636.pdf), [AMD's 2024 10-K](https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm), and [TSMC supplier awards](https://pr.tsmc.com/english/news/3274). We publish only names and source links for aliases already in the public packs, not private Cala response text, addresses or unused private aliases. The seed uses those names for the supplier map, alternatives and Add supplier search. We still do not infer domains or ownership from a name.
 
 ## What becomes of it
 - **A second demo client**, "Real-data demo (anonymised buyer)". Hub placed in Helsinki: that is an **assumption** (the pack does not say where the buyer is).
@@ -18,7 +19,7 @@ Override the locations with `CALA_WORLD_DIR` and `CALA_GRID_DIR`. If the world p
 - **Hidden tiers**: the pack's supplier-to-supplier links (48 suppliers behind `Supplier-0131`) are stored as tier-2/3 edges. They are never returned or drawn; they feed each supplier's risk (the formula is unchanged).
 - **Sites (607)**: real facility records, country level. Shown on the supplier card, and as numbered dots on the map when a supplier is selected. Only the country is known, so positions are the country centre ("approximate location"); suppliers that share a country are spread on a small ring so they stay clickable.
 - **Ports (43)**: real ports with coordinates, shown on the map as small anchors for ports that matter now (used by a direct supplier or named by an open incident).
-- **Known companies**: the 578 headquarters records. In "Add supplier", typing a name, country or city offers matching known companies; **Add this one** adds it straight away with its real location, no lookup (`GET /known`, `POST /suppliers/snap`).
+- **Known companies**: the 578 headquarters records. In "Add supplier", typing a name, country or city offers matching known companies; **Add this one** adds it straight away with its recorded city-level location, no lookup (`GET /known`, `POST /suppliers/snap`).
 - **Alternatives**: the other suppliers in the pack (about 200), ranked, top 12 shown.
 
 ## What is real, and what is an assumption
@@ -26,8 +27,9 @@ Override the locations with `CALA_WORLD_DIR` and `CALA_GRID_DIR`. If the world p
 |---|---|
 | Supplier-to-buyer and supplier-to-supplier links, facility records, their countries | **Recorded real data** (mode REC), each with its public source URL |
 | Port coordinates | Real public reference data |
+| Company display names | Matched to public disclosures or GLEIF records; see each entry's `source_url` in `names_v1.json` |
 | **Which port a supplier uses** | **Assumption.** The pack says its carrier sources show service availability, not which supplier ships where. Each supplier is assumed to ship via one port in its main country, picked deterministically. Stored as an inferred key flagged seeded, with "Scenario assumption" in its note; the UI says "we think so, not confirmed" |
-| Ownership | **Unknown** for every company (anonymised) |
+| Ownership | **Unknown** for every company; a published name does not establish ownership |
 | Hub location, "Test a disruption" notice | Assumption / demo notice, labelled TEST |
 
 ## Consequences to expect (these are correct, not bugs)
@@ -46,4 +48,4 @@ Or by hand: set `DEMO_CLIENT_ID=00000000-0000-4000-8000-000000000002` and run `p
 "Test a disruption" publishes a notice about the port most direct suppliers are assumed to use (today: Long Beach), so the demo has real impact: two suppliers turn red.
 
 ## Later, with a Cala key
-The adapters already exist (`CALA_API_KEY`). Live Cala responses would replace the recorded pack for ownership and relationships; the pack format, the aliasing rule and the "assumed port" labelling stay as they are.
+The adapters already exist (`CALA_API_KEY`). Live Cala responses could replace the recorded pack for ownership and relationships; the stable alias keys, display-name overlay and "assumed port" labelling remain separate.

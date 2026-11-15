@@ -12,10 +12,9 @@ import { pool, tx } from "../db/pool";
  *
  *  - data/packs/cala/world_v0 (this repo, vendored from the Crucible repo): 841 cited observations from eight public
  *    disclosures. 218 supplier-to-buyer links, 607 site records (country level), 16 freight routes. Names are ALIASES
- *    (Supplier-0001, Buyer-0001, Site-0008): the pack deliberately anonymises companies. We never try to undo that.
+ *    (Supplier-0001, Buyer-0001, Site-0008). A separate, source-linked overlay supplies display names.
  *  - ../data/packs/cala/starting_grid_v0 (repo root): real ports with coordinates, and headquarters nodes (alias, city,
- *    country). We import ports and headquarters; we do NOT copy the pack's per-company source URLs (they point at real
- *    company pages).
+ *    country). We import ports and headquarters; display names come from the overlay, while aliases remain graph keys.
  *
  * What becomes of it:
  *  - a second demo client "Real-data demo" (the anonymised buyer's supply base, hub placed in Helsinki as an assumption);
@@ -35,6 +34,7 @@ const DIRECT_COUNT = 10;
 const root = join(dirname(fileURLToPath(import.meta.url)), "../../../..");
 export const worldDir = () => process.env.CALA_WORLD_DIR ?? join(root, "data/packs/cala/world_v0");
 export const gridDir = () => process.env.CALA_GRID_DIR ?? join(root, "../data/packs/cala/starting_grid_v0");
+export const namesFile = () => process.env.CALA_NAMES_FILE ?? join(root, "data/packs/cala/names_v1.json");
 
 const uuid = (ns: string, key: string) => {
   const h = createHash("sha1").update(`${ns}:${key}`).digest("hex");
@@ -46,20 +46,27 @@ const hashPick = <T,>(items: T[], key: string): T => items[parseInt(createHash("
 
 interface Fact { id: string; kind: "supplier" | "site" | "route"; subject_alias: string; attributes: Record<string, any>; source_ids: string[] }
 interface GridNode { id: string; alias: string; node_type: string; city: string | null; country: string | null; lat: number | null; lon: number | null; industry: string | null; source_ids: string[] }
+interface NameEntry { name: string; source_url: string }
 
 const noticeFor = (portName: string) =>
   `NOTICE: Strike action at the Port of ${portName}. All container terminals are closed until further notice. Inbound and outbound cargo is delayed.`;
 
 export function packsAvailable(): boolean {
-  return existsSync(join(worldDir(), "world_facts.json"));
+  return existsSync(join(worldDir(), "world_facts.json")) && existsSync(namesFile());
 }
 
 export async function seedCala(log: (m: string) => void = console.log) {
   if (!packsAvailable()) {
-    log(`world pack not found at ${worldDir()}: real-data scenario skipped (the fictional seed is unaffected)`);
+    log(`world pack or name overlay missing (${worldDir()}, ${namesFile()}): real-data scenario skipped`);
     return { skipped: true as const };
   }
   const facts = read<Fact[]>(join(worldDir(), "world_facts.json"));
+  const names = read<Record<string, NameEntry>>(namesFile());
+  const display = (alias: string) => {
+    const name = names[alias]?.name;
+    if (!name) throw new Error(`no verified display name for ${alias} in ${namesFile()}`);
+    return name;
+  };
   const worldSources = new Map(read<Array<{ id: string; url: string }>>(join(worldDir(), "sources.json")).map((s) => [s.id, s.url]));
   const urlOf = (ids: string[]) => ids.map((i) => worldSources.get(i)).find(Boolean) ?? null;
 
@@ -120,13 +127,13 @@ export async function seedCala(log: (m: string) => void = console.log) {
       stats.ports++;
     }
 
-    // headquarters nodes: known companies a user can snap a new supplier to (alias, city, country; no source URLs on purpose)
+    // Headquarters nodes: use verified display names, retaining aliases only as stable pack keys.
     for (const h of hqs) {
       await c.query(
         `INSERT INTO company (id, name, legal_name, country, category, city, lat, lng, in_candidate_pool, seeded, mode, source_urls)
          VALUES ($1,$2,$2,$3,$4,$5,$6,$7,false,false,'REC','{}')
-         ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, country = EXCLUDED.country, city = EXCLUDED.city, lat = EXCLUDED.lat, lng = EXCLUDED.lng, updated_at = now()`,
-        [uuid("grid", h.id), h.alias, h.country, h.industry, h.city, h.lat, h.lon],
+         ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, legal_name = EXCLUDED.legal_name, country = EXCLUDED.country, city = EXCLUDED.city, lat = EXCLUDED.lat, lng = EXCLUDED.lng, updated_at = now()`,
+        [uuid("grid", h.id), display(h.alias), h.country, h.industry, h.city, h.lat, h.lon],
       );
       stats.hqs++;
     }
@@ -152,8 +159,8 @@ export async function seedCala(log: (m: string) => void = console.log) {
       await c.query(
         `INSERT INTO company (id, name, legal_name, country, category, in_candidate_pool, seeded, mode, source_urls)
          VALUES ($1,$2,$2,$3,'electronics',$4,false,'REC',$5)
-         ON CONFLICT (id) DO UPDATE SET country = EXCLUDED.country, category = 'electronics', in_candidate_pool = EXCLUDED.in_candidate_pool, source_urls = EXCLUDED.source_urls, updated_at = now()`,
-        [id, a, mainCountry(a), !directSet.has(a), urls],
+         ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, legal_name = EXCLUDED.legal_name, country = EXCLUDED.country, category = 'electronics', in_candidate_pool = EXCLUDED.in_candidate_pool, source_urls = EXCLUDED.source_urls, updated_at = now()`,
+        [id, display(a), mainCountry(a), !directSet.has(a), urls],
       );
       stats.companies++;
     }
@@ -191,7 +198,7 @@ export async function seedCala(log: (m: string) => void = console.log) {
       } else {
         await key("PORT", "?", "UNKNOWN", null, null, false);
       }
-      await key("PARENT", "?", "UNKNOWN", null, null, false); // ownership is anonymised in the pack
+      await key("PARENT", "?", "UNKNOWN", null, null, false); // naming a supplier does not establish ownership
     }
 
     // supplier edges for the real-data client: direct (tier 1) and their own suppliers (tier 2, 3), hidden from the map
@@ -206,8 +213,8 @@ export async function seedCala(log: (m: string) => void = console.log) {
       await c.query(
         `INSERT INTO supplier_edge (id, client_id, buyer_company_id, company_id, tier, input_name, input_country, status, monitors, resolve_score, seeded, mode, details)
          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,1.000,false,'REC','{"_pack":"true"}')
-         ON CONFLICT (id) DO NOTHING`,
-        [uuid(`edge${tier}`, `${buyerAlias ?? "-"}>${alias}`), REAL_CLIENT_ID, buyerAlias ? uuid("company", buyerAlias) : null, uuid("company", alias), tier, alias, mainCountry(alias), tier === 1 ? "MONITORED" : "RESOLVED", tier === 1 ? monitors : "[]"],
+         ON CONFLICT (id) DO UPDATE SET input_name = EXCLUDED.input_name`,
+        [uuid(`edge${tier}`, `${buyerAlias ?? "-"}>${alias}`), REAL_CLIENT_ID, buyerAlias ? uuid("company", buyerAlias) : null, uuid("company", alias), tier, display(alias), mainCountry(alias), tier === 1 ? "MONITORED" : "RESOLVED", tier === 1 ? monitors : "[]"],
       );
     };
     for (const a of direct) { await insertEdge(a, 1, null); stats.direct++; }
